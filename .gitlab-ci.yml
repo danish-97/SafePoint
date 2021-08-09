@@ -10,5 +10,4 @@ generate_artifacts:
     script:
         -mvn -B clean package
     artifacts:
-        paths:
-        -target/SafePoint*.jar
+        paths: target/SafePoint*.jar
