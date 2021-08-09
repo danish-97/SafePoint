@@ -4,6 +4,7 @@ junit:
         -mvn -B clean test
 
 
+
 generate_artifacts:
     stage: deploy
     script:
