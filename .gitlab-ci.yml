@@ -1,13 +1,12 @@
-junit:
-    stage: test
-    script:
-        -mvn -B clean test
-
-
-
-generate_artifacts:
-    stage: deploy
-    script:
-        -mvn -B clean package
-    artifacts:
-        paths: target/SafePoint*.jar
+junit: 
+  stage: test 
+  script: 
+    - mvn -B clean test 
+ 
+generate_artifacts: 
+  stage: deploy 
+  script: 
+    - mvn -B clean package 
+  artifacts: 
+    paths: 
+    - target/SafePoint*.jar 
