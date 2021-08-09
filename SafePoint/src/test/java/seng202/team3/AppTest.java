@@ -35,4 +35,9 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    /**
+     * Priscilla's test for checklist
+     */
+    public void testAppPriscilla() { assertTrue(true); }
 }
