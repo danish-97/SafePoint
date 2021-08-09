@@ -11,4 +11,4 @@ generate_artifacts:
         -mvn -B clean package
     artifacts:
         paths:
-            -target/SafePoint*.jar
+            -"target/SafePoint*.jar"
