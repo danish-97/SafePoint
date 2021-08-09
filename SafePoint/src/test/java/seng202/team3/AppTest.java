@@ -39,15 +39,16 @@ public class AppTest
     /**
      * Priscilla's test for checklist
      */
-    public void testAppPriscilla() { assertTrue(true); }
+    //public void testAppPriscilla() { assertTrue(true); }
 
     /**
      * Danish's test for checklist
      */
+
     public void testAppDanish() { assertTrue(true);}
 
     /**
      * Rory's test for checklist
      */
     public void testAppRory() { assertTrue(true);}
-}
+
