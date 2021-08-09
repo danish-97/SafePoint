@@ -45,4 +45,9 @@ public class AppTest
      * Danish's test for checklist
      */
     public void testAppDanish() { assertTrue(true);}
+
+    /**
+     * Rory's test for checklist
+     */
+    public void testAppRory() { assertTrue(true);}
 }
