@@ -12,7 +12,7 @@ public class DataManager {
         return NULL;
     }
 
-    public CrimeData getDataByID(string) {
+    public CrimeData getDataByID(String ID) {
         //TODO IMPLEMENT getDataByID
         return NULL;
     }
