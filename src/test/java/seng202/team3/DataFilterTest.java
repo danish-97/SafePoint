@@ -3,7 +3,9 @@ package seng202.team3;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import seng202.team3.controller.DataFilter;
 import seng202.team3.model.CrimeStat;
+
 
 import java.util.ArrayList;
 
@@ -42,16 +44,17 @@ public class DataFilterTest
     public static Test suite() {
         return new TestSuite(DataFilterTest.class);
     }
-
+    // TODO clear ActiveFilters before testing
     /**
      * Tests if a DataFilter will filter results based on types
      */
     public void testValidTypeFilterOneResult() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
-        dataFilter.setActiveFilters(typeFilter);
+        activeFilters.add(typeFilter);
+        dataFilter.setActiveFilters(activeFilters);
         UIdataInterface.setCurrCrimeType("THEFT");
-        Arraylist<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(1, filteredData.size());
         assertEquals("JE123990", filteredData.get(0).id);
     }
@@ -62,7 +65,8 @@ public class DataFilterTest
     public void testValidTypeFilterTwoResults() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
-        dataFilter.setActiveFilters(typeFilter);
+        activeFilters.add(typeFilter);
+        dataFilter.setActiveFilters(activeFilters);
         UIdataInterface.setCurrCrimeType("THEFT");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
