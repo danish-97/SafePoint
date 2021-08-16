@@ -3,6 +3,7 @@ package seng202.team3;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import seng202.team3.model.CrimeStat;
 
 import java.util.ArrayList;
 
