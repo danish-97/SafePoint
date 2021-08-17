@@ -1,4 +1,4 @@
-package seng202.team3;
+package test.java.seng202.team3;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
