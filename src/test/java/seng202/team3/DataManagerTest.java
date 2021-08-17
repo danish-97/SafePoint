@@ -1,6 +1,7 @@
 package test.java.seng202.team3;
 
 import main.java.seng202.team3.model.DataManager;
+import static junit.framework.Assert.assertEquals;
 
 public class DataManagerTest {
 
