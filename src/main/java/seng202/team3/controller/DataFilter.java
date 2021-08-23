@@ -7,6 +7,9 @@ import seng202.team3.model.UserData;
 
 import java.util.ArrayList;
 
+// TODO DATA_RANGE section, using java.Date
+// TODO HIGH_FREQ, LOW_FREQ sorting
+
 public class DataFilter {
 
     private ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
@@ -41,7 +44,7 @@ public class DataFilter {
                     }
                     break;
                 case ARREST_MADE:
-                    if (crime.isArrestMade() == UIDataInterface.currArrest) {
+                    if (crime instanceof PoliceData && (((PoliceData) crime).isArrestMade() == 'Y')) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -56,7 +59,7 @@ public class DataFilter {
                     }
                     break;
                 case DATE_RANGE:
-                    if (crime.isArrestMade() == UIDataInterface.currArrest) {
+                    if (crime.getDate() == UIDataInterface.currDateRange) { // TODO might have to change date to be a Java.date value to work with range
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -64,6 +67,10 @@ public class DataFilter {
 
         }
         return singleFilterArray;
+    }
+
+    public ArrayList<CrimeData> sortByFrequency() {
+
     }
 
     public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
