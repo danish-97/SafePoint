@@ -1,4 +1,4 @@
-package seng202.team3.controller;
+package seng202.team3.model;
 
 public class UserData {
     private int day;

@@ -1,10 +1,10 @@
-package seng202.team3.controller;
+package seng202.team3.model;
 
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CrimeData extends PoliceData {
+public class CrimeData {
     private String address;
     private String date;
     private String location;

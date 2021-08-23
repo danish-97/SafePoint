@@ -1,8 +1,5 @@
 package seng202.team3;
 
-import seng202.team3.controller.CrimeData;
-import seng202.team3.model.DataManager;
-
 import static junit.framework.Assert.assertEquals;
 
 public class DataManagerTest {

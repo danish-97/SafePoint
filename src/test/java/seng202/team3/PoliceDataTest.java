@@ -1,7 +1,7 @@
 package seng202.team3;
 
 import org.junit.jupiter.api.Test;
-import seng202.team3.controller.PoliceData;
+import seng202.team3.model.PoliceData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

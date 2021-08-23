@@ -1,17 +1,15 @@
 package seng202.team3.model;
 
 
-import seng202.team3.controller.CrimeData;
-
 import java.util.ArrayList;
 
 public class DataManager {
 
-    private String[] acitveDataLocation;
+    private String[] activeDataLocation;
     private ArrayList<CrimeData> allCrimeData = new ArrayList<CrimeData>();
-    private ArrayList<CrimeData> activeCrimeDataactiveCrimeData = new ArrayList<CrimeData>();
+    private ArrayList<CrimeData> activeCrimeData = new ArrayList<CrimeData>();
 
-   /* public ArrayList<CrimeData> getData() {
+    public ArrayList<CrimeData> getData() {
         //TODO IMPLEMENT getData()
         return NULL;
     }
@@ -20,6 +18,5 @@ public class DataManager {
         //TODO IMPLEMENT getDataByID
         return NULL;
     }
-    */
 
 }
