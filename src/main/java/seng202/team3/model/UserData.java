@@ -1,35 +1,18 @@
 package seng202.team3.model;
 
-public class UserData {
-    private int day;
-    private int month;
-    private int year;
+import java.util.Arrays;
+import java.util.List;
 
-    public int getDay() {
-        return day;
+public class UserData extends CrimeData {
+    private String dateReported;
+
+    public UserData(String data) {
+        super(data);
+        List<String> date = Arrays.asList(data.split(", "));
+        dateReported = date.get(1);
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String dateReported() {
-        return getDay() + " /" + getMonth() + " /" + getYear();
+    public String getDateReported() {
+        return dateReported;
     }
 }

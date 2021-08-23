@@ -1,10 +1,14 @@
 package seng202.team3.model;
 
-public class PoliceData {
+public class PoliceData extends CrimeData {
     private String caseNumber;
     private char arrestMade;
     private int xCord;
     private int yCord;
+
+    public PoliceData(String data) {
+        super(data);
+    }
 
     public String getCaseNumber() {
         return String.format("%8s", caseNumber).replace(' ', '0');
