@@ -9,7 +9,7 @@ public class PoliceDataTest {
     @Test
 
     public void caseNumberCheck() {
-        PoliceData data = new PoliceData();
+        PoliceData data = new PoliceData("JE163990");
         data.setCaseNumber("JE163990");
         assertEquals("JE163990", data.getCaseNumber());
     }
@@ -17,7 +17,7 @@ public class PoliceDataTest {
     @Test
 
     public void arrestMadeCheck() {
-        PoliceData data = new PoliceData();
+        PoliceData data = new PoliceData("JE163990");
         data.setArrestMade('Y');
         assertEquals('Y', data.isArrestMade());
     }
@@ -25,7 +25,7 @@ public class PoliceDataTest {
     @Test
 
     public void xCordCheck() {
-        PoliceData data = new PoliceData();
+        PoliceData data = new PoliceData("JE163990");
         data.setxCord(56);
         assertEquals(Integer.valueOf(56), data.getxCord());
     }
@@ -33,7 +33,7 @@ public class PoliceDataTest {
     @Test
 
     public void yCordCheck() {
-        PoliceData data = new PoliceData();
+        PoliceData data = new PoliceData("JE163990");
         data.setyCord(56);
         assertEquals(Integer.valueOf(56), data.getyCord());
     }
