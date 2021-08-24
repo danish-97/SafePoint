@@ -1,7 +1,7 @@
 package seng202.team3;
 
 import org.junit.Test;
-import seng202.team3.controller.CrimeData;
+import seng202.team3.model.CrimeData;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CrimeDataTest {
