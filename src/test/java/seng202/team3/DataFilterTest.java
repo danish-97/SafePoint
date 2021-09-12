@@ -4,7 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import seng202.team3.model.CrimeData;
-import seng202.team3.controller.DataFilter;
+import seng202.team3.model.DataFilter;
 import seng202.team3.model.CrimeStat;
 
 
@@ -37,7 +37,7 @@ public class DataFilterTest
         crimeDataArrayList.add(crimeData2);
         crimeDataArrayList.add(crimeData3);
         //  UIDataInterface UIdataInterface = new UIDataInterface();
-        // address, date, location, crimeType
+
 
     }
 
@@ -64,7 +64,7 @@ public class DataFilterTest
     }
 
     /**
-     * Tests if a DataFilter will filter results based on types with two resulting crimeData
+     * Tests if a DataFilter will filter results based on types with two resulting crimeData objects
      */
     public void testValidTypeFilterTwoResults() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();

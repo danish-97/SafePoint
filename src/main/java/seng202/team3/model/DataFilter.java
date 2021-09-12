@@ -1,4 +1,4 @@
-package seng202.team3.controller;
+package seng202.team3.model;
 
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.CrimeStat;
