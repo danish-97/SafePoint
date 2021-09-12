@@ -9,14 +9,14 @@ public class DataManager {
     private ArrayList<CrimeData> allCrimeData = new ArrayList<CrimeData>();
     private ArrayList<CrimeData> activeCrimeData = new ArrayList<CrimeData>();
 
-    public ArrayList<CrimeData> getData() {
-        //TODO IMPLEMENT getData()
-        return NULL;
-    }
-
-    public CrimeData getDataByID(String ID) {
-        //TODO IMPLEMENT getDataByID
-        return NULL;
-    }
+//    public ArrayList<CrimeData> getData() {
+//        //TODO IMPLEMENT getData()
+//        return NULL;
+//    }
+//
+//    public CrimeData getDataByID(String ID) {
+//        //TODO IMPLEMENT getDataByID
+//        return NULL;
+//    }
 
 }

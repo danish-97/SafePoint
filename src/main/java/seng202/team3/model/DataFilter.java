@@ -1,20 +1,21 @@
 package seng202.team3.model;
 
-import seng202.team3.model.CrimeData;
-import seng202.team3.model.CrimeStat;
-import seng202.team3.model.PoliceData;
-import seng202.team3.model.UserData;
-
 import java.util.ArrayList;
+import java.util.Date;
 
-// TODO DATA_RANGE section, using java.Date
 // TODO HIGH_FREQ, LOW_FREQ sorting
 
 public class DataFilter {
 
-    private ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
+    FilterController filterController = new FilterController(); // TODO to be initialised in a different class.
+    UIDataInterface uiDataInterface = new UIDataInterface(); // TODO to be initialised in a different class.
+    private ArrayList<CrimeStat> activeFilters = filterController.getActiveFilters();
 
-
+    /**
+     * Returns a list of crime data after filtering has been processed with ALL the active filters.
+     * @param data List of crime data to be filtered.
+     * @return an ArrayList<CrimeData> containing only filtered data
+     */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
         for (CrimeStat filter : activeFilters) {
@@ -24,22 +25,39 @@ public class DataFilter {
 
     }
 
+    /**
+     * Checks whether a date is within range of the startDate and endDate given.
+     * @param startDate selected by the user and processed in UIDataInterface
+     * @param endDate selected by the user and processed in UIDataInterface
+     * @param testDate date of a given CrimeData object.
+     * @return true if within range, false if not.
+     */
+    public boolean isWithinRange(Date startDate, Date endDate, Date testDate) {
+        return !(testDate.before(startDate) || testDate.after(endDate));
+    }
+
+    /**
+     * Filters a list of CrimeData according to a single specific given filter.
+     * @param filter criteria used to filter data.
+     * @param data list of CrimeData objects to be filtered.
+     * @return an Arraylist<CrimeData> with filtered crimes.
+     */
     public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data) {
         ArrayList<CrimeData> singleFilterArray = new ArrayList<CrimeData>();
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (crime.getLocation() == (UIDataInterface.regionActive)) {
+                    if (crime.getLocation() == (uiDataInterface.getRegionActive())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case CRIME_TYPE:
-                    if (crime.getCrimeType() == UIDataInterface.currCrimeType) {
+                    if (crime.getCrimeType() == uiDataInterface.getCurrCrimeType()) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case DATE:
-                    if (crime.getDate() == UIDataInterface.currDate) {
+                    if (crime.getDate() == uiDataInterface.getCurrDate()) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -59,7 +77,7 @@ public class DataFilter {
                     }
                     break;
                 case DATE_RANGE:
-                    if (crime.getDate() == UIDataInterface.currDateRange) { // TODO might have to change date to be a Java.date value to work with range
+                    if (isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crime.getDate()) ) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -69,10 +87,14 @@ public class DataFilter {
         return singleFilterArray;
     }
 
-    public ArrayList<CrimeData> sortByFrequency() {
+//    public ArrayList<CrimeData> sortByFrequency() {
+//
+//    }
 
-    }
-
+    /**
+     * Setter for ActiveFilters parameter.
+     * @param activeFilters
+     */
     public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
         this.activeFilters = activeFilters;
     }

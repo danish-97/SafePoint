@@ -1,12 +1,14 @@
 package seng202.team3.model;
 
+import java.text.ParseException;
+
 public class PoliceData extends CrimeData {
     private String caseNumber;
     private char arrestMade;
     private int xCord;
     private int yCord;
 
-    public PoliceData(String data) {
+    public PoliceData(String data) throws ParseException {
         super(data);
     }
 
