@@ -16,7 +16,7 @@ public class CrimeDataTest {
      */
     @Test
     public void checkAddress() {
-        String data = "042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
+        String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
         assertEquals("042XX W MADISON ST", crime.getAddress());
     }
@@ -26,7 +26,7 @@ public class CrimeDataTest {
      */
     @Test
     public void checkDate() {
-        String data = "042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
+        String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
         assertEquals("06/15/2021 07:50:00 AM", crime.getDate());
     }
@@ -36,7 +36,7 @@ public class CrimeDataTest {
      */
     @Test
     public void checkLocation() {
-        String data = "042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
+        String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
         assertEquals("(41.880660786, -87.731186405)", crime.getLocation());
     }
@@ -46,7 +46,7 @@ public class CrimeDataTest {
      */
     @Test
     public void checkCrimeType() {
-        String data = "042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
+        String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
         System.out.println(crime.getCrimeType());
         assertEquals("ASSAULT", crime.getCrimeType());

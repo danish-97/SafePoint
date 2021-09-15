@@ -14,7 +14,7 @@ public class UserData extends CrimeData {
     public UserData(String data) {
         super(data);
         List<String> date = Arrays.asList(data.split(", "));
-        dateReported = date.get(1);
+        dateReported = date.get(2);
     }
 
     public String getDateReported() {
