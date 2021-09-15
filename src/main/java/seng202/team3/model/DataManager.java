@@ -13,11 +13,18 @@ public class DataManager {
         //TODO IMPLEMENT getData()
         return NULL;
     }
-
-    public CrimeData getDataByID(String ID) {
-        //TODO IMPLEMENT getDataByID
-        return NULL;
-    }
     */
+   public CrimeData getDataByID(String ID) throws Exception {
+        //Loops through allCrimeData and returns Crime with matching ID
+        CrimeData matchingCrime = null;
+        for (CrimeData crime : allCrimeData) {
+            if (crime.getCrimeId() == ID) {
+                matchingCrime = crime;
+            }
+        }
+        if (matchingCrime == null) {
+            throw new Exception("Crime not found excpetion");
 
+        } else return matchingCrime;
+    }
 }
