@@ -2,9 +2,14 @@ package seng202.team3;
 
 import org.junit.jupiter.api.Test;
 import seng202.team3.model.UserData;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserDataTest {
+
+    /**
+     * Checks if the getDateReported method works as intended.
+     */
     @Test
     public void checkDate(){
         String date = "06/15/2021 07:50:00 AM";

@@ -6,6 +6,11 @@ public class PoliceData extends CrimeData {
     private int xCord;
     private int yCord;
 
+    /**
+     * Constructor method for the class PoliceData
+     * @param data is the String that is received
+     */
+
     public PoliceData(String data) {
         super(data);
     }

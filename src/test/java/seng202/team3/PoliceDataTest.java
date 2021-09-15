@@ -5,7 +5,12 @@ import seng202.team3.model.PoliceData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class PoliceDataTest {
+
+    /**
+     * Checks if the getCaseNumber method gets the correct field from the String.
+     */
     @Test
     public void caseNumberCheck() {
         PoliceData data = new PoliceData("042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
@@ -13,6 +18,9 @@ public class PoliceDataTest {
         assertEquals("JE163990", data.getCaseNumber());
     }
 
+    /**
+     * Checks if the isArrestMade method gets the correct field from the String.
+     */
     @Test
 
     public void arrestMadeCheck() {
@@ -21,20 +29,27 @@ public class PoliceDataTest {
         assertEquals('Y', data.isArrestMade());
     }
 
+    /**
+     * Checks if the getxCord method gets the correct field from the String.
+     */
     @Test
 
     public void xCordCheck() {
         PoliceData data = new PoliceData("042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setxCord(56);
-        assertEquals(Integer.valueOf(56), data.getxCord());
+        assertEquals(56, data.getxCord());
     }
+
+    /**
+     * Checks if the getyCord method gets the correct field from the String.
+     */
 
     @Test
 
     public void yCordCheck() {
         PoliceData data = new PoliceData("042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setyCord(56);
-        assertEquals(Integer.valueOf(56), data.getyCord());
+        assertEquals(56, data.getyCord());
     }
 
 

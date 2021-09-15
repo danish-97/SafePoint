@@ -12,6 +12,15 @@ public class CrimeData {
     private String location;
     private String crimeType;
 
+    /**
+     * Constructor method for the class CrimeData
+     * @param data is the string that is passed to the method
+     */
+
+    public CrimeData(String data) {
+        formatStringToData(data);
+    }
+
     public String getAddress() {
         return address;
     }
@@ -37,9 +46,10 @@ public class CrimeData {
         return crimeType;
     }
 
-    public CrimeData(String data) {
-        formatStringToData(data);
-    }
+    /**
+     * Function that splits the given string to get the required fields
+     * @param data is the String which is to be formatted
+     */
 
     private void formatStringToData(String data) {
         List<String> dataSplit = Arrays.asList(data.split(", "));
