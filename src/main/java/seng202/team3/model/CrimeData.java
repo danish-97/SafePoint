@@ -16,6 +16,17 @@ public class CrimeData {
     private String location;
     private String crimeType;
 
+    /**
+     * Constructor method for the class CrimeData
+     * @param data is the string that is passed to the method
+     */
+
+    public CrimeData(String data) {
+        formatStringToData(data);
+    }
+
+    public String getId() {return id;}
+
     public String getAddress() {
         return address;
     }
@@ -44,15 +55,21 @@ public class CrimeData {
     public CrimeData(String data) throws ParseException {
         formatStringToData(data);
     }
+    /**
+     * Function that splits the given string to get the required fields
+     * @param data is the String which is to be formatted
+     */
 
     private void formatStringToData(String data) throws ParseException {
         List<String> dataSplit = Arrays.asList(data.split(", "));
-        address = dataSplit.get(0);
-        String dateString = dataSplit.get(1);
+        id = dataSplit.get(0);
+        address = dataSplit.get(1);
+        latitude = dataSplit.get(3);
+        longitude = dataSplit.get(4);
+        crimeType = dataSplit.get(5);
+        String dateString = dataSplit.get(2);
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-        latitude = dataSplit.get(2);
-        longitude = dataSplit.get(3);
-        crimeType = dataSplit.get(4);
+
     }
 
 

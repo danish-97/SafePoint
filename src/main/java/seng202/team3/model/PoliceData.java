@@ -8,7 +8,12 @@ public class PoliceData extends CrimeData {
     private int xCord;
     private int yCord;
 
-    public PoliceData(String data) throws ParseException {
+    /**
+     * Constructor method for the class PoliceData
+     * @param data is the String that is received
+     */
+
+    public PoliceData(String data) {
         super(data);
     }
 

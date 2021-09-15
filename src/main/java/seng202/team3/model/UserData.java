@@ -7,10 +7,15 @@ import java.util.List;
 public class UserData extends CrimeData {
     private String dateReported;
 
-    public UserData(String data) throws ParseException {
+    /**
+     * Constructor method for the class UserData
+     * @param data is the String received
+     */
+
+    public UserData(String data) {
         super(data);
         List<String> date = Arrays.asList(data.split(", "));
-        dateReported = date.get(1);
+        dateReported = date.get(2);
     }
 
     public String getDateReported() {
