@@ -1,8 +1,6 @@
-package seng202.team3;
+package seng202.team3.model;
 
 import org.junit.jupiter.api.Test;
-import seng202.team3.model.CrimeData;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
