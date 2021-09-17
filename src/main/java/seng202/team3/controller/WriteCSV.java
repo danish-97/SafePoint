@@ -9,11 +9,15 @@ import java.util.ArrayList;
 
 public class WriteCSV {
 
+    /**
+     * Reads data from a csv input file and writes it to an output file
+     * @param outputPath Location of output file
+     * @param inputPath Location of input file
+     */
     public static void writeDataLineByLine(String outputPath, String inputPath)
     {
-        ReadCSV inputFile = null;
-        ArrayList<ArrayList<String>> inputCrimes = new ArrayList<>();
-        inputCrimes = inputFile.readDataLineByLine(inputPath);
+        ArrayList<ArrayList<String>> inputCrimes;
+        inputCrimes = ReadCSV.readDataLineByLine(inputPath);
 
         // first create file object for file placed at location
         // specified by filepath
@@ -33,6 +37,7 @@ public class WriteCSV {
             writer.writeNext(header);
 
 
+            assert inputCrimes != null;
             for (ArrayList<String> crime : inputCrimes) {
                 String[] str = new String[crime.size()];
                 for (int i = 0; i < crime.size(); i++) {

@@ -4,10 +4,15 @@ import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ReadCSV {
-
+    /**
+     * Reads content of a file and returns list of Crimes in file without a header
+     * @param file Location of input file
+     * @return A list of crimes in file
+     */
     public static ArrayList<ArrayList<String>> readDataLineByLine(String file) {
 
         try {
@@ -29,11 +34,9 @@ public class ReadCSV {
             int counter = 0;
             while ((nextRecord = csvReader.readNext()) != null) {
                 if (counter != 0) { //Removes header of file
-                    for (String cell : nextRecord) {
-                        crime.add(cell);
-                    }
+                    Collections.addAll(crime, nextRecord);
                     listOfCrimes.add(crime);
-                    crime = new ArrayList<String>();
+                    crime = new ArrayList<>();
                 } else {
                     counter++;
                 }
