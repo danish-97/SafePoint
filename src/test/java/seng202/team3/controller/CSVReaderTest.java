@@ -12,7 +12,9 @@ public class CSVReaderTest {
     @Test
     public void checkReadCSV() throws FileNotFoundException {
         ReadCSV csv = new ReadCSV();
-        FileReader file = new FileReader("src/test/java/seng202/team3/controller/file.txt");
+
+        String file = ("src/test/java/seng202/team3/controller/file.txt");
+        csv.readDataLineByLine(file);
        // assertEquals(csv.readDataLineByLine(file));
     }
 
