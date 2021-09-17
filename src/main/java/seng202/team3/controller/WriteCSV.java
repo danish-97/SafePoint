@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class WriteCSV {
+public class WriteCSV {
 
     public static void writeDataLineByLine(String filePath, String[] data)
     {
@@ -19,6 +19,12 @@ class WriteCSV {
 
             // create CSVWriter object writer as parameter
             CSVWriter writer = new CSVWriter(outputFile);
+
+            // adding header to csv
+            String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "IUCR", "PRIMARY DESCRIPTION",
+                    "SECONDARY DESCRIPTION", "LOCATION DESCRIPTION", "ARREST", "DOMESTIC", "BEAT", "WARD", "FBI CD","X COORDINATE",
+                    "Y COORDINATE", "LATITUDE", "LONGITUDE", "LOCATION"};
+            writer.writeNext(header);
 
             writer.writeNext(data);
 

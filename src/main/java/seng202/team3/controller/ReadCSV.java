@@ -4,13 +4,13 @@ import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 
-class ReadCSV {
+public class ReadCSV {
 
     public static void readDataLineByLine(String file) {
 
         try {
 
-            // Create an object of filereader
+            // Create an object of fileReader
             // class with CSV file as a parameter.
             FileReader filereader = new FileReader(file);
 
