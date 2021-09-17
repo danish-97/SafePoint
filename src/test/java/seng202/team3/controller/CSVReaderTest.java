@@ -13,7 +13,7 @@ public class CSVReaderTest {
     public void checkReadCSV() throws FileNotFoundException {
         ReadCSV csv = new ReadCSV();
 
-        String file = ("src/test/java/seng202/team3/controller/file.txt");
+        String file = ("src/test/java/seng202/team3/controller/seng202_2021_crimes_one_year_prior_to_present_5k.csv");
         csv.readDataLineByLine(file);
        // assertEquals(csv.readDataLineByLine(file));
     }

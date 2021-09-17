@@ -38,7 +38,7 @@ public class ReadCSV {
                     counter++;
                 }
             }
-
+            System.out.println(listOfCrimes);
             return listOfCrimes;
 
         } catch (Exception e) {
