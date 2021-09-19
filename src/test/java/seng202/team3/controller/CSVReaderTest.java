@@ -7,6 +7,10 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests for CSV reader
+ * @author roryh
+ */
 public class CSVReaderTest {
     /**
      * Reads file.txt and compares result to correct output

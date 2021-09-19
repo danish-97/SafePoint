@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Class to read Crime content of a file and return list of String crimes
+ * @author roryh and Danish
+ */
 
 public class ReadCSV {
     /**

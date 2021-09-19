@@ -7,7 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-
+/**
+ * Tests for CSV writer
+ * @author roryh
+ */
 public class CSVWriterTest {
 
     /**

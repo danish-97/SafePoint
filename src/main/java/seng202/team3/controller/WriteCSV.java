@@ -7,6 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Writes data found in an input file ot an output file
+ * @author roryh and Danish
+ */
 public class WriteCSV {
 
     /**

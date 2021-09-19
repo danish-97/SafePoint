@@ -2,6 +2,10 @@ package seng202.team3.model;
 
 import java.util.ArrayList;
 
+/**
+ * Handles and stores data
+ * @author roryh
+ */
 public class DataManager {
 
     private String[] acitveDataLocation;
