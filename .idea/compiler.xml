@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SafePoint" target="16" />
+      <module name="SafePoint" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>
