@@ -16,12 +16,10 @@ public class DataManager {
         allCrimeData.add(object);
     }
 
-
-   /* public ArrayList<CrimeData> getData() {
-        //TODO IMPLEMENT getData()
-        return NULL;
+   public ArrayList<CrimeData> getData() {
+        return activeCrimeData;
     }
-    */
+
 
     /**
      * Loops through allCrimeData and returns matching CrimeData object
