@@ -14,7 +14,7 @@ public class PoliceDataTest {
      * Checks if the getCaseNumber method gets the correct field from the String.
      */
     @Test
-    public void caseNumberCheck() {
+    public void caseNumberCheck() throws ParseException {
         PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setCaseNumber("JE163990");
         assertEquals("JE163990", data.getCaseNumber());
@@ -25,7 +25,7 @@ public class PoliceDataTest {
      */
     @Test
 
-    public void arrestMadeCheck() {
+    public void arrestMadeCheck() throws ParseException {
         PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setArrestMade('Y');
         assertEquals('Y', data.isArrestMade());
@@ -36,7 +36,7 @@ public class PoliceDataTest {
      */
     @Test
 
-    public void xCordCheck() {
+    public void xCordCheck() throws ParseException {
         PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setxCord(56);
         assertEquals(56, data.getxCord());
@@ -48,7 +48,7 @@ public class PoliceDataTest {
 
     @Test
 
-    public void yCordCheck() {
+    public void yCordCheck() throws ParseException {
         PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
         data.setyCord(56);
         assertEquals(56, data.getyCord());

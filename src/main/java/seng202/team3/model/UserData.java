@@ -12,7 +12,7 @@ public class UserData extends CrimeData {
      * @param data is the String received
      */
 
-    public UserData(String data) {
+    public UserData(String data) throws ParseException {
         super(data);
         List<String> date = Arrays.asList(data.split(", "));
         dateReported = date.get(2);

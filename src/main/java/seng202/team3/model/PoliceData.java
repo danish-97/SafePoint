@@ -13,7 +13,7 @@ public class PoliceData extends CrimeData {
      * @param data is the String that is received
      */
 
-    public PoliceData(String data) {
+    public PoliceData(String data) throws ParseException {
         super(data);
     }
 

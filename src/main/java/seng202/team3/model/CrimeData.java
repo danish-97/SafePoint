@@ -21,7 +21,7 @@ public class CrimeData {
      * @param data is the string that is passed to the method
      */
 
-    public CrimeData(String data) {
+    public CrimeData(String data) throws ParseException {
         formatStringToData(data);
     }
 
@@ -52,9 +52,6 @@ public class CrimeData {
         return crimeType;
     }
 
-    public CrimeData(String data) throws ParseException {
-        formatStringToData(data);
-    }
     /**
      * Function that splits the given string to get the required fields
      * @param data is the String which is to be formatted
