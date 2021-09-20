@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
@@ -111,7 +112,12 @@
                   </Pane>
                </children>
             </FlowPane>
-            <Pane layoutX="140.0" layoutY="74.0" prefHeight="517.0" prefWidth="646.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+            <Pane layoutX="140.0" layoutY="74.0" prefHeight="517.0" prefWidth="645.0" style="-fx-border-color: black; -fx-border-width: 2;">
+               <children>
+                  <WebView fx:id="mapView" layoutX="4.0" layoutY="4.0" prefHeight="517.0" prefWidth="645.0" />
+               </children>
+
+            </Pane>
          </children>
       </FlowPane>
    </children>

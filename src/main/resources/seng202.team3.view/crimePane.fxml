@@ -12,3 +12,6 @@
       <Button mnemonicParsing="false" style="-fx-border-color: black; -fx-background-color: white; -fx-font-size: 10; -fx-padding: 0; -fx-pref-width: 50; -fx-translate-x: 65; -fx-translate-y: 60;" text="View" />
    </children>
 </Pane>
+
+
+
