@@ -1,4 +1,4 @@
-package seng202.team3;
+package seng202.team3.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

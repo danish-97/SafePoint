@@ -3,6 +3,8 @@ package seng202.team3.model;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,9 +16,10 @@ public class PoliceDataTest {
      */
     @Test
     public void caseNumberCheck() throws ParseException {
-        PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
-        data.setCaseNumber("JE163990");
-        assertEquals("JE163990", data.getCaseNumber());
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
+        PoliceData pData = new PoliceData("1", data);
+        assertEquals("JE163990", pData.getCaseNumber());
     }
 
     /**
@@ -25,9 +28,10 @@ public class PoliceDataTest {
     @Test
 
     public void arrestMadeCheck() throws ParseException {
-        PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
-        data.setArrestMade('Y');
-        assertEquals('Y', data.isArrestMade());
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
+        PoliceData pData = new PoliceData("1", data);
+        assertEquals("NO", pData.isArrestMade());
     }
 
     /**
@@ -36,9 +40,10 @@ public class PoliceDataTest {
     @Test
 
     public void xCordCheck() throws ParseException {
-        PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
-        data.setxCord(56);
-        assertEquals(56, data.getxCord());
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
+        PoliceData pData = new PoliceData("1", data);
+        assertEquals(1183633, pData.getXCoord());
     }
 
     /**
@@ -48,9 +53,10 @@ public class PoliceDataTest {
     @Test
 
     public void yCordCheck() throws ParseException {
-        PoliceData data = new PoliceData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
-        data.setyCord(56);
-        assertEquals(56, data.getyCord());
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
+        PoliceData pData = new PoliceData("1", data);
+        assertEquals(1851786, pData.getYCoord());
     }
 
 

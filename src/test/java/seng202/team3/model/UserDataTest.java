@@ -3,6 +3,7 @@ package seng202.team3.model;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,8 +15,10 @@ public class UserDataTest {
      */
     @Test
     public void checkDate() throws ParseException {
-        String date = "06/15/2021 07:50:00 AM";
-        UserData userDate = new UserData("JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT");
-        assertEquals(date, userDate.getDateReported());
+        String date = "11/26/2020 07:50:00 AM";
+        ArrayList<String> uData = new ArrayList<>();
+        uData.add("THEFT"); uData.add("49 MAYS ROAD"); uData.add("41.812610526"); uData.add("-87.723765071"); uData.add("11/26/2020 07:50:00 AM");
+        UserData data = new UserData("1", uData);
+        assertEquals(date, data.getDate());
     }
 }
