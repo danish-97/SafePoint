@@ -2,15 +2,14 @@ package seng202.team3;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seng202.team3.model.CrimeData;
-import seng202.team3.model.DataFilter;
-import seng202.team3.model.CrimeStat;
-import seng202.team3.model.UIDataInterface;
+import seng202.team3.model.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Unit test for DataFilterTest.
@@ -40,14 +39,18 @@ public class DataFilterTest {
     public void initDataFilterTestInfo() throws ParseException {
 
         ArrayList<CrimeData> crimeDataArrayList = new ArrayList<CrimeData>();
-        CrimeData crimeData = new CrimeData("1 RANDOM STREET, 27/08/2021, 41.74848637, -87.60267506, THEFT");
-        CrimeData crimeData1 = new CrimeData("2 RANDOM STREET, 28/08/2021, 41.74848637, -87.60267506, BATTERY");
-        CrimeData crimeData2 = new CrimeData("3 RANDOM STREET, 29/08/2021, 41.74848637, -87.60267506, ASSAULT");
-        CrimeData crimeData3 = new CrimeData("4 RANDOM STREET, 30/08/2021, 41.74848637, -87.60267506, HOMICIDE");
-        crimeDataArrayList.add(crimeData);
-        crimeDataArrayList.add(crimeData1);
-        crimeDataArrayList.add(crimeData2);
-        crimeDataArrayList.add(crimeData3);
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
+        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
+        crimeDataArrayList.add(new PoliceData("1", data));
+        strSplit = "JE163990,11/23/2020 03:05:00 PM,073XX S SOUTH SHORE DR,0820,THEFT,$500 AND UNDER,APARTMENT,N,N,334,7,06,,,,,".split(",");
+        data = new ArrayList<>(Arrays.asList(strSplit));
+        crimeDataArrayList.add(new PoliceData("2", data));
+        strSplit = "JD364009,09/11/2020 04:20:00 PM,056XX S WESTERN AVE,0560,ASSAULT,SIMPLE,AUTO / BOAT / RV DEALERSHIP,N,N,824,15,08A,1161332,1867195,41.79126146,-87.683967547,(41.79126146, -87.683967547)".split(",");
+        data = new ArrayList<>(Arrays.asList(strSplit));
+        crimeDataArrayList.add(new PoliceData("3", data));
+        ArrayList<String> uData = new ArrayList<>();
+        uData.add("THEFT"); uData.add("49 MAYS ROAD"); uData.add("41.812610526"); uData.add("-87.723765071");
+        crimeDataArrayList.add(new UserData("4", uData));
         uiDataInterface = new UIDataInterface();
 
     }
@@ -57,13 +60,11 @@ public class DataFilterTest {
      */
     @Test
     public void testValidTypeFilterOneResult() {
-        System.out.println(crimeDataArrayList);
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
         activeFilters.add(typeFilter);
         dataFilter.setActiveFilters(activeFilters);
         uiDataInterface.setCurrCrimeType("THEFT");
-        System.out.println(crimeDataArrayList);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(1, filteredData.size());
         assertEquals("1 RANDOM STREET", filteredData.get(0));
