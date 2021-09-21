@@ -1,5 +1,6 @@
 package seng202.team3.model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -59,13 +60,18 @@ public class DataFilter {
                     }
                     break;
                 case DATE:
-                    Date
-                    if (crime.getDate() == uiDataInterface.getCurrDate()) {
-                        singleFilterArray.add(crime);
+                    try {
+                        String crimeDateStr = crime.getDate().substring(0, 9);
+                        Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
+                        if (crimeDate == uiDataInterface.getCurrDate()) {
+                            singleFilterArray.add(crime);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case ARREST_MADE:
-                    if (crime instanceof PoliceData && (((PoliceData) crime).isArrestMade() == 'Y')) {
+                    if (crime instanceof PoliceData && (Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -80,8 +86,14 @@ public class DataFilter {
                     }
                     break;
                 case DATE_RANGE:
-                    if (isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crime.getDate()) ) {
-                        singleFilterArray.add(crime);
+                    try {
+                        String crimeDateStr = crime.getDate().substring(0, 9);
+                        Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
+                        if (isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crimeDate)) {
+                            singleFilterArray.add(crime);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
                     break;
             }
