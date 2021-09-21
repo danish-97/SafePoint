@@ -2,7 +2,7 @@ package seng202.team3.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seng202.team3.model.*;
+import seng202.team3.controller.UIDataInterface;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

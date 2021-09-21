@@ -1,5 +1,8 @@
 package seng202.team3.model;
 
+import seng202.team3.controller.FilterController;
+import seng202.team3.controller.UIDataInterface;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;

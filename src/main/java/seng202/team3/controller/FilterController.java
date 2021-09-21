@@ -1,4 +1,6 @@
-package seng202.team3.model;
+package seng202.team3.controller;
+
+import seng202.team3.model.CrimeStat;
 
 import java.util.ArrayList;
 
