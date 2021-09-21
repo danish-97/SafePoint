@@ -22,5 +22,6 @@ public class UserData extends CrimeData {
         setLatitude(data.get(2));
         setLongitude(data.get(3));
         setLocation(data.get(2) + ", " + data.get(3));
+        setDate(data.get(4));
     }
 }

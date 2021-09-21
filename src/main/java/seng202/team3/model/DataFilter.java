@@ -2,6 +2,8 @@ package seng202.team3.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 // TODO HIGH_FREQ, LOW_FREQ sorting
 
@@ -47,16 +49,17 @@ public class DataFilter {
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (crime.getLocation() == (uiDataInterface.getRegionActive())) {
+                    if (Objects.equals(crime.getLocation(), uiDataInterface.getRegionActive())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case CRIME_TYPE:
-                    if (crime.getCrimeType() == uiDataInterface.getCurrCrimeType()) {
+                    if (Objects.equals(crime.getCrimeType(), uiDataInterface.getCurrCrimeType())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case DATE:
+                    Date
                     if (crime.getDate() == uiDataInterface.getCurrDate()) {
                         singleFilterArray.add(crime);
                     }

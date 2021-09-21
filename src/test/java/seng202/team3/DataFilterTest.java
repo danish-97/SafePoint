@@ -49,7 +49,7 @@ public class DataFilterTest {
         data = new ArrayList<>(Arrays.asList(strSplit));
         crimeDataArrayList.add(new PoliceData("3", data));
         ArrayList<String> uData = new ArrayList<>();
-        uData.add("THEFT"); uData.add("49 MAYS ROAD"); uData.add("41.812610526"); uData.add("-87.723765071");
+        uData.add("THEFT"); uData.add("49 MAYS ROAD"); uData.add("41.812610526"); uData.add("-87.723765071"); uData.add("11/26/2020");
         crimeDataArrayList.add(new UserData("4", uData));
         uiDataInterface = new UIDataInterface();
 
