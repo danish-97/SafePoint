@@ -1,5 +1,6 @@
 package seng202.team3;
 
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
@@ -59,6 +60,7 @@ public class CrimeDataTest {
      * Checks to make sure crimes are added to allCrimeData
      */
     @Test
+    @Order(1)
     public void checkAllCrimeData() {
         String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
