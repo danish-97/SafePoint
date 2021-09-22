@@ -83,11 +83,11 @@
                   </Pane>
                   <Pane layoutX="12.0" layoutY="167.0" prefHeight="208.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
-                        <CheckBox layoutX="4.0" layoutY="6.0" mnemonicParsing="false" text="Show Region Data" />
-                        <ChoiceBox layoutX="4.0" layoutY="26.0" prefHeight="25.0" prefWidth="118.0" />
-                        <CheckBox layoutX="4.0" layoutY="59.0" mnemonicParsing="false" text="Sort by Date" />
-                        <DatePicker layoutX="7.0" layoutY="82.0" prefHeight="25.0" prefWidth="142.0" promptText="Start Date" />
-                        <DatePicker layoutX="7.0" layoutY="115.0" prefHeight="25.0" prefWidth="142.0" promptText="End Date" />
+                        <CheckBox fx:id="regionFilteringToggle" layoutX="4.0" layoutY="6.0" mnemonicParsing="false" text="Show Region Data" />
+                        <ChoiceBox fx:id="regionFilteringKey" layoutX="4.0" layoutY="26.0" prefHeight="25.0" prefWidth="118.0" />
+                        <CheckBox fx:id="dateSortToggle" layoutX="4.0" layoutY="59.0" mnemonicParsing="false" text="Sort by Date" />
+                        <DatePicker fx:id="startDate" layoutX="7.0" layoutY="82.0" prefHeight="25.0" prefWidth="142.0" promptText="Start Date" />
+                        <DatePicker fx:id="endDate" layoutX="7.0" layoutY="115.0" prefHeight="25.0" prefWidth="142.0" promptText="End Date" />
                      </children>
                   </Pane>
                </children>
