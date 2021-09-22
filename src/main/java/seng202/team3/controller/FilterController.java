@@ -10,8 +10,4 @@ public class FilterController {
         return null;
     }
 
-//    public DisplayState getDisplayState() {
-//        return null;
-//    }
-
 }

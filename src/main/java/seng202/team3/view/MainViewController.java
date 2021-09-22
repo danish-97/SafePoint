@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import seng202.team3.controller.UIDataInterface;
 
 public class MainViewController implements Initializable {
 
@@ -41,7 +42,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void updateCrimeData (ActionEvent e) {
-
+        UIDataInterface.updateFilters();
     }
 
     @Override

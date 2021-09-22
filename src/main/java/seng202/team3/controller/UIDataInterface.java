@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import seng202.team3.model.DisplayState;
+import seng202.team3.view.MainViewController;
 
 import java.util.Date;
 
@@ -76,5 +77,10 @@ public class UIDataInterface {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public static void updateFilters() {
+        MainViewController mvc = new MainViewController();
+        System.out.println(mvc.getCurrentCrimeType());
     }
 }
