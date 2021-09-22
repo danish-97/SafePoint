@@ -17,7 +17,7 @@ public class PoliceData extends CrimeData {
      * Constructor method for the class PoliceData
      * @param data is the String that is received
      */
-    public PoliceData(String id, ArrayList<String> data) throws ParseException {
+    public PoliceData(String id ,ArrayList<String> data) throws ParseException {
         super(id);
         formatPoliceData(data);
     }
