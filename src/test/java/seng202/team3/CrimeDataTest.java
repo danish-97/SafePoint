@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit test for CrimeDataTest
@@ -64,9 +63,6 @@ public class CrimeDataTest {
     public void checkAllCrimeData() {
         String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
         CrimeData crime = new CrimeData(data);
-        DataManager manager = new DataManager();
-        ArrayList<CrimeData> test = new ArrayList<>();
-        test.add(crime);
-        assertEquals(test, manager.getAllData());
+        assertTrue(DataManager.getAllData().contains(crime));
     }
 }
