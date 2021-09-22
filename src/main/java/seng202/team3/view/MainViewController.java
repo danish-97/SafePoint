@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
 public class MainViewController implements Initializable {
@@ -41,8 +42,9 @@ public class MainViewController implements Initializable {
     private WebEngine webEngine;
 
     @FXML
-    public void updateCrimeData (ActionEvent e) {
-        UIDataInterface.updateFilters();
+    public void  updateCrimeData(ActionEvent e) {
+        updateRegionCrimeData();
+        updateMapSettingsData();
     }
 
     @Override
@@ -71,6 +73,46 @@ public class MainViewController implements Initializable {
         }
     }
 
+    public void updateRegionCrimeData () {
+        if (!Objects.equals(regionFilter.getText(), "")) {
+            FilterController.setActiveLocation(regionFilter.getText());
+        }
+        FilterController.setActiveCrimeType((String) crimeSelector.getValue());
+    }
+
+    public void updateMapSettingsData () {
+        FilterController.setPoliceDataActive(policeDataToggle.isSelected());
+        FilterController.setUserDataActive(userDataToggle.isSelected());
+        FilterController.setArrestMade(arrestMadeToggle.isSelected());
+    }
+
+    public TextField getRegionFilter() {return regionFilter;}
+
+    public ChoiceBox getCrimeSelector() {return crimeSelector;}
+
+    public CheckBox getPoliceDataToggle() {return policeDataToggle;}
+
+    public CheckBox getUserDataToggle() {return userDataToggle;}
+
+    public CheckBox getArrestMadeToggle() {return arrestMadeToggle;}
+
+    public CheckBox getGraphToggle() {return graphToggle;}
+
+    public CheckBox getRegionFilteringToggle() {return regionFilteringToggle;}
+
+    public ChoiceBox getRegionFilteringKey() {return regionFilteringKey;}
+
+    public CheckBox getDateSortToggle() {return dateSortToggle;}
+
+    public DatePicker getStartDate() {return startDate;}
+
+    public DatePicker getEndDate() {return endDate;}
+
+    public WebView getMapView() {return mapView;}
+
+    public WebEngine getWebEngine() {return webEngine;}
+
+    /*
     public String getCurrentRegion () {
         return regionFilter.getText();
     }
@@ -116,5 +158,7 @@ public class MainViewController implements Initializable {
         String endDateStr = endDate.getValue().toString();
         return new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr);
     }
+
+     */
 }
 

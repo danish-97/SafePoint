@@ -80,7 +80,7 @@ public class UIDataInterface {
     }
 
     public static void updateFilters() {
-        MainViewController mvc = new MainViewController();
-        System.out.println(mvc.getCurrentCrimeType());
+        //MainViewController mvc = new MainViewController();
+        //System.out.println(mvc.getCurrentCrimeType());
     }
 }
