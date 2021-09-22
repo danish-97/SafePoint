@@ -3,11 +3,10 @@ package seng202.team3.model;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.Objects;
 
 // TODO HIGH_FREQ, LOW_FREQ sorting
 
@@ -16,6 +15,7 @@ public class DataFilter {
     FilterController filterController = new FilterController(); // TODO to be initialised in a different class.
     UIDataInterface uiDataInterface = new UIDataInterface(); // TODO to be initialised in a different class.
     private ArrayList<CrimeStat> activeFilters = filterController.getActiveFilters();
+    private DataManager dataManager;
 
     /**
      * Returns a list of crime data after filtering has been processed with ALL the active filters.
@@ -99,15 +99,14 @@ public class DataFilter {
                         e.printStackTrace();
                     }
                     break;
+                case LOW_FREQUENCY:
+                    ArrayList<CrimeData> lowFreqArray = new ArrayList<CrimeData>();
+
             }
 
         }
         return singleFilterArray;
     }
-
-//    public ArrayList<CrimeData> sortByFrequency() {
-//
-//    }
 
     /**
      * Setter for ActiveFilters parameter.
@@ -116,4 +115,50 @@ public class DataFilter {
     public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
         this.activeFilters = activeFilters;
     }
-}
+
+    public ArrayList<CrimeData> countFrequency(ArrayList<CrimeData> crimeDataArrayList) {
+
+        HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
+        for (int i = 0; i < crimeDataArrayList.size(); i++) {
+
+            if (countList.containsKey(crimeDataArrayList.get(i).getCrimeType())) {
+                ArrayList<CrimeData> guh = countList.get(crimeDataArrayList.get(i).getCrimeType());
+                guh.add(crimeDataArrayList.get(i));
+                countList.put(crimeDataArrayList.get(i).getCrimeType(), guh);
+            } else {
+                ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
+                hashMapArray.add(crimeDataArrayList.get(i));
+                countList.put(crimeDataArrayList.get(i).getCrimeType(), hashMapArray);
+            }
+        }
+
+        List<Map.Entry<String, ArrayList<CrimeData>>> list =
+                new ArrayList<>(countList.entrySet());
+        Collections.sort(list, new EntryComparator());
+
+        ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
+        for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
+            finalData.addAll(entry.getValue());
+        }
+
+        return finalData;
+    }
+
+    private static class EntryComparator
+            implements Comparator<Map.Entry<String, ArrayList<CrimeData>>>
+    {
+        public int compare(Map.Entry<String, ArrayList<CrimeData>> left,
+                           Map.Entry<String, ArrayList<CrimeData>> right) {
+            // Right then left to get a descending order
+            return Integer.compare(right.getValue().size(), left.getValue().size());
+        }
+    }
+
+
+
+
+
+    }
+
+
+
