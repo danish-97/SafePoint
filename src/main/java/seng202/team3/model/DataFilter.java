@@ -13,16 +13,14 @@ import java.util.Objects;
 
 public class DataFilter {
 
-    FilterController filterController = new FilterController(); // TODO to be initialised in a different class.
-    UIDataInterface uiDataInterface = new UIDataInterface(); // TODO to be initialised in a different class.
-    private ArrayList<CrimeStat> activeFilters = filterController.getActiveFilters();
-
     /**
      * Returns a list of crime data after filtering has been processed with ALL the active filters.
      * @param data List of crime data to be filtered.
      * @return an ArrayList<CrimeData> containing only filtered data
      */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
+        ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
+
         ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
         for (CrimeStat filter : activeFilters) {
             filteredData.addAll(filterCrimeData(filter, data));
@@ -53,15 +51,16 @@ public class DataFilter {
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (Objects.equals(crime.getLocation(), uiDataInterface.getRegionActive())) {
+                    if (Objects.equals(crime.getLocation(), FilterController.getActiveLocation())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case CRIME_TYPE:
-                    if (Objects.equals(crime.getCrimeType(), uiDataInterface.getCurrCrimeType())) {
+                    if (Objects.equals(crime.getCrimeType(), FilterController.getActiveCrimeType())) {
                         singleFilterArray.add(crime);
                     }
                     break;
+                    /*
                 case DATE:
                     try {
                         String crimeDateStr = crime.getDate().substring(0, 9);
@@ -73,6 +72,7 @@ public class DataFilter {
                         e.printStackTrace();
                     }
                     break;
+                    */
                 case ARREST_MADE:
                     if (crime instanceof PoliceData && (Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
                         singleFilterArray.add(crime);
@@ -92,7 +92,7 @@ public class DataFilter {
                     try {
                         String crimeDateStr = crime.getDate().substring(0, 9);
                         Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-                        if (isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crimeDate)) {
+                        if (isWithinRange(FilterController.getStartDate(), FilterController.getEndDate(), crimeDate)) {
                             singleFilterArray.add(crime);
                         }
                     } catch (ParseException e) {
@@ -108,12 +108,4 @@ public class DataFilter {
 //    public ArrayList<CrimeData> sortByFrequency() {
 //
 //    }
-
-    /**
-     * Setter for ActiveFilters parameter.
-     * @param activeFilters
-     */
-    public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
-        this.activeFilters = activeFilters;
-    }
 }

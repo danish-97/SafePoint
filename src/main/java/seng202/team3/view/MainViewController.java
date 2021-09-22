@@ -42,9 +42,10 @@ public class MainViewController implements Initializable {
     private WebEngine webEngine;
 
     @FXML
-    public void  updateCrimeData(ActionEvent e) {
+    public void  updateCrimeData(ActionEvent e) throws ParseException {
         updateRegionCrimeData();
         updateMapSettingsData();
+        updateRegionDateData();
     }
 
     @Override
@@ -60,7 +61,7 @@ public class MainViewController implements Initializable {
     }
 
     public void initCrimeSelector () {
-        String[] crimeTypes = {"ARSON", "ASSAULT", "BATTERY", "BURGLARY", "CONCEALED CARRY LICENCE", "CRIMINAL DAMAGE", "CRIMINAL SEXUAL ASSAULT", "CRIMINAL TRESPASS", "DECEPTIVE PRACTICE", "HOMICIDE", "INTERFERENCE WITH PUBLIC OFFICER", "INTIMIDATION", "KIDNAPPING", "LIQUOR LAW VIOLATION", "MOTOR VEHICLE THEFT", "NARCOTICS", "OFFENSE INVOLVING CHILDREN", "OTHER NARCOTIC VIOLATION", "OTHER OFFENSE", "PROSTITUTION", "PUBLIC PEACE VIOLATION", "ROBBERY", "SEX OFFENSE", "STALKING", "THEFT", "WEAPONS VIOLATION"};
+        String[] crimeTypes = {"ALL", "ARSON", "ASSAULT", "BATTERY", "BURGLARY", "CONCEALED CARRY LICENCE", "CRIMINAL DAMAGE", "CRIMINAL SEXUAL ASSAULT", "CRIMINAL TRESPASS", "DECEPTIVE PRACTICE", "HOMICIDE", "INTERFERENCE WITH PUBLIC OFFICER", "INTIMIDATION", "KIDNAPPING", "LIQUOR LAW VIOLATION", "MOTOR VEHICLE THEFT", "NARCOTICS", "OFFENSE INVOLVING CHILDREN", "OTHER NARCOTIC VIOLATION", "OTHER OFFENSE", "PROSTITUTION", "PUBLIC PEACE VIOLATION", "ROBBERY", "SEX OFFENSE", "STALKING", "THEFT", "WEAPONS VIOLATION"};
         for (String crimeType : crimeTypes) {
             crimeSelector.getItems().add(crimeType);
         }
@@ -86,29 +87,15 @@ public class MainViewController implements Initializable {
         FilterController.setArrestMade(arrestMadeToggle.isSelected());
     }
 
-    public TextField getRegionFilter() {return regionFilter;}
-
-    public ChoiceBox getCrimeSelector() {return crimeSelector;}
-
-    public CheckBox getPoliceDataToggle() {return policeDataToggle;}
-
-    public CheckBox getUserDataToggle() {return userDataToggle;}
-
-    public CheckBox getArrestMadeToggle() {return arrestMadeToggle;}
-
-    public CheckBox getGraphToggle() {return graphToggle;}
-
-    public CheckBox getRegionFilteringToggle() {return regionFilteringToggle;}
-
-    public ChoiceBox getRegionFilteringKey() {return regionFilteringKey;}
-
-    public CheckBox getDateSortToggle() {return dateSortToggle;}
-
-    public DatePicker getStartDate() {return startDate;}
-
-    public DatePicker getEndDate() {return endDate;}
-
-    public WebView getMapView() {return mapView;}
+    public void updateRegionDateData () throws ParseException {
+        FilterController.setRegionDataActive(regionFilteringToggle.isSelected());
+        FilterController.setRegionFilteringKey((String) regionFilteringKey.getValue());
+        FilterController.setDateFiltering(dateSortToggle.isSelected());
+        String startDateStr = startDate.getValue().toString();
+        FilterController.setStartDate( new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr));
+        String endDateStr = endDate.getValue().toString();
+        FilterController.setEndDate( new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr));
+    }
 
     public WebEngine getWebEngine() {return webEngine;}
 
