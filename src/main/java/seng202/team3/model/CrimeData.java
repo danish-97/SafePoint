@@ -1,6 +1,7 @@
 package seng202.team3.model;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CrimeData {
      * @param data is the String which is to be formatted
      */
 
-    private void formatStringToData(String data) {
+    private void formatStringToData(ArrayList<String> data) {
         List<String> dataSplit = Arrays.asList(data.split(", "));
         id = dataSplit.get(0);
         address = dataSplit.get(1);

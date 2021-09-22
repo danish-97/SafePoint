@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVReader;
+import seng202.team3.model.CrimeData;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class ReadCSV {
             while ((nextRecord = csvReader.readNext()) != null) {
                 if (counter != 0) { //Removes header of file
                     Collections.addAll(crime, nextRecord);
+                    CrimeData crimeObject = new CrimeData(crime);
                     listOfCrimes.add(crime);
                     crime = new ArrayList<>();
                 } else {

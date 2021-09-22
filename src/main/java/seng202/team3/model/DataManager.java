@@ -16,8 +16,6 @@ public class DataManager {
         allCrimeData.add(object);
     }
 
-   public ArrayList<CrimeData> getData() {
-        return activeCrimeData;
     public void addActiveCrimeData(CrimeData crime) {
         activeCrimeData.add(crime);
     }
