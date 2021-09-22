@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class DataManager {
 
     private String[] acitveDataLocation;
-    private ArrayList<CrimeData> allCrimeData = new ArrayList<>();
-    private ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
+    private static final ArrayList<CrimeData> allCrimeData = new ArrayList<>();
+    private static final ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
 
-    public void addCrimeData(CrimeData object) {
+    public static void addCrimeData(CrimeData object) {
         allCrimeData.add(object);
     }
 
@@ -16,6 +16,7 @@ public class DataManager {
         activeCrimeData.add(crime);
     }
 
+    public ArrayList<CrimeData> getAllData() {return allCrimeData; }
 
     /**
      * Returns activeCrimeData which is a list of CrimeData objects
@@ -46,4 +47,5 @@ public class DataManager {
             return matchingCrime;
         }
     }
+
 }
