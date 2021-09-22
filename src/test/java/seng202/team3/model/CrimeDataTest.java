@@ -2,6 +2,7 @@ package seng202.team3.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit test for CrimeDataTest
@@ -48,5 +49,15 @@ public class CrimeDataTest {
         CrimeData crime = new CrimeData(data);
         System.out.println(crime.getCrimeType());
         assertEquals("ASSAULT", crime.getCrimeType());
+    }
+
+    /**
+     * Checks to make sure crimes are added to allCrimeData
+     */
+    @Test
+    public void checkAllCrimeData() {
+        String data = "JE163990, 042XX W MADISON ST, 06/15/2021 07:50:00 AM, (41.880660786, -87.731186405), ASSAULT";
+        CrimeData crime = new CrimeData(data);
+        assertTrue(DataManager.getAllData().contains(crime));
     }
 }

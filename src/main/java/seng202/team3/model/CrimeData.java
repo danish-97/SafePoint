@@ -20,6 +20,7 @@ public class CrimeData {
 
     public CrimeData(String data) {
         formatStringToData(data);
+        DataManager.addCrimeData(this);
     }
 
     public String getId() {return id;}
