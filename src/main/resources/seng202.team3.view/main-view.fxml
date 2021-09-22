@@ -26,7 +26,7 @@
                <children>
                   <Pane prefHeight="42.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
-                        <TextField layoutX="3.0" layoutY="8.0" prefHeight="25.0" prefWidth="149.0" promptText="Filter by Region" style="-fx-border-color: black;" />
+                        <TextField fx:id="regionFilter" layoutX="3.0" layoutY="8.0" prefHeight="25.0" prefWidth="149.0" promptText="Filter by Region" style="-fx-border-color: black;" />
                      </children>
                   </Pane>
                   <Pane layoutX="12.0" layoutY="12.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
@@ -40,7 +40,7 @@
                   </Pane>
                   <Pane layoutX="12.0" layoutY="43.0" prefHeight="39.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
-                        <ChoiceBox layoutX="12.0" layoutY="4.0" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <ChoiceBox fx:id="crimeSelector" layoutX="12.0" layoutY="4.0" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: white; -fx-border-color: black;" />
                      </children>
                   </Pane>
                   <Pane layoutX="12.0" layoutY="74.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
@@ -54,19 +54,19 @@
                   </Pane>
                   <Pane layoutX="12.0" layoutY="105.0" prefHeight="110.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
-                        <CheckBox layoutX="7.0" layoutY="6.0" mnemonicParsing="false" text="Show Police Data">
+                        <CheckBox fx:id="policeDataToggle" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" text="Show Police Data">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
-                        <CheckBox layoutX="7.0" layoutY="31.0" mnemonicParsing="false" text="Show User Data">
+                        <CheckBox fx:id="userDataToggle" layoutX="7.0" layoutY="31.0" mnemonicParsing="false" text="Show User Data">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
-                        <CheckBox layoutX="5.0" layoutY="55.0" mnemonicParsing="false" text="Arrest Made">
+                        <CheckBox fx:id="arrestMadeToggle" layoutX="5.0" layoutY="55.0" mnemonicParsing="false" text="Arrest Made">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
-                        <CheckBox layoutX="7.0" layoutY="86.0" mnemonicParsing="false" text="Graph View">
+                        <CheckBox fx:id="graphToggle" layoutX="7.0" layoutY="86.0" mnemonicParsing="false" text="Graph View">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
