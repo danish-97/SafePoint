@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class DataManager {
 
-    private String[] acitveDataLocation;
+    private String[] activeDataLocation;
     private ArrayList<CrimeData> allCrimeData = new ArrayList<>();
     private ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
 
