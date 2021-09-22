@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -33,13 +34,15 @@ public class MainViewController implements Initializable {
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
 
-
-
     @FXML
     private WebView mapView;
 
     private WebEngine webEngine;
 
+    @FXML
+    public void updateCrimeData (ActionEvent e) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
