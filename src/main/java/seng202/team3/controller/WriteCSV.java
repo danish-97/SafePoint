@@ -7,14 +7,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Writes data found in an input file ot an output file
  * @author roryh and Danish
  */
 public class WriteCSV {
-
-    private static final String CSV_SEPARATOR = ",";
 
     /**
      * Reads data from a csv input file and writes it to an output file
@@ -44,10 +43,9 @@ public class WriteCSV {
             writer.writeNext(header);
 
             assert inputCrimes != null;
-            int i = 0;
             for (PoliceData crime : inputCrimes) {
-                String crimeString[] = {crime.getCaseNumber(), crime.getDate(), crime.getAddress(),
-                        crime.getCrimeType(), (crime.isArrestMade() == "YES" ? "Y" : "N"),
+                String[] crimeString = {crime.getCaseNumber(), crime.getDate(), crime.getAddress(),
+                        crime.getCrimeType(), (Objects.equals(crime.isArrestMade(), "YES") ? "Y" : "N"),
                         crime.getDomestic(), crime.getBeat(), crime.getWard(), Integer.toString(crime.getXCoord()),
                         Integer.toString(crime.getYCoord()), crime.getLatitude(), crime.getLongitude()
                 };

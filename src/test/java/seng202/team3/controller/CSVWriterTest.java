@@ -31,6 +31,7 @@ public class CSVWriterTest {
      */
     @Test
     public void checkWriteCSV() {
+
         WriteCSV.writeDataLineByLine("src/test/java/seng202/team3/controller/WriterTestFIle.txt",
                 "src/test/java/seng202/team3/controller/ReaderTestFile.txt");
 
@@ -43,9 +44,11 @@ public class CSVWriterTest {
         ArrayList<String> expectedResult = new ArrayList<>();
         ArrayList<String> result = new ArrayList<>();
 
+        assert readFromInitial != null;
         for (PoliceData crime : readFromInitial) {
             expectedResult.add(crime.getCaseNumber());
         }
+        assert readFromFinal != null;
         for (PoliceData crime : readFromFinal) {
             result.add(crime.getCaseNumber());
         }

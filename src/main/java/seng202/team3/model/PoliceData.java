@@ -92,15 +92,15 @@ public class PoliceData extends CrimeData {
         setCaseNumber(data.get(0));
         setDate(data.get(1));
         setAddress(data.get(2));
-        setCrimeType(data.get(4)); //Originally 4
-        setArrestMade(data.get(7)); //7
-        setDomestic(data.get(8)); //8
-        setBeat(data.get(9));//9
-        setWard(data.get(10));//10
-        setXCoord(data.get(12));//12
-        setYCoord(data.get(13));//13
-        setLatitude(data.get(14));//14
-        setLongitude(data.get(15));//15
-        setLocation(data.get(14) + ", " + data.get(15));//14 + 15
+        setCrimeType(data.get(3)); //Originally 4
+        setArrestMade(data.get(4)); //7
+        setDomestic(data.get(5)); //8
+        setBeat(data.get(6));//9
+        setWard(data.get(7));//10
+        setXCoord(data.get(8));//12
+        setYCoord(data.get(9));//13
+        setLatitude(data.get(10));//14
+        setLongitude(data.get(11));//15
+        setLocation(data.get(10) + ", " + data.get(11));//14 + 15
     }
 }
