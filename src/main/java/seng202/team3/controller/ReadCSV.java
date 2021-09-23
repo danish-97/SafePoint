@@ -22,7 +22,7 @@ public class ReadCSV extends Importer {
      * @param columnAmount size of header (column amount)
      * @return policeDataObject
      */
-    private static PoliceData readerHelper(String[] line, int columnAmount){
+    private static CrimeData readerHelper(String[] line, int columnAmount){
 
         ArrayList<String> modifiedCrime = new ArrayList(); //Modified line to send to PoliceData
 
@@ -51,11 +51,11 @@ public class ReadCSV extends Importer {
      * @param file Location of input file
      * @return A list of crimes in file
      */
-    public static ArrayList<PoliceData> readDataLineByLine(String file) {
+    public static ArrayList<CrimeData> readDataLineByLine(String file) {
 
         try {
             
-            ArrayList<PoliceData> listOfCrimes =  new ArrayList<>();
+            ArrayList<CrimeData> listOfCrimes =  new ArrayList<>();
 
 
             // Create an object of fileReader
@@ -70,8 +70,8 @@ public class ReadCSV extends Importer {
             int headerSize = csvReader.readNext().length;
             // Read data line by line
             while ((nextRecord = csvReader.readNext()) != null) {
-                PoliceData policeDataObject = readerHelper(nextRecord, headerSize); //Calls reader helper, sends in line of CSV file
-                listOfCrimes.add(policeDataObject); //Adds Crime to final list
+                CrimeData crimeDataObject = readerHelper(nextRecord, headerSize); //Calls reader helper, sends in line of CSV file
+                listOfCrimes.add(crimeDataObject); //Adds Crime to final list
             }
             return listOfCrimes;
 

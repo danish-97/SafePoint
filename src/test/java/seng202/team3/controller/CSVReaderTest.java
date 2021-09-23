@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import org.junit.jupiter.api.Test;
+import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 
 import java.util.ArrayList;
@@ -20,14 +21,14 @@ public class CSVReaderTest {
     @Test
     public void checkReadCSV() {
         String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
-        ArrayList<PoliceData> ReadingCSV = ReadCSV.readDataLineByLine(file);
+        ArrayList<CrimeData> ReadingCSV = ReadCSV.readDataLineByLine(file);
 
         ArrayList<String> expectedResultList = new ArrayList<>(Arrays.asList("JE266628", "JE266536"));
 
         ArrayList<String> result = new ArrayList<>();
         assert ReadingCSV != null;
-        for (PoliceData crime : ReadingCSV) {
-            result.add(crime.getCaseNumber());
+        for (CrimeData crime : ReadingCSV) {
+            result.add(((PoliceData) crime).getCaseNumber());
         }
 
         assertEquals(result, expectedResultList);
@@ -38,24 +39,24 @@ public class CSVReaderTest {
      */
     @Test
     public void checkDatabaseCSV() {
-        ArrayList<PoliceData> inputCrimes;
+        ArrayList<CrimeData> inputCrimes;
         inputCrimes = ReadCSV.readDataLineByLine("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<String[]> stringCrimes = new ArrayList<>();
-        for (PoliceData crime: inputCrimes) {
-            String[] stringCrime = Importer.policeToString(crime);
+        for (CrimeData crime: inputCrimes) {
+            String[] stringCrime = Importer.policeToString(((PoliceData) crime));
             stringCrimes.add(stringCrime);
         }
         WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/WriterTestFIle.txt", stringCrimes);
 
         String file = ("src/main/java/seng202/team3/Database/WriterTestFIle.txt");
-        ArrayList<PoliceData> ReadingCSV = ReadCSV.readDataLineByLine(file);
+        ArrayList<CrimeData> ReadingCSV = ReadCSV.readDataLineByLine(file);
 
         ArrayList<String> expectedResultList = new ArrayList<>(Arrays.asList("JE266628", "JE266536"));
 
         ArrayList<String> result = new ArrayList<>();
         assert ReadingCSV != null;
-        for (PoliceData crime : ReadingCSV) {
-            result.add(crime.getCaseNumber());
+        for (CrimeData crime : ReadingCSV) {
+            result.add(((PoliceData) crime).getCaseNumber());
         }
 
         assertEquals(result, expectedResultList);

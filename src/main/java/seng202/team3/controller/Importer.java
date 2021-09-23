@@ -1,5 +1,6 @@
 package seng202.team3.controller;
 
+import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 import java.util.ArrayList;
@@ -56,10 +57,10 @@ public class Importer {
          * @param inputPath Input path of police crimes
          */
         public static void addPoliceData(String inputPath) {
-                ArrayList<PoliceData> crimes = ReadCSV.readDataLineByLine(inputPath);
+                ArrayList<CrimeData> crimes = ReadCSV.readDataLineByLine(inputPath);
                 ArrayList<String[]> stringCrimes = new ArrayList<>();
-                for (PoliceData crime : crimes) {
-                        stringCrimes.add(policeToString(crime));
+                for (CrimeData crime : crimes) {
+                        stringCrimes.add(policeToString(((PoliceData) crime)));
                 }
                 WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/Database.txt", stringCrimes);
         }
