@@ -1,86 +1,27 @@
 package seng202.team3.controller;
 
-import seng202.team3.model.DisplayState;
-import seng202.team3.view.MainViewController;
-
-import java.util.Date;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
+import java.util.ArrayList;
+import seng202.team3.controller.ReadCSV;
+import seng202.team3.view.DataPaneConstructor;
 
 public class UIDataInterface {
 
-    private String currCrimeType;
-    private String regionActive;
-    private String[] activeMapSettings;
-    private boolean regionMapping;
-    private Date currDate;
-    private Date startDate;
-    private Date endDate;
+    private static String dataLocation = "data.csv";
 
-    public DisplayState currentState() {
-        return null; //TODO Return current state of data
+    public static void initCrimeData () {
+        ArrayList<CrimeData> allData;
+        allData = ReadCSV.readDataLineByLine(dataLocation);
+        DataManager.constructCrimeData(allData);
     }
 
-    public String constructUserData() {
-        return null; //TODO Return UserData
+    public static ArrayList<CrimeData> getActiveData () {
+        return DataManager.getData();
     }
 
-    public String getCurrCrimeType() {
-        return currCrimeType;
-    }
+    public static void addUserData (String userData) {
+        WriteCSV exporter = new WriteCSV();
 
-    public void setCurrCrimeType(String currCrimeType) {
-        this.currCrimeType = currCrimeType;
-    }
-
-    public String getRegionActive() {
-        return regionActive;
-    }
-
-    public void setRegionActive(String regionActive) {
-        this.regionActive = regionActive;
-    }
-
-    public String[] getActiveMapSettings() {
-        return activeMapSettings;
-    }
-
-    public void setActiveMapSettings(String[] activeMapSettings) {
-        this.activeMapSettings = activeMapSettings;
-    }
-
-    public boolean isRegionMapping() {
-        return regionMapping;
-    }
-
-    public void setRegionMapping(boolean regionMapping) {
-        this.regionMapping = regionMapping;
-    }
-
-    public Date getCurrDate() {
-        return currDate;
-    }
-
-    public void setCurrDate(Date currDate) {
-        this.currDate = currDate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public static void updateFilters() {
-        //MainViewController mvc = new MainViewController();
-        //System.out.println(mvc.getCurrentCrimeType());
     }
 }

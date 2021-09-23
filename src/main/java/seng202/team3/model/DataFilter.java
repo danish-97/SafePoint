@@ -21,6 +21,10 @@ public class DataFilter {
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
 
+        if (activeFilters.size() == 0) {
+            return data;
+        }
+
         ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
         for (CrimeStat filter : activeFilters) {
             filteredData.addAll(filterCrimeData(filter, data));

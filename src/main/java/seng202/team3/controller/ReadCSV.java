@@ -1,6 +1,8 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVReader;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.PoliceData;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -17,11 +19,11 @@ public class ReadCSV {
      * @param file Location of input file
      * @return A list of crimes in file
      */
-    public static ArrayList<ArrayList<String>> readDataLineByLine(String file) {
+    public static ArrayList<CrimeData> readDataLineByLine(String file) {
 
         try {
             //Creates list of lists
-            ArrayList<ArrayList<String>> listOfCrimes = new ArrayList<>();
+            ArrayList<CrimeData> listOfCrimes = new ArrayList<>();
             ArrayList<String> crime = new ArrayList<>();
 
             // Create an object of fileReader
@@ -39,13 +41,14 @@ public class ReadCSV {
             while ((nextRecord = csvReader.readNext()) != null) {
                 if (counter != 0) { //Removes header of file
                     Collections.addAll(crime, nextRecord);
-                    listOfCrimes.add(crime);
+                    PoliceData policeDataObject = new PoliceData(Integer.toString(CrimeData.getLatestID()), crime);
+                    CrimeData.incrementLatestID();
+                    listOfCrimes.add(policeDataObject);
                     crime = new ArrayList<>();
                 } else {
                     counter++;
                 }
             }
-            System.out.println(listOfCrimes);
             return listOfCrimes;
 
         } catch (Exception e) {
@@ -54,4 +57,5 @@ public class ReadCSV {
         }
     }
 }
+
 

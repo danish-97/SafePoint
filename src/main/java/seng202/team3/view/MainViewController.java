@@ -12,10 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.controller.FilterController;
@@ -36,6 +33,8 @@ public class MainViewController implements Initializable {
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
 
+    @FXML private ScrollPane crimeDataPanel;
+
     @FXML
     private WebView mapView;
 
@@ -46,6 +45,7 @@ public class MainViewController implements Initializable {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
+        crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
     }
 
     @Override
@@ -53,6 +53,7 @@ public class MainViewController implements Initializable {
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
+        UIDataInterface.initCrimeData();
     }
 
     private void initMap() {
@@ -91,61 +92,17 @@ public class MainViewController implements Initializable {
         FilterController.setRegionDataActive(regionFilteringToggle.isSelected());
         FilterController.setRegionFilteringKey((String) regionFilteringKey.getValue());
         FilterController.setDateFiltering(dateSortToggle.isSelected());
-        String startDateStr = startDate.getValue().toString();
-        FilterController.setStartDate( new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr));
-        String endDateStr = endDate.getValue().toString();
-        FilterController.setEndDate( new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr));
+        if (startDate.getValue() != null) {
+            String startDateStr = startDate.getValue().toString();
+            FilterController.setStartDate(new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr));
+        }
+        if (endDate.getValue() != null) {
+            String endDateStr = endDate.getValue().toString();
+            FilterController.setEndDate(new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr));
+        }
     }
 
     public WebEngine getWebEngine() {return webEngine;}
 
-    /*
-    public String getCurrentRegion () {
-        return regionFilter.getText();
-    }
-
-    public String getCurrentCrimeType () {
-        return (String) crimeSelector.getValue();
-    }
-
-    public Boolean getPoliceDataToggle() {
-        return policeDataToggle.isSelected();
-    }
-
-    public Boolean getUserDataToggle() {
-        return userDataToggle.isSelected();
-    }
-
-    public Boolean getArrestMadeToggle() {
-        return arrestMadeToggle.isSelected();
-    }
-
-    public Boolean getGraphToggle() {
-        return graphToggle.isSelected();
-    }
-
-    public Boolean getRegionFilteringToggle () {
-        return regionFilteringToggle.isSelected();
-    }
-
-    public String getRegionFilter () {
-        return (String) regionFilteringKey.getValue();
-    }
-
-    public Boolean getDateSortToggle () {
-        return dateSortToggle.isSelected();
-    }
-
-    public Date getStartDate () throws ParseException {
-        String startDateStr = startDate.getValue().toString();
-        return new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr);
-    }
-
-    public Date getEndDate () throws ParseException {
-        String endDateStr = endDate.getValue().toString();
-        return new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr);
-    }
-
-     */
 }
 

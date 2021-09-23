@@ -9,7 +9,8 @@ import java.util.ArrayList;
  */
 public class CrimeData {
 
-    private String id; /**Unique ID for each CrimeData*/
+    private String id;/**Unique ID for each CrimeData*/
+    private static int latestID; /**Is the latest id for crime Objects**/
     private String address; /**Address that the crime happened at (or closest to)*/
     private String date; /**Date that the crime happened on*/
     private String latitude; /**Latitude representation of the location of the crime*/
@@ -23,6 +24,14 @@ public class CrimeData {
      */
     public CrimeData(String id){
         this.id = id;
+    }
+
+    public static int getLatestID() {
+        return latestID;
+    }
+
+    public static void incrementLatestID() {
+        latestID++;
     }
 
     public String getId() {return id;}
@@ -75,5 +84,6 @@ public class CrimeData {
     public void setCrimeType(String type) {
         this.crimeType = type;
     }
+
 
 }
