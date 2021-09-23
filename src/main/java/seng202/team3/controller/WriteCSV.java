@@ -19,7 +19,7 @@ public class WriteCSV extends Importer {
      * @param outputPath Location of output file
      * @param inputCrimes Input Crimes to be added
      */
-    public static void writeDataLineByLine(String outputPath, ArrayList<PoliceData> inputCrimes)
+    public static void writeDataLineByLine(String outputPath, ArrayList<String[]> inputCrimes)
     {
         // first create file object for file placed at location
         // specified by filepath
@@ -42,16 +42,9 @@ public class WriteCSV extends Importer {
                 writer.writeNext(header);
             }
 
-
-
             assert inputCrimes != null;
-            for (PoliceData crime : inputCrimes) {
-                String[] crimeString = {crime.getCaseNumber(), crime.getDate(), crime.getAddress(),
-                        crime.getCrimeType(), (Objects.equals(crime.isArrestMade(), "YES") ? "Y" : "N"),
-                        crime.getDomestic(), crime.getBeat(), crime.getWard(), Integer.toString(crime.getXCoord()),
-                        Integer.toString(crime.getYCoord()), crime.getLatitude(), crime.getLongitude()
-                };
-                writer.writeNext(crimeString);
+            for (String[] crime : inputCrimes) {
+                writer.writeNext(crime);
             }
 
 

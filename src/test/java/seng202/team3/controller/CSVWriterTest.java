@@ -35,8 +35,12 @@ public class CSVWriterTest {
     public void checkWriteCSV() {
         ArrayList<PoliceData> inputCrimes;
         inputCrimes = ReadCSV.readDataLineByLine("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
-
-        WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/WriterTestFIle.txt", inputCrimes);
+        ArrayList<String[]> stringCrimes = new ArrayList<>();
+        for (PoliceData crime: inputCrimes) {
+            String[] stringCrime = Importer.policeToString(crime);
+            stringCrimes.add(stringCrime);
+        }
+        WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/WriterTestFIle.txt", stringCrimes);
 
         String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<PoliceData> readFromInitial = ReadCSV.readDataLineByLine(file);
