@@ -19,7 +19,7 @@ public class CSVReaderTest {
      */
     @Test
     public void checkReadCSV() {
-        String file = ("src/test/java/seng202/team3/controller/ReaderTestFile.txt");
+        String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<PoliceData> ReadingCSV = ReadCSV.readDataLineByLine(file);
 
         ArrayList<String> expectedResultList = new ArrayList<>(Arrays.asList("JE266628", "JE266536"));
@@ -38,10 +38,12 @@ public class CSVReaderTest {
      */
     @Test
     public void checkDatabaseCSV() {
-        WriteCSV.writeDataLineByLine("src/test/java/seng202/team3/controller/WriterTestFIle.txt",
-                "src/test/java/seng202/team3/controller/ReaderTestFile.txt");
+        ArrayList<PoliceData> inputCrimes;
+        inputCrimes = ReadCSV.readDataLineByLine("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
 
-        String file = ("src/test/java/seng202/team3/controller/WriterTestFIle.txt");
+        WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/WriterTestFIle.txt", inputCrimes);
+
+        String file = ("src/main/java/seng202/team3/Database/WriterTestFIle.txt");
         ArrayList<PoliceData> ReadingCSV = ReadCSV.readDataLineByLine(file);
 
         ArrayList<String> expectedResultList = new ArrayList<>(Arrays.asList("JE266628", "JE266536"));

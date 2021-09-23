@@ -1,13 +1,16 @@
 package seng202.team3.controller;
 
+import com.opencsv.CSVWriter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng202.team3.model.PoliceData;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for CSV writer
@@ -20,10 +23,9 @@ public class CSVWriterTest {
      * @throws FileNotFoundException if file is not found
      */
     @BeforeEach
-    public void deleteFile() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter("src/test/java/seng202/team3/controller/WriterTestFIle.txt");
-        writer.print("");
-        writer.close();
+    public void deleteFile() throws IOException {
+        new FileWriter("src/main/java/seng202/team3/Database/WriterTestFIle.txt", false);
+
     }
 
     /**
@@ -31,14 +33,15 @@ public class CSVWriterTest {
      */
     @Test
     public void checkWriteCSV() {
+        ArrayList<PoliceData> inputCrimes;
+        inputCrimes = ReadCSV.readDataLineByLine("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
 
-        WriteCSV.writeDataLineByLine("src/test/java/seng202/team3/controller/WriterTestFIle.txt",
-                "src/test/java/seng202/team3/controller/ReaderTestFile.txt");
+        WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/WriterTestFIle.txt", inputCrimes);
 
-        String file = ("src/test/java/seng202/team3/controller/ReaderTestFile.txt");
+        String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<PoliceData> readFromInitial = ReadCSV.readDataLineByLine(file);
 
-        String file2 = ("src/test/java/seng202/team3/controller/WriterTestFIle.txt");
+        String file2 = ("src/main/java/seng202/team3/Database/WriterTestFIle.txt");
         ArrayList<PoliceData> readFromFinal = ReadCSV.readDataLineByLine(file2);
 
         ArrayList<String> expectedResult = new ArrayList<>();

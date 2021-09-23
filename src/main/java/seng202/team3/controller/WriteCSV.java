@@ -2,7 +2,6 @@ package seng202.team3.controller;
 
 import com.opencsv.CSVWriter;
 import seng202.team3.model.PoliceData;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,18 +17,17 @@ public class WriteCSV extends Importer {
     /**
      * Reads data from a csv input file and writes it to an output file
      * @param outputPath Location of output file
-     * @param inputPath Location of input file
+     * @param inputCrimes Input Crimes to be added
      */
-    public static void writeDataLineByLine(String outputPath, String inputPath)
+    public static void writeDataLineByLine(String outputPath, ArrayList<PoliceData> inputCrimes)
     {
-        ArrayList<PoliceData> inputCrimes;
-        inputCrimes = ReadCSV.readDataLineByLine(inputPath);
-
         // first create file object for file placed at location
         // specified by filepath
         File file = new File(outputPath);
 
         try {
+
+
             // create FileWriter object with file as parameter
             FileWriter outputFile = new FileWriter(file);
 
@@ -37,10 +35,14 @@ public class WriteCSV extends Importer {
             CSVWriter writer = new CSVWriter(outputFile);
 
             // adding header to csv
-            String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "PRIMARY DESCRIPTION",
-                     "ARREST", "DOMESTIC", "BEAT", "WARD","X COORDINATE",
-                    "Y COORDINATE", "LATITUDE", "LONGITUDE"};
-            writer.writeNext(header);
+            if (file.length() == 0 ) {
+                String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "PRIMARY DESCRIPTION",
+                        "ARREST", "DOMESTIC", "BEAT", "WARD","X COORDINATE",
+                        "Y COORDINATE", "LATITUDE", "LONGITUDE"};
+                writer.writeNext(header);
+            }
+
+
 
             assert inputCrimes != null;
             for (PoliceData crime : inputCrimes) {
@@ -56,9 +58,9 @@ public class WriteCSV extends Importer {
 
             // closing writer connection
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
