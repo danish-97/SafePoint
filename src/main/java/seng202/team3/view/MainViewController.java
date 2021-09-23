@@ -41,7 +41,7 @@ public class MainViewController implements Initializable {
     private WebEngine webEngine;
 
     @FXML
-    public void  updateCrimeData(ActionEvent e) throws ParseException {
+    public void  updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();

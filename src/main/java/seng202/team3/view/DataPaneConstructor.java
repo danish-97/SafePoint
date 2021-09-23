@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DataPaneConstructor {
 
-    public static VBox loadActiveCrimes() throws ParseException {
+    public static VBox loadActiveCrimes() throws ClassNotFoundException {
         VBox root = new VBox();
         ArrayList<CrimeData> allData = UIDataInterface.getActiveData();
         ArrayList<Pane> panes = new ArrayList<>();
