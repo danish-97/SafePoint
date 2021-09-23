@@ -13,7 +13,7 @@ import java.util.Objects;
  * Writes data found in an input file ot an output file
  * @author roryh and Danish
  */
-public class WriteCSV {
+public class WriteCSV extends Importer {
 
     /**
      * Reads data from a csv input file and writes it to an output file

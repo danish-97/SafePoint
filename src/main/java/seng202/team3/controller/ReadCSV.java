@@ -13,7 +13,7 @@ import java.util.List;
  * @author roryh and Danish
  */
 
-public class ReadCSV {
+public class ReadCSV extends Importer {
 
 
     /**
