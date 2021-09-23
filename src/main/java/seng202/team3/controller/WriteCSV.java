@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVWriter;
+import seng202.team3.model.PoliceData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
  */
 public class WriteCSV {
 
+    private static final String CSV_SEPARATOR = ",";
+
     /**
      * Reads data from a csv input file and writes it to an output file
      * @param outputPath Location of output file
@@ -20,7 +23,7 @@ public class WriteCSV {
      */
     public static void writeDataLineByLine(String outputPath, String inputPath)
     {
-        ArrayList<ArrayList<String>> inputCrimes;
+        ArrayList<PoliceData> inputCrimes;
         inputCrimes = ReadCSV.readDataLineByLine(inputPath);
 
         // first create file object for file placed at location
@@ -35,19 +38,20 @@ public class WriteCSV {
             CSVWriter writer = new CSVWriter(outputFile);
 
             // adding header to csv
-            String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "IUCR", "PRIMARY DESCRIPTION",
-                    "SECONDARY DESCRIPTION", "LOCATION DESCRIPTION", "ARREST", "DOMESTIC", "BEAT", "WARD", "FBI CD","X COORDINATE",
-                    "Y COORDINATE", "LATITUDE", "LONGITUDE", "LOCATION"};
+            String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "PRIMARY DESCRIPTION",
+                     "ARREST", "DOMESTIC", "BEAT", "WARD","X COORDINATE",
+                    "Y COORDINATE", "LATITUDE", "LONGITUDE"};
             writer.writeNext(header);
 
-
             assert inputCrimes != null;
-            for (ArrayList<String> crime : inputCrimes) {
-                String[] str = new String[crime.size()];
-                for (int i = 0; i < crime.size(); i++) {
-                    str[i] = crime.get(i);
-                }
-                writer.writeNext(str);
+            int i = 0;
+            for (PoliceData crime : inputCrimes) {
+                String crimeString[] = {crime.getCaseNumber(), crime.getDate(), crime.getAddress(),
+                        crime.getCrimeType(), (crime.isArrestMade() == "YES" ? "Y" : "N"),
+                        crime.getDomestic(), crime.getBeat(), crime.getWard(), Integer.toString(crime.getXCoord()),
+                        Integer.toString(crime.getYCoord()), crime.getLatitude(), crime.getLongitude()
+                };
+                writer.writeNext(crimeString);
             }
 
 

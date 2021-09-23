@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVReader;
+import org.apache.commons.lang3.ArrayUtils;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 
@@ -36,12 +37,21 @@ public class ReadCSV {
             String[] nextRecord;
 
 
-            // we are going to read data line by line
+            // Read data line by line
+            ArrayList modifiedCrime = new ArrayList();
             int counter = 0;
+            int columnCount = 0;
             while ((nextRecord = csvReader.readNext()) != null) {
                 if (counter != 0) { //Removes header of file
                     Collections.addAll(crime, nextRecord);
-                    PoliceData policeDataObject = new PoliceData(Integer.toString(CrimeData.getLatestID()), crime);
+                    for (String column : crime) { //Loops through each crime
+                        if (ArrayUtils.contains(new int[]{3,5,6,11,16,17}, columnCount)); { //Gets columns needed
+                            modifiedCrime.add(column);
+                        }
+                    }
+                    columnCount = 0;
+                    System.out.println("MODIFIED CRIME " + modifiedCrime);
+                    PoliceData policeDataObject = new PoliceData(CrimeData.getLatestID(), modifiedCrime);
                     CrimeData.incrementLatestID();
                     listOfCrimes.add(policeDataObject);
                     crime = new ArrayList<>();

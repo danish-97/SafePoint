@@ -1,6 +1,5 @@
 package seng202.team3.model;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,7 +16,7 @@ public class PoliceData extends CrimeData {
      * Constructor method for the class PoliceData
      * @param data is the String that is received
      */
-    public PoliceData(String id ,ArrayList<String> data) throws ParseException {
+    public PoliceData(String id ,ArrayList<String> data) {
         super(id);
         formatPoliceData(data);
     }
@@ -89,19 +88,19 @@ public class PoliceData extends CrimeData {
      * Function that splits the given string to get the required fields
      * @param data is the ArrayList of String which is to be formatted
      */
-    private void formatPoliceData(ArrayList<String> data) throws ParseException {
+    private void formatPoliceData(ArrayList<String> data) {
         setCaseNumber(data.get(0));
         setDate(data.get(1));
         setAddress(data.get(2));
-        setCrimeType(data.get(4));
-        setArrestMade(data.get(7));
-        setDomestic(data.get(8));
-        setBeat(data.get(9));
-        setWard(data.get(10));
-        setXCoord(data.get(12));
-        setYCoord(data.get(13));
-        setLatitude(data.get(14));
-        setLongitude(data.get(15));
-        setLocation(data.get(14) + ", " + data.get(15));
+        setCrimeType(data.get(4)); //Originally 4
+        setArrestMade(data.get(7)); //7
+        setDomestic(data.get(8)); //8
+        setBeat(data.get(9));//9
+        setWard(data.get(10));//10
+        setXCoord(data.get(12));//12
+        setYCoord(data.get(13));//13
+        setLatitude(data.get(14));//14
+        setLongitude(data.get(15));//15
+        setLocation(data.get(14) + ", " + data.get(15));//14 + 15
     }
 }

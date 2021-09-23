@@ -1,15 +1,12 @@
 package seng202.team3.model;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-
 /**
  * Represents a certain crime
  * @author Danish Jahangir
  */
 public class CrimeData {
 
-    private String id;/**Unique ID for each CrimeData*/
+    private final String id;/**Unique ID for each CrimeData*/
     private static int latestID; /**Is the latest id for crime Objects**/
     private String address; /**Address that the crime happened at (or closest to)*/
     private String date; /**Date that the crime happened on*/
@@ -20,14 +17,13 @@ public class CrimeData {
 
     /**
      * Constructor method for the class CrimeData
-     * @param data is the string that is passed to the method
      */
     public CrimeData(String id){
         this.id = id;
     }
 
-    public static int getLatestID() {
-        return latestID;
+    public static String getLatestID() {
+        return Integer.toString(latestID);
     }
 
     public static void incrementLatestID() {
