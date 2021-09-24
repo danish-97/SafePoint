@@ -25,7 +25,7 @@ public class DataManager {
     public ArrayList<CrimeData> getData() {
         return activeCrimeData;
     }
-    
+
 
     /**
      * Loops through allCrimeData and returns matching CrimeData object
@@ -33,7 +33,7 @@ public class DataManager {
      * @return the CrimeData object
      * @throws Exception if crimeData object is not found
      */
-   public static CrimeData getDataByID(String ID) throws Exception {
+    public static CrimeData getDataByID(String ID) throws Exception {
         CrimeData matchingCrime = null;
         for (CrimeData crime : allCrimeData) {
             if (crime.getId().equals(ID)) {
