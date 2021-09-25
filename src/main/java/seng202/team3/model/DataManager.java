@@ -2,26 +2,27 @@ package seng202.team3.model;
 
 import java.util.ArrayList;
 
-/**
- * Handles and stores data
- * @author roryh
- */
 public class DataManager {
 
-    private static ArrayList<CrimeData> allCrimeData = new ArrayList<>();
-    private static ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
+    private String[] acitveDataLocation;
+    private static final ArrayList<CrimeData> allCrimeData = new ArrayList<>();
+    private static final ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
 
-    public void addCrimeData(CrimeData object) {
+    public static void addCrimeData(CrimeData object) {
         allCrimeData.add(object);
     }
 
-    public static void constructCrimeData (ArrayList<CrimeData> newCrimeData) {
-        allCrimeData = newCrimeData;
+    public void addActiveCrimeData(CrimeData crime) {
+        activeCrimeData.add(crime);
     }
 
-   public static ArrayList<CrimeData> getData() {
-        DataFilter filter = new DataFilter();
-        activeCrimeData = filter.filterData(allCrimeData);
+    public static ArrayList<CrimeData> getAllData() {return allCrimeData; }
+
+    /**
+     * Returns activeCrimeData which is a list of CrimeData objects
+     * @return activeCrimeData
+     */
+    public ArrayList<CrimeData> getData() {
         return activeCrimeData;
     }
 
@@ -32,7 +33,7 @@ public class DataManager {
      * @return the CrimeData object
      * @throws Exception if crimeData object is not found
      */
-   public CrimeData getDataByID(String ID) throws Exception {
+    public static CrimeData getDataByID(String ID) throws Exception {
         CrimeData matchingCrime = null;
         for (CrimeData crime : allCrimeData) {
             if (crime.getId().equals(ID)) {
@@ -46,4 +47,5 @@ public class DataManager {
             return matchingCrime;
         }
     }
+
 }

@@ -12,6 +12,7 @@ public class UserDataTest {
 
     /**
      * Checks if the getDateReported method works as intended.
+     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
     public void checkDate() throws ParseException {

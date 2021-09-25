@@ -4,6 +4,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Child class for CrimeData class which takes the existing data and formats it
+ * @author Danish Jahangir
+ */
+
 public class PoliceData extends CrimeData {
     private String caseNumber;
     private String arrestMade;
@@ -15,7 +20,9 @@ public class PoliceData extends CrimeData {
 
     /**
      * Constructor method for the class PoliceData
-     * @param data is the String that is received
+     * @param id is the String that identifies a particular Crime
+     * @param data is an ArrayList containing strings of all Crimes
+     * @throws ParseException checks if the format is correct when string is parsed.
      */
     public PoliceData(String id, ArrayList<String> data) throws ParseException {
         super(id);
@@ -88,8 +95,9 @@ public class PoliceData extends CrimeData {
     /**
      * Function that splits the given string to get the required fields
      * @param data is the ArrayList of String which is to be formatted
+     * @throws ParseException checks if the format is correct when string is parsed.
      */
-    private void formatPoliceData(ArrayList<String> data) throws ParseException {
+    public void formatPoliceData(ArrayList<String> data) throws ParseException {
         setCaseNumber(data.get(0));
         setDate(data.get(1));
         setAddress(data.get(2));

@@ -3,6 +3,7 @@ package seng202.team3.model;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+
 /**
  * Represents a certain crime
  * @author Danish Jahangir
@@ -20,7 +21,7 @@ public class CrimeData {
 
     /**
      * Constructor method for the class CrimeData
-     * @param data is the string that is passed to the method
+     * @param id is the string that is passed to the method
      */
     public CrimeData(String id){
         this.id = id;
@@ -34,13 +35,24 @@ public class CrimeData {
         latestID++;
     }
 
-    public String getId() {return id;}
+    public String getId() {
+        return id;
+    }
 
     public String getAddress() {
         return address;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setLatitude (String latitude) {
@@ -71,14 +83,6 @@ public class CrimeData {
 
     public String getCrimeType() {
         return crimeType;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public void setCrimeType(String type) {
