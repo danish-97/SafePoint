@@ -97,19 +97,20 @@ public class PoliceData extends CrimeData {
      * @param data is the ArrayList of String which is to be formatted
      * @throws ParseException checks if the format is correct when string is parsed.
      */
-    public void formatPoliceData(ArrayList<String> data) throws ParseException {
+    private void formatPoliceData(ArrayList<String> data) {
         setCaseNumber(data.get(0));
         setDate(data.get(1));
         setAddress(data.get(2));
-        setCrimeType(data.get(4));
-        setArrestMade(data.get(7));
-        setDomestic(data.get(8));
-        setBeat(data.get(9));
-        setWard(data.get(10));
-        setXCoord(data.get(12));
-        setYCoord(data.get(13));
-        setLatitude(data.get(14));
-        setLongitude(data.get(15));
-        setLocation(data.get(14) + ", " + data.get(15));
+        setCrimeType(data.get(3)); //Originally 4
+        setArrestMade(data.get(4)); //7
+        setDomestic(data.get(5)); //8
+        setBeat(data.get(6));//9
+        setWard(data.get(7));//10
+        setXCoord(data.get(8));//12
+        setYCoord(data.get(9));//13
+        setLatitude(data.get(10));//14
+        setLongitude(data.get(11));//15
+        setLocation(data.get(10) + ", " + data.get(11));//14 + 15
     }
+
 }

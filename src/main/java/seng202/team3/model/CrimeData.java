@@ -27,8 +27,8 @@ public class CrimeData {
         this.id = id;
     }
 
-    public static int getLatestID() {
-        return latestID;
+    public static String getLatestID() {
+        return Integer.toString(latestID);
     }
 
     public static void incrementLatestID() {
