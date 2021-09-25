@@ -16,7 +16,6 @@ public class UserInputHandler {
             Stage stage = new Stage();
             stage.setTitle("Report Crime");
             stage.setScene(new Scene(root, 250, 335));
-            System.out.println("2");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
