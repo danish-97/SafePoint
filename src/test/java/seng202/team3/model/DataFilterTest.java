@@ -31,10 +31,10 @@ public class DataFilterTest {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         crimeDataArrayList.add(new PoliceData("1", data));
-        strSplit = "JE266959,06/15/2021 01:30:00 PM,018XX N DAMEN AVE,BATTERY,Y,N,1434,32,1162738,1912139,41.91456299,-87.67755343,(41.914562993, -87.677553434)".split(",");
+        strSplit = "JE266959,06/15/2021 01:30:00 PM,018XX N DAMEN AVE,BATTERY,Y,N,1434,34,1162738,1912139,41.91456299,-87.67755343,(41.914562993, -87.677553434)".split(",");
         data = new ArrayList<>(Arrays.asList(strSplit));
         crimeDataArrayList.add(new PoliceData("2", data));
-        strSplit = "JD364009,09/11/2020 04:20:00 PM,056XX S WESTERN AVE,ASSAULT,N,N,824,15,1161332,1867195,41.79126146,-87.683967547,(41.79126146, -87.683967547)".split(",");
+        strSplit = "JD364009,09/11/2020 04:20:00 PM,056XX S WESTERN AVE,ASSAULT,N,N,824,8,1161332,1867195,41.79126146,-87.683967547,(41.79126146, -87.683967547)".split(",");
         data = new ArrayList<>(Arrays.asList(strSplit));
         crimeDataArrayList.add(new PoliceData("3", data));
         ArrayList<String> uData = new ArrayList<>();
@@ -124,6 +124,8 @@ public class DataFilterTest {
         filterController.setRegionDataActive(true);
         filterController.setHighFreqActive(false);
         filterController.setLowFreqActive(true);
+        filterController.setLowRiskAreas(false);
+        filterController.setHighRiskAreas(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals("THEFT", filteredData.get(3).getCrimeType());
 
@@ -142,6 +144,8 @@ public class DataFilterTest {
         filterController.setRegionDataActive(true);
         filterController.setHighFreqActive(true);
         filterController.setLowFreqActive(false);
+        filterController.setHighRiskAreas(false);
+        filterController.setLowRiskAreas(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals("THEFT", filteredData.get(0).getCrimeType());
 
@@ -158,6 +162,7 @@ public class DataFilterTest {
         filterController.setUserDataActive(true);
         filterController.setDateFiltering(true);
         filterController.setRegionDataActive(false);
+
         Date date = new Date(121, 5, 15); // Months are 0-based, therefore June = month 5
         filterController.setStartDate(date);
         Date date2 = new Date(121, 5, 15); // Years are calculated based on actualYear - 1900
@@ -165,6 +170,25 @@ public class DataFilterTest {
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
 
+    }
+
+    @Test
+    public void testHighRiskAreasSorting() {
+        filterController.setAllFilters(null, null, true, true, true,
+                null, null, false, null, null, false,  false,
+                true, false);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        assertEquals("8", ((PoliceData)filteredData.get(0)).getWard());
+
+    }
+
+    @Test
+    public void testLowRiskAreasSorting() {
+        filterController.setAllFilters(null, null, true, true, true,
+                null, null, false, null, null, false,  false,
+                false, true);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        assertEquals("8", ((PoliceData)filteredData.get(2)).getWard());
     }
 
 

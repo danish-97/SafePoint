@@ -38,10 +38,17 @@ public class DataFilter {
             filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
         }
         if (FilterController.getRegionDataActive()) {
-            filteredData = countFrequency(filteredData, true);
+            if (activeFilters.contains(CrimeStat.LOW_FREQUENCY) || activeFilters.contains(CrimeStat.HIGH_FREQUENCY)) {
+            filteredData = sortByFrequency(filteredData, true);
             if (activeFilters.contains(CrimeStat.HIGH_FREQUENCY)) {
                 Collections.reverse(filteredData);
+            } } else {
+                filteredData = sortByRisk(filteredData);
+                if (activeFilters.contains(CrimeStat.HIGH_RISK_AREA)) {
+                    Collections.reverse(filteredData);
+                }
             }
+
         }
 
         return filteredData;
@@ -113,6 +120,42 @@ public class DataFilter {
         return singleFilterArray;
     }
 
+    public ArrayList<CrimeData> sortOverrider(HashMap<String, ArrayList<CrimeData>> countList) {
+
+        List<Map.Entry<String, ArrayList<CrimeData>>> list =
+                new ArrayList<>(countList.entrySet());
+        Collections.sort(list, new EntryComparator()); // Sort based on our new overridden comparator, checking ArrayList lengths.
+        ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
+        for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
+            finalData.addAll(entry.getValue());
+        }
+
+        return finalData;
+
+    }
+
+    public ArrayList<CrimeData> sortByRisk(ArrayList<CrimeData> filteredData) {
+        HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
+        for (int i = 0; i < filteredData.size(); i++) {
+
+            if (countList.containsKey(((PoliceData)filteredData.get(i)).getWard())) {
+                ArrayList<CrimeData> currentArray = countList.get(((PoliceData) filteredData.get(i)).getWard());
+                currentArray.add(filteredData.get(i));
+                countList.put(filteredData.get(i).getCrimeType(), currentArray);
+            } else {
+                ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
+                hashMapArray.add(filteredData.get(i));
+                countList.put(filteredData.get(i).getCrimeType(), hashMapArray);
+            }
+        }
+
+
+        ArrayList<CrimeData> finalData = sortOverrider(countList);
+        return finalData;
+
+
+    }
+
 
     /**
      * Method which returns a sorted arraylist of crimes based on high frequency or low frequency.
@@ -120,7 +163,7 @@ public class DataFilter {
      * @param isLowFrequency Whether we want to sort in ascending or descending order.
      * @return A sorted arraylist of crimeData.
      */
-    public ArrayList<CrimeData> countFrequency(ArrayList<CrimeData> crimeDataArrayList, boolean isLowFrequency) {
+    public ArrayList<CrimeData> sortByFrequency(ArrayList<CrimeData> crimeDataArrayList, boolean isLowFrequency) {
 
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
         for (int i = 0; i < crimeDataArrayList.size(); i++) {
@@ -137,13 +180,8 @@ public class DataFilter {
         }
 
 
-        List<Map.Entry<String, ArrayList<CrimeData>>> list =
-                new ArrayList<>(countList.entrySet());
-        Collections.sort(list, new EntryComparator()); // Sort based on our new overridden comparator, checking ArrayList lengths.
-        ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
-        for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
-            finalData.addAll(entry.getValue());
-        }
+        ArrayList<CrimeData> finalData = sortOverrider(countList);
+
         if (isLowFrequency) {
             Collections.reverse(finalData);
         }
