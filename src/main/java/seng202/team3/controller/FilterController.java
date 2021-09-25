@@ -14,7 +14,7 @@ public class FilterController {
     private static Boolean arrestMade = true;
     private static Boolean regionDataActive = false;
     private static String regionFilteringKey;
-    private static Boolean dateFilteringActive;
+    private static Boolean dateFilteringActive = false;
     private static Date startDate;
     private static Date endDate;
 
@@ -76,5 +76,7 @@ public class FilterController {
     public static Date getStartDate() {return startDate;}
 
     public static Date getEndDate() {return endDate;}
+
+    public static Boolean getRegionDataActive() {return regionDataActive;}
 
 }

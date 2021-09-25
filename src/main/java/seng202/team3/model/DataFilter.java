@@ -27,13 +27,16 @@ public class DataFilter {
         if (activeFilters.size() == 0) {
             return data;
         }
-
-        //ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
         ArrayList<CrimeData> filteredData = (ArrayList<CrimeData>) data.clone();
         for (CrimeStat filter : activeFilters) {
-            filteredData.removeAll(filterCrimeData(filter, filteredData));
+            System.out.println("Active Filters");
+            System.out.println(activeFilters);
+            System.out.println("To be deleted");
+            System.out.println(filterCrimeData(filter, filteredData, activeFilters));
+            filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
         }
-
+        System.out.println("Hello");
+        System.out.println(filteredData);
         if (FilterController.getRegionDataActive()) {
             filteredData = countFrequency(filteredData, true);
             if (activeFilters.contains(CrimeStat.LOW_FREQUENCY)) {
@@ -62,7 +65,7 @@ public class DataFilter {
      * @param data list of CrimeData objects to be filtered.
      * @return an Arraylist<CrimeData> with filtered crimes.
      */
-    public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data) {
+    public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data, ArrayList<CrimeStat> activeFilters) {
         ArrayList<CrimeData> singleFilterArray = new ArrayList<CrimeData>();
 
         for (CrimeData crime : data) {
@@ -73,7 +76,7 @@ public class DataFilter {
                     }
                     break;
                 case CRIME_TYPE:
-                    if (!Objects.equals(crime.getCrimeType(), FilterController.getActiveCrimeType())) {
+                    if (!(Objects.equals(crime.getCrimeType(), FilterController.getActiveCrimeType()))) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -89,17 +92,17 @@ public class DataFilter {
 //                    }
 //                    break;
                 case ARREST_MADE:
-                    if (!(crime instanceof PoliceData) && !(Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
+                    if ((crime instanceof PoliceData) && !(Objects.equals(((PoliceData)crime).isArrestMade(), "YES"))) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case POLICE_DATA:
-                    if (!(crime instanceof PoliceData)) {
+                    if (!(crime instanceof PoliceData) && !(activeFilters.contains(CrimeStat.USER_DATA))) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case USER_DATA:
-                    if (!(crime instanceof UserData)) {
+                    if (!(crime instanceof UserData) && !(activeFilters.contains(CrimeStat.POLICE_DATA))) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -121,13 +124,6 @@ public class DataFilter {
         return singleFilterArray;
     }
 
-//    /**
-//     * Setter for ActiveFilters parameter.
-//     * @param activeFilters
-//     */
-//    public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
-//        this.activeFilters = activeFilters;
-//    }
 
     /**
      * Method which returns a sorted arraylist of crimes based on high frequency or low frequency.
@@ -179,10 +175,6 @@ public class DataFilter {
             return Integer.compare(right.getValue().size(), left.getValue().size());
         }
     }
-
-
-
-
 
     }
 
