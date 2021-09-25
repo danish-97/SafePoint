@@ -52,7 +52,6 @@ public class DataManagerTest {
      * Test to check if getData() returns correct ArrayList
      */
     @Test
-
     public void getActiveData() {
         DataManager data = new DataManager();
         ArrayList<CrimeData> activeCrimeDataTest = new ArrayList<>();
