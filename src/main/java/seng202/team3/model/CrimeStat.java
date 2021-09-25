@@ -1,10 +1,14 @@
 package seng202.team3.model;
 
+/**
+ * Enum displaying all attributes which CrimeData objects can be sorted or filtered by.
+ * @author Priscilla Ishida-Foale
+ */
+
 public enum CrimeStat {
     LOCATION,
     CRIME_TYPE,
     ARREST_MADE,
-    DATE,
     DATE_RANGE,
     POLICE_DATA,
     USER_DATA,

@@ -3,6 +3,11 @@ package seng202.team3.model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Child class for CrimeData class which takes the existing data and formats it
+ * @author Danish Jahangir
+ */
+
 public class PoliceData extends CrimeData {
     private String caseNumber;
     private String arrestMade;
@@ -14,7 +19,9 @@ public class PoliceData extends CrimeData {
 
     /**
      * Constructor method for the class PoliceData
-     * @param data is the String that is received
+     * @param id is the String that identifies a particular Crime
+     * @param data is an ArrayList containing strings of all Crimes
+     * @throws ParseException checks if the format is correct when string is parsed.
      */
     public PoliceData(String id ,ArrayList<String> data) {
         super(id);
@@ -87,6 +94,7 @@ public class PoliceData extends CrimeData {
     /**
      * Function that splits the given string to get the required fields
      * @param data is the ArrayList of String which is to be formatted
+     * @throws ParseException checks if the format is correct when string is parsed.
      */
     private void formatPoliceData(ArrayList<String> data) {
         setCaseNumber(data.get(0));
@@ -103,4 +111,5 @@ public class PoliceData extends CrimeData {
         setLongitude(data.get(11));//15
         setLocation(data.get(10) + ", " + data.get(11));//14 + 15
     }
+
 }

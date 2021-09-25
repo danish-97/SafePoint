@@ -19,7 +19,7 @@ public class DataManager {
         allCrimeData = newCrimeData;
     }
 
-   public static ArrayList<CrimeData> getData() {
+    public static ArrayList<CrimeData> getData() {
         DataFilter filter = new DataFilter();
         activeCrimeData = filter.filterData(allCrimeData);
         return activeCrimeData;
@@ -32,7 +32,7 @@ public class DataManager {
      * @return the CrimeData object
      * @throws Exception if crimeData object is not found
      */
-   public CrimeData getDataByID(String ID) throws Exception {
+    public CrimeData getDataByID(String ID) throws Exception {
         CrimeData matchingCrime = null;
         for (CrimeData crime : allCrimeData) {
             if (crime.getId().equals(ID)) {
