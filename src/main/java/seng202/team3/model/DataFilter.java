@@ -3,12 +3,11 @@ package seng202.team3.model;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-// TODO HIGH_FREQ, LOW_FREQ sorting
+// TODO HIGH_RISK_AREA, LOW_RISK_AREA
 
 public class DataFilter {
 
@@ -17,16 +16,29 @@ public class DataFilter {
     private ArrayList<CrimeStat> activeFilters = filterController.getActiveFilters();
     private DataManager dataManager;
 
+    // If regionDataActive is true, call sortCrimeData, make the array passed into filteredData that sorted array.
+    // HIGH_RISK_AREAS sort ONLY the PoliceData and sort based on number of crimes per ward.
+    // The crimes that belong to the ward that has the most crimes will be returned at the start of the array list.
+    // LOW_RISK_AREAS do the same but in reverse
+
     /**
      * Returns a list of crime data after filtering has been processed with ALL the active filters.
      * @param data List of crime data to be filtered.
      * @return an ArrayList<CrimeData> containing only filtered data
      */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
-        ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> filteredData = (ArrayList<CrimeData>) data.clone();
         for (CrimeStat filter : activeFilters) {
-            filteredData.addAll(filterCrimeData(filter, data));
+            filteredData.removeAll(filterCrimeData(filter, filteredData));
         }
+
+        if (filterController.getRegionDataActive()) {
+            filteredData = countFrequency(filteredData, true);
+            if (activeFilters.contains(CrimeStat.LOW_FREQUENCY)) {
+                Collections.reverse(filteredData);
+            }
+        }
+
         return filteredData;
 
     }
@@ -50,15 +62,16 @@ public class DataFilter {
      */
     public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data) {
         ArrayList<CrimeData> singleFilterArray = new ArrayList<CrimeData>();
+
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (Objects.equals(crime.getLocation(), uiDataInterface.getRegionActive())) {
+                    if (!Objects.equals(crime.getLocation(), uiDataInterface.getRegionActive())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case CRIME_TYPE:
-                    if (Objects.equals(crime.getCrimeType(), uiDataInterface.getCurrCrimeType())) {
+                    if (!Objects.equals(crime.getCrimeType(), uiDataInterface.getCurrCrimeType())) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -66,7 +79,7 @@ public class DataFilter {
                     try {
                         String crimeDateStr = crime.getDate().substring(0, 9);
                         Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-                        if (crimeDate == uiDataInterface.getCurrDate()) {
+                        if (crimeDate != uiDataInterface.getCurrDate()) {
                             singleFilterArray.add(crime);
                         }
                     } catch (ParseException e) {
@@ -74,17 +87,17 @@ public class DataFilter {
                     }
                     break;
                 case ARREST_MADE:
-                    if (crime instanceof PoliceData && (Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
+                    if (!(crime instanceof PoliceData) && !(Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case POLICE_DATA:
-                    if (crime instanceof PoliceData) {
+                    if (!(crime instanceof PoliceData)) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case USER_DATA:
-                    if (crime instanceof UserData) {
+                    if (!(crime instanceof UserData)) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -92,15 +105,13 @@ public class DataFilter {
                     try {
                         String crimeDateStr = crime.getDate().substring(0, 9);
                         Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-                        if (isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crimeDate)) {
+                        if (!(isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crimeDate))) {
                             singleFilterArray.add(crime);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     break;
-                case LOW_FREQUENCY:
-                    ArrayList<CrimeData> lowFreqArray = new ArrayList<CrimeData>();
 
             }
 
@@ -116,15 +127,21 @@ public class DataFilter {
         this.activeFilters = activeFilters;
     }
 
-    public ArrayList<CrimeData> countFrequency(ArrayList<CrimeData> crimeDataArrayList) {
+    /**
+     * Method which returns a sorted arraylist of crimes based on high frequency or low frequency.
+     * @param crimeDataArrayList The crimes required to sort.
+     * @param isLowFrequency Whether we want to sort in ascending or descending order.
+     * @return A sorted arraylist of crimeData.
+     */
+    public ArrayList<CrimeData> countFrequency(ArrayList<CrimeData> crimeDataArrayList, boolean isLowFrequency) {
 
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
         for (int i = 0; i < crimeDataArrayList.size(); i++) {
 
             if (countList.containsKey(crimeDataArrayList.get(i).getCrimeType())) {
-                ArrayList<CrimeData> guh = countList.get(crimeDataArrayList.get(i).getCrimeType());
-                guh.add(crimeDataArrayList.get(i));
-                countList.put(crimeDataArrayList.get(i).getCrimeType(), guh);
+                ArrayList<CrimeData> currentArray = countList.get(crimeDataArrayList.get(i).getCrimeType());
+                currentArray.add(crimeDataArrayList.get(i));
+                countList.put(crimeDataArrayList.get(i).getCrimeType(), currentArray);
             } else {
                 ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
                 hashMapArray.add(crimeDataArrayList.get(i));
@@ -134,16 +151,23 @@ public class DataFilter {
 
         List<Map.Entry<String, ArrayList<CrimeData>>> list =
                 new ArrayList<>(countList.entrySet());
-        Collections.sort(list, new EntryComparator());
+        Collections.sort(list, new EntryComparator()); // Sort based on our new overridden comparator, checking ArrayList lengths.
 
         ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
         for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
             finalData.addAll(entry.getValue());
         }
+        if (isLowFrequency) {
+            Collections.reverse(finalData);
+        }
 
         return finalData;
     }
 
+    /**
+     * Overrides comparator for countList's entries - allows us to compare the lengths of the values of this hashmap.
+     * Sorts in descending order.
+     */
     private static class EntryComparator
             implements Comparator<Map.Entry<String, ArrayList<CrimeData>>>
     {

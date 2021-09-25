@@ -36,4 +36,7 @@ public class FilterController {
         return null;
     }
 
+    public boolean getRegionDataActive() {
+        return true; // Temporary before pull
+    }
 }

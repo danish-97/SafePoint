@@ -1,6 +1,6 @@
 package seng202.team3.model;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DataManagerTest {
 
