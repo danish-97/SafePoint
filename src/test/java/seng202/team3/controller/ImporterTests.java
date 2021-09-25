@@ -1,7 +1,5 @@
 package seng202.team3.controller;
 
-
-import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seng202.team3.model.CrimeData;
