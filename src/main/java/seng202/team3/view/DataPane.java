@@ -1,6 +1,5 @@
 package seng202.team3.view;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import seng202.team3.model.CrimeData;
@@ -12,9 +11,11 @@ import seng202.team3.model.UserData;
  * @author Matthew Garrett
  */
 public class DataPane implements Renderable{
+    // TODO make DataPane extend Pane
 
     CrimeData data;
     Pane pane;
+    CrimeViewButton viewButton;
 
     /**
      * Constructs a new DataPane object
@@ -65,8 +66,8 @@ public class DataPane implements Renderable{
         Label caseNumber = new Label(pData.getCaseNumber());
         caseNumber.setStyle("-fx-translate-x: 5; -fx-translate-y: 41;");
         //view button
-        Button viewButton = new Button("View");
-        viewButton.setStyle("-fx-border-color: black; -fx-background-color: white; -fx-font-size: 10; -fx-padding: 0; -fx-pref-width: 50; -fx-translate-x: 65; -fx-translate-y: 60;");
+
+        viewButton = new CrimeViewButton(data);
 
         //adding all javafx components constructed above to the main pain
         pane.getChildren().addAll(crimeLabel, location, arrestMade, caseNumber, viewButton);

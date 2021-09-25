@@ -16,7 +16,7 @@
                         <Font name="System Bold" size="53.0" />
                      </font>
                   </Label>
-                  <Button layoutX="844.0" layoutY="19.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="142.0" text="Report Crime">
+                  <Button layoutX="844.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="45.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
                      <font>
                         <Font size="19.0" />
                      </font></Button>

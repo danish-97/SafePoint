@@ -48,6 +48,11 @@ public class MainViewController implements Initializable {
         crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
     }
 
+    @FXML
+    public void reportCrime (ActionEvent e) {
+        UserInputHandler uih = new UserInputHandler();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initMap();
@@ -94,11 +99,11 @@ public class MainViewController implements Initializable {
         FilterController.setDateFiltering(dateSortToggle.isSelected());
         if (startDate.getValue() != null) {
             String startDateStr = startDate.getValue().toString();
-            FilterController.setStartDate(new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr));
+            FilterController.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(startDateStr));
         }
         if (endDate.getValue() != null) {
             String endDateStr = endDate.getValue().toString();
-            FilterController.setEndDate(new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr));
+            FilterController.setEndDate(new SimpleDateFormat("yyyy-MM-dd").parse(endDateStr));
         }
     }
 
