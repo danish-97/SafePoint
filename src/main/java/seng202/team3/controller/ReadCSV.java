@@ -69,7 +69,7 @@ public class ReadCSV extends Importer {
 
             return userDataObject;
 
-        //If CrimeData object is a PoliceData object
+            //If CrimeData object is a PoliceData object
         } else {
             PoliceData policeDataObject = new PoliceData(CrimeData.getLatestID(), modifiedCrime); //Creates PoliceData object
             CrimeData.incrementLatestID();
@@ -114,4 +114,3 @@ public class ReadCSV extends Importer {
     }
 
 }
-

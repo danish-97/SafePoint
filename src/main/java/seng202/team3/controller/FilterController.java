@@ -11,7 +11,7 @@ public class FilterController {
     private static String activeCrimeType;
     private static Boolean policeDataActive = true;
     private static Boolean userDataActive = true;
-    private static Boolean arrestMade = true;
+    private static Boolean arrestMade = false;
     private static Boolean regionDataActive = false;
     private static String regionFilteringKey;
     private static Boolean dateFilteringActive = false;

@@ -24,19 +24,14 @@ public class DataFilter {
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
 
+
         if (activeFilters.size() == 0) {
             return data;
         }
         ArrayList<CrimeData> filteredData = (ArrayList<CrimeData>) data.clone();
         for (CrimeStat filter : activeFilters) {
-            System.out.println("Active Filters");
-            System.out.println(activeFilters);
-            System.out.println("To be deleted");
-            System.out.println(filterCrimeData(filter, filteredData, activeFilters));
             filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
         }
-        System.out.println("Hello");
-        System.out.println(filteredData);
         if (FilterController.getRegionDataActive()) {
             filteredData = countFrequency(filteredData, true);
             if (activeFilters.contains(CrimeStat.LOW_FREQUENCY)) {
@@ -92,7 +87,7 @@ public class DataFilter {
 //                    }
 //                    break;
                 case ARREST_MADE:
-                    if ((crime instanceof PoliceData) && !(Objects.equals(((PoliceData)crime).isArrestMade(), "YES"))) {
+                    if (!((crime instanceof PoliceData) && (Objects.equals(((PoliceData)crime).isArrestMade(), "YES")))) {
                         singleFilterArray.add(crime);
                     }
                     break;
@@ -108,7 +103,7 @@ public class DataFilter {
                     break;
                 case DATE_RANGE:
                     try {
-                        String crimeDateStr = crime.getDate().substring(0, 9);
+                        String crimeDateStr = crime.getDate().substring(0, 10);
                         Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
                         if (!(isWithinRange(FilterController.getStartDate(), FilterController.getEndDate(), crimeDate))) {
                             singleFilterArray.add(crime);
