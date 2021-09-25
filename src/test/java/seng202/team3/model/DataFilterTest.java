@@ -78,6 +78,9 @@ public class DataFilterTest {
         assertEquals(1, filteredData.size());
     }
 
+    /**
+     * Tests if only PoliceData will be returned in the ArrayList
+     */
     @Test
     public void testPoliceDataFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
@@ -92,6 +95,9 @@ public class DataFilterTest {
         assertEquals(3, filteredData.size());
     }
 
+    /**
+     * Tests if an arraylist with crimes that occurred within the given date range is returned
+     */
     @Test
     public void testDateRangeFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
@@ -111,6 +117,9 @@ public class DataFilterTest {
         assertEquals(2, filteredData.size());
     }
 
+    /**
+     * Tests if the arraylist has been sorted from low frequency crimes to high
+     */
     @Test
     public void testLowFrequencyFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
@@ -131,6 +140,9 @@ public class DataFilterTest {
 
     }
 
+    /**
+     * Tests if the arraylist has been sorted from high frequency crimes to low
+     */
     @Test
     public void testHighFrequencyFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
@@ -151,6 +163,9 @@ public class DataFilterTest {
 
     }
 
+    /**
+     * Tests if only crimes which occurred on the specified day will be returned
+     */
     @Test
     public void testSpecificDateFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
@@ -172,6 +187,9 @@ public class DataFilterTest {
 
     }
 
+    /**
+     * Tests if this returns an ArrayList of crimes from high risk areas to low risk areas
+     */
     @Test
     public void testHighRiskAreasSorting() {
         filterController.setAllFilters(null, null, true, true, true,
@@ -182,6 +200,9 @@ public class DataFilterTest {
 
     }
 
+    /**
+     * Tests if this retyrns an ArrayList of crimes from low risk areas to high risk areas
+     */
     @Test
     public void testLowRiskAreasSorting() {
         filterController.setAllFilters(null, null, true, true, true,

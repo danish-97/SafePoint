@@ -1,13 +1,10 @@
 package seng202.team3.model;
 
 import seng202.team3.controller.FilterController;
-import seng202.team3.controller.UIDataInterface;
-
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-// TODO HIGH_RISK_AREA, LOW_RISK_AREA
 
 /**
  * Main filtering class. Filters specific attributes (such as PoliceData or UserData records, whether an arrest was made,
@@ -16,11 +13,6 @@ import java.text.SimpleDateFormat;
  */
 
 public class DataFilter {
-
-    // If regionDataActive is true, call sortCrimeData, make the array passed into filteredData that sorted array.
-    // HIGH_RISK_AREAS sort ONLY the PoliceData and sort based on number of crimes per ward.
-    // The crimes that belong to the ward that has the most crimes will be returned at the start of the array list.
-    // LOW_RISK_AREAS do the same but in reverse
 
     /**
      * Returns a list of crime data after filtering has been processed with ALL the active filters.
@@ -120,6 +112,12 @@ public class DataFilter {
         return singleFilterArray;
     }
 
+    /**
+     * Overrides the sorting criteria by comparing the lengths of ArrayLists in the given HashMap.
+     * @param countList a Hashmap<String, ArrayList<CrimeData>> which maps a given attribute (crime_type or ward) to an
+     *                  ArrayList<CrimeData> associated with this.
+     * @return a final sorted ArrayList, in ascending order.
+     */
     public ArrayList<CrimeData> sortOverrider(HashMap<String, ArrayList<CrimeData>> countList) {
 
         List<Map.Entry<String, ArrayList<CrimeData>>> list =
@@ -134,6 +132,11 @@ public class DataFilter {
 
     }
 
+    /**
+     * Sorts the CrimeData objects array according to whether they belong to the ward with the highest number of crimes.
+     * @param filteredData An ArrayList<CrimeData> which has already been filtered/checked against other filters.
+     * @return an ArrayList<CrimeData> in ascending order, according to which ward has the highest number of crimes.
+     */
     public ArrayList<CrimeData> sortByRisk(ArrayList<CrimeData> filteredData) {
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
         for (int i = 0; i < filteredData.size(); i++) {
