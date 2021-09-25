@@ -9,6 +9,12 @@ import java.text.SimpleDateFormat;
 
 // TODO HIGH_RISK_AREA, LOW_RISK_AREA
 
+/**
+ * Main filtering class. Filters specific attributes (such as PoliceData or UserData records, whether an arrest was made,
+ * etc.) and also sorts depending on whether region search is active (according to low/high frequency, high/low risk areas)
+ * @author Priscilla Ishida-Foale
+ */
+
 public class DataFilter {
 
     // If regionDataActive is true, call sortCrimeData, make the array passed into filteredData that sorted array.
@@ -24,7 +30,6 @@ public class DataFilter {
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
 
-
         if (activeFilters.size() == 0) {
             return data;
         }
@@ -34,7 +39,7 @@ public class DataFilter {
         }
         if (FilterController.getRegionDataActive()) {
             filteredData = countFrequency(filteredData, true);
-            if (activeFilters.contains(CrimeStat.LOW_FREQUENCY)) {
+            if (activeFilters.contains(CrimeStat.HIGH_FREQUENCY)) {
                 Collections.reverse(filteredData);
             }
         }
@@ -75,17 +80,6 @@ public class DataFilter {
                         singleFilterArray.add(crime);
                     }
                     break;
-//                case DATE:
-//                    try {
-//                        String crimeDateStr = crime.getDate().substring(0, 9);
-//                        Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-//                        if (crimeDate != uiDataInterface.getCurrDate()) {
-//                            singleFilterArray.add(crime);
-//                        }
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//                    break;
                 case ARREST_MADE:
                     if (!((crime instanceof PoliceData) && (Objects.equals(((PoliceData)crime).isArrestMade(), "YES")))) {
                         singleFilterArray.add(crime);
@@ -142,10 +136,10 @@ public class DataFilter {
             }
         }
 
+
         List<Map.Entry<String, ArrayList<CrimeData>>> list =
                 new ArrayList<>(countList.entrySet());
         Collections.sort(list, new EntryComparator()); // Sort based on our new overridden comparator, checking ArrayList lengths.
-
         ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
         for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
             finalData.addAll(entry.getValue());

@@ -15,7 +15,8 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Unit test for DataFilterTest.
+ * Unit tests for DataFilter class.
+ * @author Priscilla Ishida-Foale
  */
 public class DataFilterTest {
 
@@ -26,7 +27,6 @@ public class DataFilterTest {
 
     @BeforeEach
     public void initDataFilterTestInfo() throws ParseException {
-        filterController.setActiveCrimeType("");
 
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
@@ -73,6 +73,7 @@ public class DataFilterTest {
         filterController.setArrestMade(true);
         filterController.setActiveCrimeType(null);
         filterController.setDateFiltering(false);
+        filterController.setRegionDataActive(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(1, filteredData.size());
     }
@@ -86,6 +87,7 @@ public class DataFilterTest {
         filterController.setActiveCrimeType(null);
         filterController.setUserDataActive(false);
         filterController.setDateFiltering(false);
+        filterController.setRegionDataActive(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(3, filteredData.size());
     }
@@ -100,6 +102,7 @@ public class DataFilterTest {
         filterController.setPoliceDataActive(true);
         filterController.setUserDataActive(true);
         filterController.setDateFiltering(true);
+        filterController.setRegionDataActive(false);
         Date date = new Date(121, 5, 10); // Months are 0-based, therefore June = month 5
         filterController.setStartDate(date);
         Date date2 = new Date(121, 5, 30); // Years are calculated based on actualYear - 1900
@@ -107,6 +110,64 @@ public class DataFilterTest {
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
     }
+
+    @Test
+    public void testLowFrequencyFilter() {
+        ArrayList<CrimeStat> activeFilters = new ArrayList<>();
+        CrimeStat typeFilter = CrimeStat.LOW_FREQUENCY;
+        activeFilters.add(typeFilter);
+        filterController.setArrestMade(false);
+        filterController.setActiveCrimeType(null);
+        filterController.setPoliceDataActive(true);
+        filterController.setUserDataActive(true);
+        filterController.setDateFiltering(false);
+        filterController.setRegionDataActive(true);
+        filterController.setHighFreqActive(false);
+        filterController.setLowFreqActive(true);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        assertEquals("THEFT", filteredData.get(3).getCrimeType());
+
+    }
+
+    @Test
+    public void testHighFrequencyFilter() {
+        ArrayList<CrimeStat> activeFilters = new ArrayList<>();
+        CrimeStat typeFilter = CrimeStat.HIGH_FREQUENCY;
+        activeFilters.add(typeFilter);
+        filterController.setArrestMade(false);
+        filterController.setActiveCrimeType(null);
+        filterController.setPoliceDataActive(true);
+        filterController.setUserDataActive(true);
+        filterController.setDateFiltering(false);
+        filterController.setRegionDataActive(true);
+        filterController.setHighFreqActive(true);
+        filterController.setLowFreqActive(false);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        assertEquals("THEFT", filteredData.get(0).getCrimeType());
+
+    }
+
+    @Test
+    public void testSpecificDateFilter() {
+        ArrayList<CrimeStat> activeFilters = new ArrayList<>();
+        CrimeStat typeFilter = CrimeStat.DATE_RANGE;
+        activeFilters.add(typeFilter);
+        filterController.setArrestMade(false);
+        filterController.setActiveCrimeType(null);
+        filterController.setPoliceDataActive(true);
+        filterController.setUserDataActive(true);
+        filterController.setDateFiltering(true);
+        filterController.setRegionDataActive(false);
+        Date date = new Date(121, 5, 15); // Months are 0-based, therefore June = month 5
+        filterController.setStartDate(date);
+        Date date2 = new Date(121, 5, 15); // Years are calculated based on actualYear - 1900
+        filterController.setEndDate(date2);
+        ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        assertEquals(2, filteredData.size());
+
+    }
+
+
 
 
 }

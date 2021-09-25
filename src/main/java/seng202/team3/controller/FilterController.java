@@ -17,6 +17,8 @@ public class FilterController {
     private static Boolean dateFilteringActive = false;
     private static Date startDate;
     private static Date endDate;
+    private static Boolean highFreqActive = false;
+    private static Boolean lowFreqActive = false;
 
     public static void setActiveLocation(String newLocation) {
         activeLocation =  newLocation;
@@ -46,6 +48,18 @@ public class FilterController {
 
     public static void setEndDate (Date newDate) {endDate = newDate;}
 
+    public static void setDateFilteringActive(Boolean dateFilteringActive) {
+        FilterController.dateFilteringActive = dateFilteringActive;
+    }
+
+    public static void setHighFreqActive(Boolean highFreqActive) {
+        FilterController.highFreqActive = highFreqActive;
+    }
+
+    public static void setLowFreqActive(Boolean lowFreqActive) {
+        FilterController.lowFreqActive = lowFreqActive;
+    }
+
     public static ArrayList<CrimeStat> getActiveFilters() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
         if (activeLocation != null && !activeLocation.equals("")) {
@@ -65,6 +79,12 @@ public class FilterController {
         }
         if (dateFilteringActive) {
             activeFilters.add(CrimeStat.DATE_RANGE);
+        }
+        if (regionDataActive && highFreqActive) {
+            activeFilters.add(CrimeStat.HIGH_FREQUENCY);
+        }
+        if (regionDataActive && lowFreqActive) {
+            activeFilters.add(CrimeStat.LOW_FREQUENCY);
         }
         return activeFilters;
     }
