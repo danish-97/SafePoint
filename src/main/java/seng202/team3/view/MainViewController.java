@@ -12,10 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.controller.FilterController;
@@ -36,15 +33,19 @@ public class MainViewController implements Initializable {
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
 
+    @FXML private ScrollPane crimeDataPanel;
+
     @FXML
     private WebView mapView;
 
     private WebEngine webEngine;
 
     @FXML
-    public void  updateCrimeData(ActionEvent e) {
+    public void  updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
         updateRegionCrimeData();
         updateMapSettingsData();
+        updateRegionDateData();
+        crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
     }
 
     @Override
@@ -52,6 +53,7 @@ public class MainViewController implements Initializable {
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
+        UIDataInterface.initCrimeData();
     }
 
     private void initMap() {
@@ -60,7 +62,7 @@ public class MainViewController implements Initializable {
     }
 
     public void initCrimeSelector () {
-        String[] crimeTypes = {"ARSON", "ASSAULT", "BATTERY", "BURGLARY", "CONCEALED CARRY LICENCE", "CRIMINAL DAMAGE", "CRIMINAL SEXUAL ASSAULT", "CRIMINAL TRESPASS", "DECEPTIVE PRACTICE", "HOMICIDE", "INTERFERENCE WITH PUBLIC OFFICER", "INTIMIDATION", "KIDNAPPING", "LIQUOR LAW VIOLATION", "MOTOR VEHICLE THEFT", "NARCOTICS", "OFFENSE INVOLVING CHILDREN", "OTHER NARCOTIC VIOLATION", "OTHER OFFENSE", "PROSTITUTION", "PUBLIC PEACE VIOLATION", "ROBBERY", "SEX OFFENSE", "STALKING", "THEFT", "WEAPONS VIOLATION"};
+        String[] crimeTypes = {"ALL", "ARSON", "ASSAULT", "BATTERY", "BURGLARY", "CONCEALED CARRY LICENCE", "CRIMINAL DAMAGE", "CRIMINAL SEXUAL ASSAULT", "CRIMINAL TRESPASS", "DECEPTIVE PRACTICE", "HOMICIDE", "INTERFERENCE WITH PUBLIC OFFICER", "INTIMIDATION", "KIDNAPPING", "LIQUOR LAW VIOLATION", "MOTOR VEHICLE THEFT", "NARCOTICS", "OFFENSE INVOLVING CHILDREN", "OTHER NARCOTIC VIOLATION", "OTHER OFFENSE", "PROSTITUTION", "PUBLIC PEACE VIOLATION", "ROBBERY", "SEX OFFENSE", "STALKING", "THEFT", "WEAPONS VIOLATION"};
         for (String crimeType : crimeTypes) {
             crimeSelector.getItems().add(crimeType);
         }
@@ -86,79 +88,21 @@ public class MainViewController implements Initializable {
         FilterController.setArrestMade(arrestMadeToggle.isSelected());
     }
 
-    public TextField getRegionFilter() {return regionFilter;}
-
-    public ChoiceBox getCrimeSelector() {return crimeSelector;}
-
-    public CheckBox getPoliceDataToggle() {return policeDataToggle;}
-
-    public CheckBox getUserDataToggle() {return userDataToggle;}
-
-    public CheckBox getArrestMadeToggle() {return arrestMadeToggle;}
-
-    public CheckBox getGraphToggle() {return graphToggle;}
-
-    public CheckBox getRegionFilteringToggle() {return regionFilteringToggle;}
-
-    public ChoiceBox getRegionFilteringKey() {return regionFilteringKey;}
-
-    public CheckBox getDateSortToggle() {return dateSortToggle;}
-
-    public DatePicker getStartDate() {return startDate;}
-
-    public DatePicker getEndDate() {return endDate;}
-
-    public WebView getMapView() {return mapView;}
+    public void updateRegionDateData () throws ParseException {
+        FilterController.setRegionDataActive(regionFilteringToggle.isSelected());
+        FilterController.setRegionFilteringKey((String) regionFilteringKey.getValue());
+        FilterController.setDateFiltering(dateSortToggle.isSelected());
+        if (startDate.getValue() != null) {
+            String startDateStr = startDate.getValue().toString();
+            FilterController.setStartDate(new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr));
+        }
+        if (endDate.getValue() != null) {
+            String endDateStr = endDate.getValue().toString();
+            FilterController.setEndDate(new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr));
+        }
+    }
 
     public WebEngine getWebEngine() {return webEngine;}
 
-    /*
-    public String getCurrentRegion () {
-        return regionFilter.getText();
-    }
-
-    public String getCurrentCrimeType () {
-        return (String) crimeSelector.getValue();
-    }
-
-    public Boolean getPoliceDataToggle() {
-        return policeDataToggle.isSelected();
-    }
-
-    public Boolean getUserDataToggle() {
-        return userDataToggle.isSelected();
-    }
-
-    public Boolean getArrestMadeToggle() {
-        return arrestMadeToggle.isSelected();
-    }
-
-    public Boolean getGraphToggle() {
-        return graphToggle.isSelected();
-    }
-
-    public Boolean getRegionFilteringToggle () {
-        return regionFilteringToggle.isSelected();
-    }
-
-    public String getRegionFilter () {
-        return (String) regionFilteringKey.getValue();
-    }
-
-    public Boolean getDateSortToggle () {
-        return dateSortToggle.isSelected();
-    }
-
-    public Date getStartDate () throws ParseException {
-        String startDateStr = startDate.getValue().toString();
-        return new SimpleDateFormat("yyyy/MM/dd").parse(startDateStr);
-    }
-
-    public Date getEndDate () throws ParseException {
-        String endDateStr = endDate.getValue().toString();
-        return new SimpleDateFormat("yyyy/MM/dd").parse(endDateStr);
-    }
-
-     */
 }
 

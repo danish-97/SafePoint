@@ -62,8 +62,8 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
         activeFilters.add(typeFilter);
-        dataFilter.setActiveFilters(activeFilters);
-        uiDataInterface.setCurrCrimeType("THEFT");
+        //dataFilter.setActiveFilters(activeFilters);
+       // uiDataInterface.setCurrCrimeType("THEFT");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(1, filteredData.size());
         assertEquals("1 RANDOM STREET", filteredData.get(0));
@@ -77,7 +77,7 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
         activeFilters.add(typeFilter);
-        dataFilter.setActiveFilters(activeFilters);
+        //dataFilter.setActiveFilters(activeFilters);
         //   UIdataInterface.setCurrCrimeType("THEFT");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());

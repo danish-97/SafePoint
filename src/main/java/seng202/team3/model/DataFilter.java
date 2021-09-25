@@ -11,11 +11,6 @@ import java.text.SimpleDateFormat;
 
 public class DataFilter {
 
-    FilterController filterController = new FilterController(); // TODO to be initialised in a different class.
-    UIDataInterface uiDataInterface = new UIDataInterface(); // TODO to be initialised in a different class.
-    private ArrayList<CrimeStat> activeFilters = filterController.getActiveFilters();
-    private DataManager dataManager;
-
     // If regionDataActive is true, call sortCrimeData, make the array passed into filteredData that sorted array.
     // HIGH_RISK_AREAS sort ONLY the PoliceData and sort based on number of crimes per ward.
     // The crimes that belong to the ward that has the most crimes will be returned at the start of the array list.
@@ -27,12 +22,19 @@ public class DataFilter {
      * @return an ArrayList<CrimeData> containing only filtered data
      */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
+        ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
+
+        if (activeFilters.size() == 0) {
+            return data;
+        }
+
+        //ArrayList<CrimeData> filteredData = new ArrayList<CrimeData>();
         ArrayList<CrimeData> filteredData = (ArrayList<CrimeData>) data.clone();
         for (CrimeStat filter : activeFilters) {
             filteredData.removeAll(filterCrimeData(filter, filteredData));
         }
 
-        if (filterController.getRegionDataActive()) {
+        if (FilterController.getRegionDataActive()) {
             filteredData = countFrequency(filteredData, true);
             if (activeFilters.contains(CrimeStat.LOW_FREQUENCY)) {
                 Collections.reverse(filteredData);
@@ -66,26 +68,26 @@ public class DataFilter {
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (!Objects.equals(crime.getLocation(), uiDataInterface.getRegionActive())) {
+                    if (!Objects.equals(crime.getLocation(), FilterController.getActiveLocation())) {
                         singleFilterArray.add(crime);
                     }
                     break;
                 case CRIME_TYPE:
-                    if (!Objects.equals(crime.getCrimeType(), uiDataInterface.getCurrCrimeType())) {
+                    if (!Objects.equals(crime.getCrimeType(), FilterController.getActiveCrimeType())) {
                         singleFilterArray.add(crime);
                     }
                     break;
-                case DATE:
-                    try {
-                        String crimeDateStr = crime.getDate().substring(0, 9);
-                        Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-                        if (crimeDate != uiDataInterface.getCurrDate()) {
-                            singleFilterArray.add(crime);
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+//                case DATE:
+//                    try {
+//                        String crimeDateStr = crime.getDate().substring(0, 9);
+//                        Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
+//                        if (crimeDate != uiDataInterface.getCurrDate()) {
+//                            singleFilterArray.add(crime);
+//                        }
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
                 case ARREST_MADE:
                     if (!(crime instanceof PoliceData) && !(Objects.equals(((PoliceData) crime).isArrestMade(), "YES"))) {
                         singleFilterArray.add(crime);
@@ -105,7 +107,7 @@ public class DataFilter {
                     try {
                         String crimeDateStr = crime.getDate().substring(0, 9);
                         Date crimeDate = new SimpleDateFormat("MM/dd/yyyy").parse(crimeDateStr);
-                        if (!(isWithinRange(uiDataInterface.getStartDate(), uiDataInterface.getEndDate(), crimeDate))) {
+                        if (!(isWithinRange(FilterController.getStartDate(), FilterController.getEndDate(), crimeDate))) {
                             singleFilterArray.add(crime);
                         }
                     } catch (ParseException e) {
@@ -119,13 +121,13 @@ public class DataFilter {
         return singleFilterArray;
     }
 
-    /**
-     * Setter for ActiveFilters parameter.
-     * @param activeFilters
-     */
-    public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
-        this.activeFilters = activeFilters;
-    }
+//    /**
+//     * Setter for ActiveFilters parameter.
+//     * @param activeFilters
+//     */
+//    public void setActiveFilters(ArrayList<CrimeStat> activeFilters) {
+//        this.activeFilters = activeFilters;
+//    }
 
     /**
      * Method which returns a sorted arraylist of crimes based on high frequency or low frequency.

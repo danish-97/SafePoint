@@ -1,6 +1,7 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVWriter;
+import seng202.team3.model.CrimeData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +21,7 @@ public class WriteCSV {
      */
     public static void writeDataLineByLine(String outputPath, String inputPath)
     {
-        ArrayList<ArrayList<String>> inputCrimes;
+        ArrayList<CrimeData> inputCrimes;
         inputCrimes = ReadCSV.readDataLineByLine(inputPath);
 
         // first create file object for file placed at location
@@ -42,12 +43,12 @@ public class WriteCSV {
 
 
             assert inputCrimes != null;
-            for (ArrayList<String> crime : inputCrimes) {
-                String[] str = new String[crime.size()];
-                for (int i = 0; i < crime.size(); i++) {
-                    str[i] = crime.get(i);
-                }
-                writer.writeNext(str);
+            for (CrimeData crime : inputCrimes) {
+                //String[] str = new String[crime.size()];
+                //for (int i = 0; i < crime.size(); i++) {
+                    //str[i] = crime.get(i);
+                //}
+                //writer.writeNext(str);
             }
 
 
