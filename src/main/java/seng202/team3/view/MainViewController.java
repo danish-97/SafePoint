@@ -4,17 +4,21 @@ package seng202.team3.view;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import com.google.gson.Gson;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import netscape.javascript.JSObject;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
+import seng202.team3.model.PoliceData;
+import seng202.team3.model.UserData;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
@@ -46,6 +50,9 @@ public class MainViewController implements Initializable {
         updateMapSettingsData();
         updateRegionDateData();
         crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
+        webEngine.executeScript("removeMarkers()");
+        loadData1();
+
     }
 
     @FXML
@@ -55,15 +62,41 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        UIDataInterface.initCrimeData();
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
-        UIDataInterface.initCrimeData();
+
+    }
+
+    public void loadData() {
+
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        tempActiveCrimeData = DataManager.getData();
+        String json = new Gson().toJson(tempActiveCrimeData);
+        webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
+
+            }
+        });
+
+    }
+
+    public void loadData1() {
+
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        tempActiveCrimeData = DataManager.getData();
+        String json = new Gson().toJson(tempActiveCrimeData);
+        webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
+
+
     }
 
     private void initMap() {
         webEngine = mapView.getEngine();
         webEngine.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/googleMap.html")).toExternalForm());
+        loadData();
     }
 
     public void initCrimeSelector () {
