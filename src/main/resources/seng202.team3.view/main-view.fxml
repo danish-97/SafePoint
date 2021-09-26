@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
             <Pane id="Header" prefHeight="83.0" prefWidth="1000.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
-                  <Label layoutX="14.0" layoutY="2.0" prefHeight="65.0" prefWidth="403.0" text="SAFEPOINT">
+                  <Label layoutX="74.0" layoutY="9.0" prefHeight="65.0" prefWidth="403.0" text="SAFEPOINT">
                      <font>
                         <Font name="System Bold" size="53.0" />
                      </font>
@@ -20,6 +21,11 @@
                      <font>
                         <Font size="19.0" />
                      </font></Button>
+                  <ImageView fitHeight="65.0" fitWidth="61.0" layoutX="7.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@SafePoint-logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <FlowPane prefHeight="517.0" prefWidth="159.0" style="-fx-border-color: black; -fx-border-width: 2;">
@@ -101,7 +107,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <CheckBox layoutX="14.0" layoutY="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
+                        <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
                      </children>
                   </Pane>
                   <ScrollPane fx:id="crimeDataPanel" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />

@@ -14,11 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import netscape.javascript.JSObject;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
-import seng202.team3.model.PoliceData;
-import seng202.team3.model.UserData;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
@@ -36,6 +33,7 @@ public class MainViewController implements Initializable {
     @FXML private CheckBox dateSortToggle;
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
+    @FXML private CheckBox compareCrimesToggle;
 
     @FXML private ScrollPane crimeDataPanel;
 
@@ -52,7 +50,7 @@ public class MainViewController implements Initializable {
         crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
         webEngine.executeScript("removeMarkers()");
         loadData1();
-
+        //System.out.println(crimeDataPanel.getVvalue());
     }
 
     @FXML

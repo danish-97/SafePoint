@@ -131,10 +131,6 @@ public class DataFilterTest {
         filterController.setUserDataActive(true);
         filterController.setDateFiltering(false);
         filterController.setRegionDataActive(true);
-        filterController.setHighFreqActive(false);
-        filterController.setLowFreqActive(true);
-        filterController.setLowRiskAreas(false);
-        filterController.setHighRiskAreas(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals("THEFT", filteredData.get(3).getCrimeType());
 
@@ -154,10 +150,6 @@ public class DataFilterTest {
         filterController.setUserDataActive(true);
         filterController.setDateFiltering(false);
         filterController.setRegionDataActive(true);
-        filterController.setHighFreqActive(true);
-        filterController.setLowFreqActive(false);
-        filterController.setHighRiskAreas(false);
-        filterController.setLowRiskAreas(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals("THEFT", filteredData.get(0).getCrimeType());
 
