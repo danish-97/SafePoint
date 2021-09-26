@@ -1,6 +1,8 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVWriter;
+
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class WriteCSV extends Importer {
             File file = new File(outputPath);
             FileWriter outputFile = new FileWriter(file, true);
             CSVWriter writer = new CSVWriter(outputFile);
+            BufferedWriter bw = new BufferedWriter(outputFile);
 
             // Adding header to csv
             if (file.length() == 0 ) {
@@ -36,6 +39,7 @@ public class WriteCSV extends Importer {
             // Writing crimes
             assert inputCrimes != null;
             for (String[] crime : inputCrimes) {
+                bw.newLine();
                 writer.writeNext(crime);
             }
 

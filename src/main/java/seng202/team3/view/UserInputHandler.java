@@ -10,10 +10,15 @@ import java.util.Objects;
 
 public class UserInputHandler {
 
+    private static Stage stage = new Stage();
+
     public UserInputHandler () {
+        initReportCrimeWindow ();
+    }
+
+    public void initReportCrimeWindow () {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/report-crime-view.fxml")));
-            Stage stage = new Stage();
             stage.setTitle("Report Crime");
             stage.setScene(new Scene(root, 250, 335));
             stage.setResizable(false);
@@ -21,6 +26,10 @@ public class UserInputHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void closeStage() {
+        stage.close();
     }
 
 }

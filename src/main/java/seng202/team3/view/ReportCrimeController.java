@@ -29,6 +29,7 @@ public class ReportCrimeController implements Initializable {
     public void reportCrime (ActionEvent e) throws ParseException {
         if (validateInputs ()) {
             UIDataInterface.addUserData(formatInputs());
+            UserInputHandler.closeStage();
         }
     }
 
@@ -41,8 +42,16 @@ public class ReportCrimeController implements Initializable {
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
-        formattedString = formattedString + latitude.getText() + ",";
-        formattedString = formattedString + longitude.getText();
+        if (latitude.getText().equals("")) {
+            formattedString = formattedString + ",";
+        } else {
+            formattedString = formattedString + latitude.getText() + "N,";
+        }
+        if (!longitude.getText().equals("")) {
+            formattedString = formattedString + longitude.getText();
+        } else {
+            formattedString = formattedString + "N";
+        }
         return formattedString;
     }
 

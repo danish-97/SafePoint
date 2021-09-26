@@ -26,6 +26,7 @@ public class UIDataInterface {
     }
 
     public static void addUserData (String userData) throws ParseException {
+        userData = CrimeData.getLatestID() + "," + userData;
         ArrayList<String> spltUserData = new ArrayList<>(Arrays.asList(userData.split(",")));
         UserData uData = new UserData (CrimeData.getLatestID(), spltUserData);
         CrimeData.incrementLatestID();
