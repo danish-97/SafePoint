@@ -50,6 +50,9 @@ public class MainViewController implements Initializable {
         updateMapSettingsData();
         updateRegionDateData();
         crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
+        webEngine.executeScript("removeMarkers()");
+        loadData1();
+
     }
 
     @FXML
@@ -59,43 +62,34 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,0820,THEFT,$500 AND UNDER,STREET,N,N,631,8,06,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
-        ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
-        try {
-            PoliceData pData = new PoliceData("1", data);
-            tempActiveCrimeData.add(pData);
-
-            ArrayList<String> uDataList = new ArrayList<>();
-            uDataList.add("THEFT");
-            uDataList.add("49 MAYS ROAD");
-            uDataList.add("41.812610526");
-            uDataList.add("-87.723765071");
-            uDataList.add("11/26/2020 07:50:00 AM");
-            UserData uData = new UserData("2", uDataList);
-
-            tempActiveCrimeData.add(uData);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        UIDataInterface.initCrimeData();
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
-        UIDataInterface.initCrimeData();
+
     }
 
     public void loadData() {
 
-        //convert crime data into json
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
-                webEngine.executeScript("loadMarkers()");
 
             }
         });
+
+    }
+
+    public void loadData1() {
+
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        tempActiveCrimeData = DataManager.getData();
+        String json = new Gson().toJson(tempActiveCrimeData);
+        webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
+
 
     }
 
