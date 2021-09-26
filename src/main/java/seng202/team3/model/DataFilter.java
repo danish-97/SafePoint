@@ -37,7 +37,7 @@ public class DataFilter {
                 Collections.reverse(filteredData);
             } } else {
                 filteredData = sortByRisk(filteredData);
-                if (activeFilters.contains(CrimeStat.HIGH_RISK_AREA)) {
+                if (activeFilters.contains(CrimeStat.LOW_RISK_AREA)) {
                     Collections.reverse(filteredData);
                 }
             }
