@@ -9,6 +9,7 @@ import seng202.team3.controller.UIDataInterface;
 
 import javafx.event.ActionEvent;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class ReportCrimeController implements Initializable {
@@ -25,7 +26,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     @FXML
-    public void reportCrime (ActionEvent e) {
+    public void reportCrime (ActionEvent e) throws ParseException {
         if (validateInputs ()) {
             UIDataInterface.addUserData(formatInputs());
         }
@@ -37,11 +38,11 @@ public class ReportCrimeController implements Initializable {
 
     public String formatInputs () {
         String formattedString;
-        formattedString = crimeTypeSelector.getValue() + ",";
+        formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
+        formattedString = formattedString + crimeTypeSelector.getValue() + ",";
         formattedString = formattedString + latitude.getText() + ",";
-        formattedString = formattedString + longitude.getText() + ",";
-        formattedString = formattedString + date.getValue().toString();
+        formattedString = formattedString + longitude.getText();
         return formattedString;
     }
 

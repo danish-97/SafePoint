@@ -22,7 +22,7 @@ public class WriteCSV extends Importer {
         try {
 
             File file = new File(outputPath);
-            FileWriter outputFile = new FileWriter(file);
+            FileWriter outputFile = new FileWriter(file, true);
             CSVWriter writer = new CSVWriter(outputFile);
 
             // Adding header to csv

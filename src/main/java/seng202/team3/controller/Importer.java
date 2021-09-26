@@ -34,7 +34,7 @@ public class Importer {
         public static void addUserData(UserData data) {
                 ArrayList<String[]> stringCrimes = new ArrayList<>();
                 stringCrimes.add(userToString(data));
-                WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/Database.txt", stringCrimes);
+                WriteCSV.writeDataLineByLine("data.csv", stringCrimes);
         }
 
         /**
@@ -65,6 +65,6 @@ public class Importer {
                         stringCrimes.add(policeToString(((PoliceData) crime)));
                 }
                 //Calls WriteCSV with input crimes
-                WriteCSV.writeDataLineByLine("src/main/java/seng202/team3/Database/Database.txt", stringCrimes);
+                WriteCSV.writeDataLineByLine("data.csv", stringCrimes);
         }
 }
