@@ -38,9 +38,11 @@ public class PoliceDataWindow extends DataViewWindow{
         Label caseNumber = new Label (pData.getCaseNumber());
         caseNumber.setStyle ("-fx-translate-x: 5; -fx-translate-y: 10; -fx-font-weight: bold; -fx-font-size: 15;");
 
-        // TODO add description to PoliceData
+        Label crimeDescription = new Label (pData.getSecondDescription());
+        crimeDescription.setStyle("-fx-font-weight: bold; -fx-translate-x: 5; -fx-translate-y: 47; -fx-font-size: 10;");
 
-        // TODO add second description for address
+        Label locationDescription = new Label (pData.getLocationDescription());
+        locationDescription.setStyle("-fx-translate-x: 5; -fx-translate-y: 87;");
 
         Label xCoord = new Label ("x: " + pData.getXCoord());
         xCoord.setStyle ("-fx-translate-x: 5; -fx-translate-y: 130;");
@@ -54,7 +56,7 @@ public class PoliceDataWindow extends DataViewWindow{
         Label domestic = new Label ("Domestic: " + pData.getDomestic());
         domestic.setStyle ("-fx-translate-x: 5; -fx-translate-y: 197;");
 
-        pane.getChildren().addAll(caseNumber, xCoord, yCoord, arrest, domestic);
+        pane.getChildren().addAll(caseNumber, xCoord, yCoord, arrest, domestic, crimeDescription, locationDescription);
         return pane;
     }
 

@@ -30,8 +30,8 @@ public class WriteCSV extends Importer {
 
             // Adding header to csv
             if (file.length() == 0 ) {
-                String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "PRIMARY DESCRIPTION",
-                        "ARREST", "DOMESTIC", "BEAT", "WARD","X COORDINATE",
+                String[] header = { "Case#", "DATE OF OCCURRENCE", "BLOCK", "PRIMARY DESCRIPTION", "SECONDARY DESCRIPTION",
+                        "LOCATION DESCRIPTION", "ARREST", "DOMESTIC", "BEAT", "WARD","X COORDINATE",
                         "Y COORDINATE", "LATITUDE", "LONGITUDE", "OBJECT TYPE"};
                 writer.writeNext(header);
             }

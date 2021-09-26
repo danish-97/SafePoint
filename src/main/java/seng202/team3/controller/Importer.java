@@ -22,7 +22,7 @@ public class Importer {
 
                 return new String[]{
                         userCrime.getId(), userCrime.getDate(), userCrime.getAddress(),
-                        userCrime.getCrimeType(), "N", "N", "N", "N", "N", "N", userCrime.getLatitude(),
+                        userCrime.getCrimeType(), "N","N", "N", "N", "N", "N", "N", "N", userCrime.getLatitude(),
                         userCrime.getLongitude(), "U"
                 };
         }
@@ -44,7 +44,7 @@ public class Importer {
          */
         public static String[] policeToString(PoliceData crime) {
                 return new String[]{crime.getCaseNumber(), crime.getDate(), crime.getAddress(),
-                        crime.getCrimeType(), (Objects.equals(crime.isArrestMade(), "YES") ? "Y" : "N"),
+                        crime.getCrimeType(), crime.getSecondDescription(), crime.getLocationDescription(), (Objects.equals(crime.isArrestMade(), "YES") ? "Y" : "N"),
                         (Objects.equals(crime.getDomestic(), "YES") ? "Y" : "N"), crime.getBeat(), crime.getWard(), Integer.toString(crime.getXCoord()),
                         Integer.toString(crime.getYCoord()), crime.getLatitude(), crime.getLongitude(), "P"
                 };
