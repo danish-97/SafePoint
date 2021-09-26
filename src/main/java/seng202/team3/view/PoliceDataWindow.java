@@ -15,9 +15,20 @@ import java.util.Objects;
 
 public class PoliceDataWindow extends DataViewWindow{
 
+    private Pane displayPane;
+
     public PoliceDataWindow (PoliceData data) {
         Parent root = constructWindow(data);
         displayWindow(root);
+    }
+
+    public PoliceDataWindow (PoliceData data, Boolean isMain) {
+        if (isMain) {
+            Parent root = constructWindow(data);
+            displayWindow(root);
+        } else {
+            displayPane = constructWindow(data);
+        }
     }
 
     @Override
@@ -45,6 +56,10 @@ public class PoliceDataWindow extends DataViewWindow{
 
         pane.getChildren().addAll(caseNumber, xCoord, yCoord, arrest, domestic);
         return pane;
+    }
+
+    public Pane getPane() {
+        return displayPane;
     }
 
 }

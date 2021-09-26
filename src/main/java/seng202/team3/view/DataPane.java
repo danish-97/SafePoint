@@ -3,8 +3,6 @@ package seng202.team3.view;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import seng202.team3.model.CrimeData;
-import seng202.team3.model.PoliceData;
-import seng202.team3.model.UserData;
 
 /**
  * DataPane constructs a JavaFX pane that displays the data from a CrimeData object in a graphical representation.

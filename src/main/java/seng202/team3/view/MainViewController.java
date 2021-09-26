@@ -58,6 +58,11 @@ public class MainViewController implements Initializable {
         UserInputHandler uih = new UserInputHandler();
     }
 
+    @FXML
+    public void compareCrimeToggle (ActionEvent e) {
+        UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UIDataInterface.initCrimeData();

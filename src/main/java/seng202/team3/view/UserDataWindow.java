@@ -8,9 +8,20 @@ import seng202.team3.model.UserData;
 
 public class UserDataWindow extends DataViewWindow{
 
+    private Pane displayPane;
+
     public UserDataWindow (UserData data) {
         Parent root = constructWindow(data);
         displayWindow(root);
+    }
+
+    public UserDataWindow (UserData data, Boolean isMain) {
+        if (isMain) {
+            Parent root = constructWindow(data);
+            displayWindow(root);
+        } else {
+            displayPane = constructWindow(data);
+        }
     }
 
     @Override
@@ -25,5 +36,9 @@ public class UserDataWindow extends DataViewWindow{
         pane.getChildren().addAll(userLabel, arrest);
 
         return pane;
+    }
+
+    public Pane getPane () {
+        return displayPane;
     }
 }

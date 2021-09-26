@@ -15,6 +15,10 @@ public class UIDataInterface {
 
     private static String dataLocation = "data.csv";
 
+    private static Boolean compareCrimes = false;
+
+    private static CrimeData comparator = null;
+
     public static void initCrimeData () {
         ArrayList<CrimeData> allData;
         allData = ReadCSV.readDataLineByLine(dataLocation);
@@ -32,5 +36,21 @@ public class UIDataInterface {
         CrimeData.incrementLatestID();
         DataManager.addCrimeData(uData);
         Importer.addUserData(uData);
+    }
+
+    public static void setCompareCrimes (Boolean newValue) {
+        compareCrimes = newValue;
+    }
+
+    public static Boolean isComparingCrimes () {
+        return compareCrimes;
+    }
+
+    public static void setComparator (CrimeData data) {
+        comparator = data;
+    }
+
+    public static CrimeData getComparator () {
+        return comparator;
     }
 }

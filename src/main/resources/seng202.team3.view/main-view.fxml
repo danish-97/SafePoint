@@ -107,7 +107,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
+                        <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#compareCrimeToggle" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
                      </children>
                   </Pane>
                   <ScrollPane fx:id="crimeDataPanel" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />

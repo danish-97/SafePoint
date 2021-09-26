@@ -1,6 +1,7 @@
 package seng202.team3.view;
 
 import javafx.scene.control.Button;
+import seng202.team3.controller.UIDataInterface;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
@@ -14,15 +15,22 @@ public class CrimeViewButton extends Button {
     }
 
     public void setActions (CrimeData data) {
-        if (data instanceof PoliceData) {
-            this.setOnAction(value -> {
-                new PoliceDataWindow((PoliceData) data);
-            });
-        } else if (data instanceof UserData) {
-            this.setOnAction(value -> {
-                new UserDataWindow ((UserData) data);
-            });
-        }
+        this.setOnAction(value -> {
+            if (UIDataInterface.isComparingCrimes()) {
+                if (UIDataInterface.getComparator() != null) {
+                    new CompareDataWindow(UIDataInterface.getComparator(), data);
+                    UIDataInterface.setComparator(null);
+                } else {
+                    UIDataInterface.setComparator(data);
+                }
+            } else {
+                if (data instanceof PoliceData) {
+                    new PoliceDataWindow((PoliceData) data);
+                } else if (data instanceof UserData) {
+                    new UserDataWindow((UserData) data);
+                }
+            }
+        });
     }
 
 }
