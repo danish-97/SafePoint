@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class DataPaneConstructor {
 
     /**
-     * @return the
+     * @return the pane containing all the CrimePanes
      */
     public static VBox loadActiveCrimes() {
         VBox root = new VBox();
