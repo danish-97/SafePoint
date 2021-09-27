@@ -38,19 +38,19 @@ public class ImporterTests {
     @Test
     public void importUserData() throws ParseException {
         //Creates UserData object
-        ArrayList<String> crime = new ArrayList<>(Arrays.asList("31/12/2001","DREXEL AVE", "Theft","200", "50"));
+        ArrayList<String> crime = new ArrayList<>(Arrays.asList(CrimeData.getLatestID(),"06/15/2021 09:30:00 AM", "080XX S DREXEL AVE","THEFT", "41.74848637", "-87.60267506"));
         String latestId = CrimeData.getLatestID();
         UserData userCrime = new UserData(latestId, crime);
-        CrimeData.incrementLatestID();
+
 
         //Adds UserData object to database
         Importer.addUserData(userCrime);
 
         //Creates expected String[]
-        String[] expected = {"31/12/2001","DREXEL AVE", "Theft","200", "50"};
-
+        String[] expected = {"06/15/2021 09:30:00 AM","080XX S DREXEL AVE", "THEFT","41.74848637", "-87.60267506"};
+        CrimeData.incrementLatestID();
         //Reads CrimeData objects from database
-        String file = ("src/main/java/seng202/team3/Database/Database.txt");
+        String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<CrimeData> readFromDatabase = ReadCSV.readDataLineByLine(file);
 
         //Loops through crimes read from database
@@ -59,7 +59,6 @@ public class ImporterTests {
 
             //If CrimeData object ID == UserData Object ID
             if (Objects.equals((Integer.parseInt(data.getId())-1), (Integer.parseInt(latestId)))) {
-
                 //Compare Objects to check equality
                 String[] got = {data.getDate(), data.getAddress(), data.getCrimeType(),
                                 data.getLatitude(), data.getLongitude()};
@@ -86,7 +85,7 @@ public class ImporterTests {
         Importer.addPoliceData(file);
 
         //Reads CrimeData objects from Database
-        String databaseFile = ("src/main/java/seng202/team3/Database/Database.txt");
+        String databaseFile = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
         ArrayList<CrimeData> crimes = ReadCSV.readDataLineByLine(databaseFile);
 
         //Loops through CrimeData objects in Database
