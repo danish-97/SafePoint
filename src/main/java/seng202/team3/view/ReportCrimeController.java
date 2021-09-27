@@ -74,7 +74,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Adds all crime types to a ChoiceBox for selection
+     * Adds all crime types to a ChoiceBox for selectioncC
      * @param crimeTypeSelector The ChoiceBox that the fields should be added into
      */
     public static void constructCrimeChoiceBox(ChoiceBox crimeTypeSelector) {
