@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Map Demo</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    var map;
+    var marker1;
+    var marker2;
+    var path;
+    var crimeData;
+    var markerArray = [];
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 41.881832, lng: -87.623177},
+            zoom: 10
+        });
+    }
+
+    function loadMarkers() {
+        for (let i = 0; i < crimeData.length; i++) {
+            var data = crimeData[i];
+            var icon = "icons8-user-shield-48.png"
+
+            if (data.caseNumber !== undefined) {
+                icon = "icons8-warning-shield-48.png"
+            }
+            var marker = new google.maps.Marker({
+                position: {lat: parseFloat(data.latitude), lng: parseFloat(data.longitude)  },
+                map: map,
+                icon: icon,
+                title: data.id + ", " + data.crimeType
+
+            });
+            markerArray.push(marker);
+        }
+
+    }
+
+    function removeMarkers() {
+        for (let i = 0; i < markerArray.length; i++) {
+            markerArray[i].setMap(null);
+
+        }
+
+        markerArray = [];
+    }
+
+
+    function getAllActiveCrimeData(inputJson){
+        crimeData = inputJson
+        loadMarkers();
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArZlTsI6ekABAXnxX2XKFSGNxvG6evMxA&callback=initMap"
+        async defer></script>
+</body>
+</html>

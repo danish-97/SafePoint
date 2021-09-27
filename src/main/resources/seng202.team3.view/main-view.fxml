@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+   <children>
+      <FlowPane prefHeight="517.0" prefWidth="1000.0">
+         <children>
+            <Pane id="Header" prefHeight="83.0" prefWidth="1000.0" style="-fx-border-color: black; -fx-border-width: 2;">
+               <children>
+                  <Label layoutX="74.0" layoutY="9.0" prefHeight="65.0" prefWidth="403.0" text="SAFEPOINT">
+                     <font>
+                        <Font name="System Bold" size="53.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="844.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="45.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
+                     <font>
+                        <Font size="19.0" />
+                     </font></Button>
+                  <ImageView fitHeight="65.0" fitWidth="61.0" layoutX="7.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@SafePoint-logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <FlowPane prefHeight="517.0" prefWidth="159.0" style="-fx-border-color: black; -fx-border-width: 2;">
+               <children>
+                  <Pane prefHeight="42.0" prefWidth="155.0" style="-fx-border-color: black;">
+                     <children>
+                        <TextField fx:id="regionFilter" layoutX="3.0" layoutY="8.0" prefHeight="25.0" prefWidth="149.0" promptText="Filter by Region" style="-fx-border-color: black;" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="12.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Type of Crime">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="43.0" prefHeight="39.0" prefWidth="155.0" style="-fx-border-color: black;">
+                     <children>
+                        <ChoiceBox fx:id="crimeSelector" layoutX="12.0" layoutY="4.0" prefHeight="31.0" prefWidth="132.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="74.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="11.0" text="Map Settings">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="105.0" prefHeight="110.0" prefWidth="155.0" style="-fx-border-color: black;">
+                     <children>
+                        <CheckBox fx:id="policeDataToggle" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" text="Show Police Data">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <CheckBox fx:id="userDataToggle" layoutX="7.0" layoutY="31.0" mnemonicParsing="false" text="Show User Data">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <CheckBox fx:id="arrestMadeToggle" layoutX="5.0" layoutY="55.0" mnemonicParsing="false" text="Arrest Made">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                        <CheckBox fx:id="graphToggle" layoutX="7.0" layoutY="86.0" mnemonicParsing="false" text="Graph View">
+                           <font>
+                              <Font size="14.0" />
+                           </font></CheckBox>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="136.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="9.0" text="Crime Data">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="12.0" layoutY="167.0" prefHeight="208.0" prefWidth="155.0" style="-fx-border-color: black;">
+                     <children>
+                        <CheckBox fx:id="regionFilteringToggle" layoutX="4.0" layoutY="6.0" mnemonicParsing="false" text="Show Region Data" />
+                        <ChoiceBox fx:id="regionFilteringKey" layoutX="4.0" layoutY="26.0" prefHeight="25.0" prefWidth="118.0" />
+                        <CheckBox fx:id="dateSortToggle" layoutX="4.0" layoutY="59.0" mnemonicParsing="false" text="Sort by Date" />
+                        <DatePicker fx:id="startDate" layoutX="7.0" layoutY="82.0" prefHeight="25.0" prefWidth="142.0" promptText="Start Date" />
+                        <DatePicker fx:id="endDate" layoutX="7.0" layoutY="115.0" prefHeight="25.0" prefWidth="142.0" promptText="End Date" />
+                     </children>
+                  </Pane>
+               </children>
+            </FlowPane>
+            <FlowPane prefHeight="503.0" prefWidth="195.0">
+               <children>
+                  <Pane prefHeight="55.0" prefWidth="195.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
+                     <children>
+                        <Label layoutX="14.0" text="Crime Data">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#compareCrimeToggle" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
+                     </children>
+                  </Pane>
+                  <ScrollPane fx:id="crimeDataPanel" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+                  <Pane prefHeight="33.0" prefWidth="195.0" style="-fx-background-color: #c9c9c9; -fx-border-width: 2; -fx-border-color: black;">
+                     <children>
+                        <Button layoutX="57.0" layoutY="8.0" mnemonicParsing="false" onAction="#updateCrimeData" prefHeight="17.0" prefWidth="81.0" style="-fx-padding: 0; -fx-border-color: black; -fx-background-color: white;" text="Reload Data" />
+                     </children>
+                  </Pane>
+               </children>
+            </FlowPane>
+            <Pane layoutX="140.0" layoutY="74.0" prefHeight="517.0" prefWidth="645.0" style="-fx-border-color: black; -fx-border-width: 2;">
+               <children>
+                  <WebView fx:id="mapView" layoutX="4.0" layoutY="4.0" prefHeight="517.0" prefWidth="645.0" />
+               </children>
+
+            </Pane>
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>
