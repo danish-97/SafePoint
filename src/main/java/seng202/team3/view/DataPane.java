@@ -5,7 +5,8 @@ import javafx.scene.layout.Pane;
 import seng202.team3.model.CrimeData;
 
 /**
- * DataPane constructs a JavaFX pane that displays the data from a CrimeData object in a graphical representation.
+ * DataPane is a JavaFX pane that displays the data from a CrimeData object in a graphical representation.
+ * This is used on the CrimeData scroll pane on the main GUI
  * @author Matthew Garrett
  */
 public class DataPane extends Pane{
@@ -22,6 +23,11 @@ public class DataPane extends Pane{
         constructComponents (data);
     }
 
+
+    /**
+     * Adds attributes from CrimeData into this DataPane as labels with formatting
+     * @param data Data to be displayed on the DataPane
+     */
     public void constructComponents (CrimeData data) {
         Label crimeLabel = new Label(data.getCrimeType());
         crimeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15; -fx-translate-x: 5;");

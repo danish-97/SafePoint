@@ -8,8 +8,20 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import seng202.team3.model.CrimeData;
 
+/**
+ * Base class for viewing data in a larger window.
+ * This creates a pane to display all the common attributes found in every CrimeData object
+ */
 public class DataViewWindow {
 
+
+    /**
+     * Creates a JavaFX Pane and adds Labels and formatting to the pane.
+     * All CrimeData attributes added to the Pane are found in PoliceData and UserData.
+     * Constructors for PoliceData and UserData windows are found in seperate files.
+     * @param data The data to be displayed on the window
+     * @return Pane to be displayed on the view data window
+     */
     public Pane constructWindow (CrimeData data) {
         Pane pane = new Pane ();
         pane.setStyle("-fx-pref-height: 220; -fx-pref-width: 200;");
@@ -38,6 +50,11 @@ public class DataViewWindow {
         return pane;
     }
 
+
+    /**
+     * Opens a seperate window to display the pane created
+     * @param root the Pane or Parent JavaFX object to be displayed
+     */
     public void displayWindow (Parent root) {
         Stage stage = new Stage();
         stage.setTitle("View Crime");

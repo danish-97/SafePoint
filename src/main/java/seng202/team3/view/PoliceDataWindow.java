@@ -1,27 +1,34 @@
 package seng202.team3.view;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 
-import java.io.IOException;
-import java.util.Objects;
-
+/**
+ * Handles in depth displaying of PoliceData objects as a seperate window.
+ */
 public class PoliceDataWindow extends DataViewWindow{
 
     private Pane displayPane;
 
+    /**
+     * Creates a simple DataViewWindow with base attributes added by parent class DataViewWindow, and extra attributes
+     * unique to PoliceData added.
+     * @param data Data to be displayed
+     */
     public PoliceDataWindow (PoliceData data) {
         Parent root = constructWindow(data);
         displayWindow(root);
     }
 
+    /**
+     * Creates a simple DataViewWindow with base attributes added by parent class DataViewWindow, and extra attributes
+     * unique to PoliceData added. If !isMain then no window will be opened but the pane will still be constructed
+     * @param data Data to be displayed
+     * @param isMain choose whether a window should be opened on creation
+     */
     public PoliceDataWindow (PoliceData data, Boolean isMain) {
         if (isMain) {
             Parent root = constructWindow(data);
@@ -31,6 +38,11 @@ public class PoliceDataWindow extends DataViewWindow{
         }
     }
 
+    /**
+     * Formats PoliceData into physical attributes on a pane.
+     * @param data The data to be displayed on the window
+     * @return Pane displaying all formatted attributes of PoliceData
+     */
     @Override
     public Pane constructWindow (CrimeData data) {
         Pane pane = super.constructWindow(data);

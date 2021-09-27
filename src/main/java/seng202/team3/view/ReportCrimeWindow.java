@@ -8,14 +8,23 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class UserInputHandler {
+/**
+ * Handles the window for when a user wants to report a crime
+ */
+public class ReportCrimeWindow {
 
     private static Stage stage = new Stage();
 
-    public UserInputHandler () {
+    /**
+     * Constructs and opens up a new window to report crimes
+     */
+    public ReportCrimeWindow() {
         initReportCrimeWindow ();
     }
 
+    /**
+     * Opens up the Report crime window
+     */
     public void initReportCrimeWindow () {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/report-crime-view.fxml")));
@@ -28,6 +37,10 @@ public class UserInputHandler {
         }
     }
 
+    /**
+     * Closes the window when the user inputs correct data and wants to submit the report. This just closes the window
+     * but doesn't delete it.
+     */
     public static void closeStage() {
         stage.close();
     }

@@ -19,6 +19,9 @@ import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
+/**
+ * Main FXML controller for main-view.fxml
+ */
 public class MainViewController implements Initializable {
 
     //FXML components for filtering
@@ -42,8 +45,15 @@ public class MainViewController implements Initializable {
 
     private WebEngine webEngine;
 
+    /**
+     * Handles update crime button on main GUI. This calls functions to update filters and get new data for the
+     * crime data panel
+     * @param e input variable
+     * @throws ParseException if user input is invalid
+     * @throws ClassNotFoundException if CrimeData is invalid
+     */
     @FXML
-    public void  updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
+    public void updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
@@ -53,11 +63,19 @@ public class MainViewController implements Initializable {
         //System.out.println(crimeDataPanel.getVvalue());
     }
 
+    /**
+     * Handles when a user clicks the report crime button on main GUI
+     * @param e input variable
+     */
     @FXML
     public void reportCrime (ActionEvent e) {
-        UserInputHandler uih = new UserInputHandler();
+        new ReportCrimeWindow();
     }
 
+    /**
+     * Handles when the compare crimes option is clicked
+     * @param e input variable
+     */
     @FXML
     public void compareCrimeToggle (ActionEvent e) {
         UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
@@ -72,9 +90,11 @@ public class MainViewController implements Initializable {
 
     }
 
+    /**
+     * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
+     */
     public void loadData() {
-
-        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<>();
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
@@ -92,8 +112,6 @@ public class MainViewController implements Initializable {
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
-
-
     }
 
     private void initMap() {

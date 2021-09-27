@@ -10,9 +10,15 @@ import seng202.team3.model.UserData;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * Constructs CrimeData objects to DataPane objects to be displayed
+ */
 public class DataPaneConstructor {
 
-    public static VBox loadActiveCrimes() throws ClassNotFoundException {
+    /**
+     * @return the
+     */
+    public static VBox loadActiveCrimes() {
         VBox root = new VBox();
         ArrayList<CrimeData> activeData = UIDataInterface.getActiveData();
         ArrayList<Pane> panes = new ArrayList<>();
