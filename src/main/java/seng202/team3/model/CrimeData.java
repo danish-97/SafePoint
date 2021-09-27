@@ -1,9 +1,5 @@
 package seng202.team3.model;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-
-
 /**
  * Represents a certain crime
  * @author Danish Jahangir

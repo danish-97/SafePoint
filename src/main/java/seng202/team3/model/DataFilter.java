@@ -29,6 +29,7 @@ public class DataFilter {
         for (CrimeStat filter : activeFilters) {
             filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
         }
+
         if (FilterController.getRegionDataActive()) {
             if (activeFilters.contains(CrimeStat.LOW_FREQUENCY) || activeFilters.contains(CrimeStat.HIGH_FREQUENCY)) {
             filteredData = sortByFrequency(filteredData, true);
@@ -36,7 +37,7 @@ public class DataFilter {
                 Collections.reverse(filteredData);
             } } else {
                 filteredData = sortByRisk(filteredData);
-                if (activeFilters.contains(CrimeStat.HIGH_RISK_AREA)) {
+                if (activeFilters.contains(CrimeStat.LOW_RISK_AREA)) {
                     Collections.reverse(filteredData);
                 }
             }
@@ -144,11 +145,11 @@ public class DataFilter {
             if (countList.containsKey(((PoliceData)filteredData.get(i)).getWard())) {
                 ArrayList<CrimeData> currentArray = countList.get(((PoliceData) filteredData.get(i)).getWard());
                 currentArray.add(filteredData.get(i));
-                countList.put(filteredData.get(i).getCrimeType(), currentArray);
+                countList.put(((PoliceData) filteredData.get(i)).getWard(), currentArray);
             } else {
                 ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
                 hashMapArray.add(filteredData.get(i));
-                countList.put(filteredData.get(i).getCrimeType(), hashMapArray);
+                countList.put(((PoliceData) filteredData.get(i)).getWard(), hashMapArray);
             }
         }
 
@@ -181,7 +182,6 @@ public class DataFilter {
                 countList.put(crimeDataArrayList.get(i).getCrimeType(), hashMapArray);
             }
         }
-
 
         ArrayList<CrimeData> finalData = sortOverrider(countList);
 

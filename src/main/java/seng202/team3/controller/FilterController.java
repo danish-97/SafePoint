@@ -17,10 +17,7 @@ public class FilterController {
     private static Boolean dateFilteringActive = false;
     private static Date startDate;
     private static Date endDate;
-    private static Boolean highFreqActive = false;
-    private static Boolean lowFreqActive = false;
-    private static Boolean highRiskAreas = false;
-    private static Boolean lowRiskAreas = false;
+
 
     public static void setActiveLocation(String newLocation) {
         activeLocation =  newLocation;
@@ -52,22 +49,6 @@ public class FilterController {
 
     public static void setDateFilteringActive(Boolean dateFilteringActive) {
         FilterController.dateFilteringActive = dateFilteringActive;
-    }
-
-    public static void setHighFreqActive(Boolean highFreqActive) {
-        FilterController.highFreqActive = highFreqActive;
-    }
-
-    public static void setLowFreqActive(Boolean lowFreqActive) {
-        FilterController.lowFreqActive = lowFreqActive;
-    }
-
-    public static void setHighRiskAreas(Boolean highRiskAreas) {
-        FilterController.highRiskAreas = highRiskAreas;
-    }
-
-    public static void setLowRiskAreas(Boolean lowRiskAreas) {
-        FilterController.lowRiskAreas = lowRiskAreas;
     }
 
     public static void setAllFilters(String location, String crimeType, Boolean policeActive, Boolean userActive,
@@ -112,17 +93,17 @@ public class FilterController {
         if (dateFilteringActive) {
             activeFilters.add(CrimeStat.DATE_RANGE);
         }
-        if (regionDataActive && highFreqActive) {
+        if (regionDataActive && regionFilteringKey.equals("HIGH FREQUENCY")) {
             activeFilters.add(CrimeStat.HIGH_FREQUENCY);
         }
-        if (regionDataActive && lowFreqActive) {
+        if (regionDataActive && regionFilteringKey.equals("LOW FREQUENCY")) {
             activeFilters.add(CrimeStat.LOW_FREQUENCY);
         }
-        if (regionDataActive && highRiskAreas) {
+        if (regionDataActive && regionFilteringKey.equals("HIGH RISK AREAS")) {
             activeFilters.add(CrimeStat.HIGH_RISK_AREA);
             activeFilters.remove(CrimeStat.USER_DATA);
         }
-        if (regionDataActive && lowRiskAreas) {
+        if (regionDataActive && regionFilteringKey.equals("LOW RISK AREAS")) {
             activeFilters.add(CrimeStat.LOW_RISK_AREA);
             activeFilters.remove(CrimeStat.USER_DATA);
         }

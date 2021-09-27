@@ -16,6 +16,8 @@ public class PoliceData extends CrimeData {
     private String ward;
     private int xCoord;
     private int yCoord;
+    private String secondDescription;
+    private String locationDescription;
 
     /**
      * Constructor method for the class PoliceData
@@ -90,6 +92,22 @@ public class PoliceData extends CrimeData {
 
     public void setBeat(String beat) {this.beat = beat;}
 
+    public void setSecondDescription (String sDescription) {
+        secondDescription = sDescription;
+    }
+
+    public String getSecondDescription () {
+        return secondDescription;
+    }
+
+    public void setLocationDescription (String lDescription) {
+        locationDescription = lDescription;
+    }
+
+    public String getLocationDescription () {
+        return locationDescription;
+    }
+
 
     /**
      * Function that splits the given string to get the required fields
@@ -101,15 +119,17 @@ public class PoliceData extends CrimeData {
         setDate(data.get(1));
         setAddress(data.get(2));
         setCrimeType(data.get(3)); //Originally 4
-        setArrestMade(data.get(4)); //7
-        setDomestic(data.get(5)); //8
-        setBeat(data.get(6));//9
-        setWard(data.get(7));//10
-        setXCoord(data.get(8));//12
-        setYCoord(data.get(9));//13
-        setLatitude(data.get(10));//14
-        setLongitude(data.get(11));//15
-        setLocation(data.get(10) + ", " + data.get(11));//14 + 15
+        setSecondDescription(data.get(4));
+        setLocationDescription(data.get(5));
+        setArrestMade(data.get(6)); //7
+        setDomestic(data.get(7)); //8
+        setBeat(data.get(8));//9
+        setWard(data.get(9));//10
+        setXCoord(data.get(10));//12
+        setYCoord(data.get(11));//13
+        setLatitude(data.get(12));//14
+        setLongitude(data.get(13));//15
+        setLocation(data.get(12) + ", " + data.get(13));//14 + 15
     }
 
 }

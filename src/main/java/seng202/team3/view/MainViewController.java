@@ -4,20 +4,24 @@ package seng202.team3.view;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import com.google.gson.Gson;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 
+/**
+ * Main FXML controller for main-view.fxml
+ */
 public class MainViewController implements Initializable {
 
     //FXML components for filtering
@@ -32,6 +36,7 @@ public class MainViewController implements Initializable {
     @FXML private CheckBox dateSortToggle;
     @FXML private DatePicker startDate;
     @FXML private DatePicker endDate;
+    @FXML private CheckBox compareCrimesToggle;
 
     @FXML private ScrollPane crimeDataPanel;
 
@@ -40,41 +45,83 @@ public class MainViewController implements Initializable {
 
     private WebEngine webEngine;
 
+    /**
+     * Handles update crime button on main GUI. This calls functions to update filters and get new data for the
+     * crime data panel
+     * @param e input variable
+     * @throws ParseException if user input is invalid
+     * @throws ClassNotFoundException if CrimeData is invalid
+     */
     @FXML
-    public void  updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
+    public void updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
         crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
+        webEngine.executeScript("removeMarkers()");
+        loadData1();
+        //System.out.println(crimeDataPanel.getVvalue());
     }
 
+    /**
+     * Handles when a user clicks the report crime button on main GUI
+     * @param e input variable
+     */
     @FXML
     public void reportCrime (ActionEvent e) {
-        UserInputHandler uih = new UserInputHandler();
+        new ReportCrimeWindow();
+    }
+
+    /**
+     * Handles when the compare crimes option is clicked
+     * @param e input variable
+     */
+    @FXML
+    public void compareCrimeToggle (ActionEvent e) {
+        UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        UIDataInterface.initCrimeData();
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
-        UIDataInterface.initCrimeData();
+
+    }
+
+    /**
+     * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
+     */
+    public void loadData() {
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<>();
+        tempActiveCrimeData = DataManager.getData();
+        String json = new Gson().toJson(tempActiveCrimeData);
+        webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
+            if (newState == Worker.State.SUCCEEDED) {
+                webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
+
+            }
+        });
+
+    }
+
+    public void loadData1() {
+
+        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        tempActiveCrimeData = DataManager.getData();
+        String json = new Gson().toJson(tempActiveCrimeData);
+        webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
     }
 
     private void initMap() {
         webEngine = mapView.getEngine();
         webEngine.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/googleMap.html")).toExternalForm());
+        loadData();
     }
 
     public void initCrimeSelector () {
-        String[] crimeTypes = {"ALL", "ARSON", "ASSAULT", "BATTERY", "BURGLARY", "CONCEALED CARRY LICENCE", "CRIMINAL DAMAGE",
-                "CRIMINAL SEXUAL ASSAULT", "CRIMINAL TRESPASS", "DECEPTIVE PRACTICE", "HOMICIDE", "INTERFERENCE WITH PUBLIC OFFICER",
-                "INTIMIDATION", "KIDNAPPING", "LIQUOR LAW VIOLATION", "MOTOR VEHICLE THEFT", "NARCOTICS", "OFFENSE INVOLVING CHILDREN",
-                "OTHER NARCOTIC VIOLATION", "OTHER OFFENSE", "PROSTITUTION", "PUBLIC PEACE VIOLATION", "ROBBERY", "SEX OFFENSE",
-                "STALKING", "THEFT", "WEAPONS VIOLATION"};
-        for (String crimeType : crimeTypes) {
-            crimeSelector.getItems().add(crimeType);
-        }
+        ReportCrimeController.constructCrimeChoiceBox(crimeSelector);
     }
 
     public void initRegionFilterSelector () {

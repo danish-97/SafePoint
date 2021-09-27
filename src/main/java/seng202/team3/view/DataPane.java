@@ -3,18 +3,14 @@ package seng202.team3.view;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import seng202.team3.model.CrimeData;
-import seng202.team3.model.PoliceData;
-import seng202.team3.model.UserData;
 
 /**
- * DataPane constructs a JavaFX pane that displays the data from a CrimeData object in a graphical representation.
+ * DataPane is a JavaFX pane that displays the data from a CrimeData object in a graphical representation.
+ * This is used on the CrimeData scroll pane on the main GUI
  * @author Matthew Garrett
  */
-public class DataPane implements Renderable{
-    // TODO make DataPane extend Pane
+public class DataPane extends Pane{
 
-    CrimeData data;
-    Pane pane;
     CrimeViewButton viewButton;
 
     /**
@@ -22,77 +18,29 @@ public class DataPane implements Renderable{
      * @param data CrimeData object to be displayed on the DataPane
      */
     public DataPane(CrimeData data) {
-        this.data = data;
+        super();
+        this.setStyle("-fx-border-color: black; -fx-pref-height: 80; -fx-pref-width: 175; -fx-border-radius: 5");
+        constructComponents (data);
     }
 
 
     /**
-     * Creates the JavaFX pane from the CrimeData object data.
-     * @throws ClassNotFoundException on variable data not being PoliceData or UserData
+     * Adds attributes from CrimeData into this DataPane as labels with formatting
+     * @param data Data to be displayed on the DataPane
      */
-    @Override
-    public void createPane() throws ClassNotFoundException {
-        if (data instanceof PoliceData) {
-            createPoliceDataPane();
-        } else if (data instanceof UserData) {
-            createUserDataPane();
-        } else {
-            throw new ClassNotFoundException();
-        }
-    }
-
-    /**
-     * Constructs the JavaFX pane when data is an instance of PoliceData.
-     * Also adds unique labels and button with styling.
-     */
-    public void createPoliceDataPane() {
-        PoliceData pData = (PoliceData) data;
-        //construct DataPane pane
-        pane = new Pane();
-        pane.setPrefHeight(80);
-        pane.setPrefWidth(175);
-        pane.setStyle("-fx-border-color: black;");
-
-        //Crime type label
-        Label crimeLabel = new Label(pData.getCrimeType());
+    public void constructComponents (CrimeData data) {
+        Label crimeLabel = new Label(data.getCrimeType());
         crimeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15; -fx-translate-x: 5;");
-        //Location label
-        Label location = new Label(pData.getAddress());
+
+        Label location = new Label(data.getAddress());
         location.setStyle("-fx-translate-y: 15; -fx-translate-x: 5;");
-        //arrest made label
-        Label arrestMade = new Label(pData.isArrestMade());
-        arrestMade.setStyle("-fx-translate-x: 5; -fx-translate-y: 28;");
-        //case number label
-        Label caseNumber = new Label(pData.getCaseNumber());
-        caseNumber.setStyle("-fx-translate-x: 5; -fx-translate-y: 41;");
-        //view button
+
+        Label date = new Label(data.getDate());
+        date.setStyle("-fx-translate-x: 5; -fx-translate-y: 41;");
 
         viewButton = new CrimeViewButton(data);
 
-        //adding all javafx components constructed above to the main pain
-        pane.getChildren().addAll(crimeLabel, location, arrestMade, caseNumber, viewButton);
+        this.getChildren().addAll(crimeLabel, location, date, viewButton);
     }
 
-    /**
-     * Constructs the JavaFX pane when data is an instance of UserData.
-     * Also adds unique labels and button with styling.
-     */
-    public void createUserDataPane() {
-        //TODO construct proper data pane for user submitted crimes
-        //UserData uData = (UserData) data;
-        pane = new Pane();
-    }
-
-
-    /**
-     * @return Returns pane constructed by the createPane() method.
-     * @throws NullPointerException On pane not being properly constructed
-     */
-    @Override
-    public Pane getPane() throws NullPointerException{
-        if (pane == null) {
-            throw new NullPointerException();
-        }
-        return pane;
-    }
 }

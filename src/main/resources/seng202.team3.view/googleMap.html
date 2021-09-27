@@ -22,65 +22,49 @@
     var marker1;
     var marker2;
     var path;
+    var crimeData;
+    var markerArray = [];
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 39.144684, lng: -84.510079},
-            zoom: 15
-        });
-
-        new google.maps.Marker({
-            position: {lat: 39.144684, lng: -84.510079},
-            map: map,
-            title: '\u0048\u0061\u0072\u0061\u006d\u0062\u0065'
+            center: {lat: 41.881832, lng: -87.623177},
+            zoom: 10
         });
     }
 
-    function displayRoute(flightPath) {
-        // CLEAR EXISTING MARKERS
-        if (marker1 !== undefined && marker2 !== undefined && path !== undefined) {
-            marker1.setMap(null);
-            marker2.setMap(null);
-            path.setMap(null);
+    function loadMarkers() {
+        for (let i = 0; i < crimeData.length; i++) {
+            var data = crimeData[i];
+            var icon = "icons8-user-shield-48.png"
+
+            if (data.caseNumber !== undefined) {
+                icon = "icons8-warning-shield-48.png"
+            }
+            var marker = new google.maps.Marker({
+                position: {lat: parseFloat(data.latitude), lng: parseFloat(data.longitude)  },
+                map: map,
+                icon: icon,
+                title: data.id + ", " + data.crimeType
+
+            });
+            markerArray.push(marker);
         }
 
-        if (flightPath.length < 2) {
-            return;
-        }
-
-        // CREATE MARKERS AT START AND FINISH
-        marker1 = new google.maps.Marker({
-            position: flightPath[0],
-            map: map
-        });
-
-        marker2 = new google.maps.Marker({
-            position: flightPath[flightPath.length - 1],
-            map: map
-        });
-
-        // DRAW POLYLINE FOR ROUTE
-        path = new google.maps.Polyline({
-            path: flightPath,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
-
-        path.setMap(map);
-
-        repositionMap(flightPath);
     }
 
-    function repositionMap(flightPath) {
-        var bounds = new google.maps.LatLngBounds();
+    function removeMarkers() {
+        for (let i = 0; i < markerArray.length; i++) {
+            markerArray[i].setMap(null);
 
-        for (var i = 0; i < flightPath.length; i++) {
-            bounds.extend(flightPath[i]);
         }
 
-        map.fitBounds(bounds);
+        markerArray = [];
+    }
+
+
+    function getAllActiveCrimeData(inputJson){
+        crimeData = inputJson
+        loadMarkers();
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArZlTsI6ekABAXnxX2XKFSGNxvG6evMxA&callback=initMap"

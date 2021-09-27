@@ -20,7 +20,7 @@ public class PoliceDataTest {
      */
     @Test
     public void caseNumberCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
         assertEquals("JE266628", pData.getCaseNumber());
@@ -33,7 +33,7 @@ public class PoliceDataTest {
     @Test
 
     public void arrestMadeCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
         assertEquals("NO", pData.isArrestMade());
@@ -46,7 +46,7 @@ public class PoliceDataTest {
     @Test
 
     public void xCordCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
         pData.setXCoord("1183633");
@@ -61,7 +61,7 @@ public class PoliceDataTest {
     @Test
 
     public void yCordCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
         pData.setYCoord("1851786");
@@ -76,7 +76,7 @@ public class PoliceDataTest {
     @Test
 
     public void getDomesticCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
         assertEquals("NO", pData.getDomestic());
@@ -90,10 +90,10 @@ public class PoliceDataTest {
     @Test
 
     public void getWardCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
-        assertEquals(" 8", pData.getWard());
+        assertEquals("8", pData.getWard());
     }
 
     /**
@@ -104,10 +104,10 @@ public class PoliceDataTest {
     @Test
 
     public void getBeatCheck() throws ParseException {
-        String[] strSplit = "JE266628, 06/15/2021 09:30:00 AM, 080XX S DREXEL AVE, THEFT, NO, NO, 631, 8, 1183633, 1851786, 41.74848637, -87.60267506".split(",");
+        String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
-        assertEquals(" 631", pData.getBeat());
+        assertEquals("631", pData.getBeat());
     }
 
 

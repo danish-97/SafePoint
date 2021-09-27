@@ -23,11 +23,19 @@ public class UserData extends CrimeData {
     }
 
     public void formatUserData (ArrayList<String> data) {
-        setCrimeType(data.get(0));
-        setAddress(data.get(1));
-        setLatitude(data.get(2));
-        setLongitude(data.get(3));
-        setLocation(data.get(2) + ", " + data.get(3));
-        setDate(data.get(4));
+        setDate(data.get(1));
+        setAddress(data.get(2));
+        setCrimeType(data.get(3));
+        if (data.get(4).equals("N")) {
+            setLatitude("");
+        } else {
+            setLatitude(data.get(4));
+        }
+        if (data.get(5).equals("N")) {
+            setLongitude("");
+        } else {
+            setLongitude(data.get(5));
+        }
+        setLocation(getLatitude() + ", " + getLongitude());
     }
 }

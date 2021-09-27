@@ -36,7 +36,7 @@ public class ReadCSV extends Importer {
 
         //Checks column count to determine if reading from database.txt
         if (columnAmount == 17) { //If reading from an Excel document
-            columnNotWanted = Arrays.asList(3, 5, 6, 11, 16, 17); //Columns not needed for PoliceData
+            columnNotWanted = Arrays.asList(3, 11, 16, 17); //Columns not needed for PoliceData
 
         } else { //If reading from database.txt
 

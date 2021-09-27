@@ -11,7 +11,7 @@ public class DataManager {
     private static ArrayList<CrimeData> allCrimeData = new ArrayList<>();
     private static ArrayList<CrimeData> activeCrimeData = new ArrayList<>();
 
-    public void addCrimeData(CrimeData object) {
+    public static void addCrimeData(CrimeData object) {
         allCrimeData.add(object);
     }
 
