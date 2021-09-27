@@ -48,13 +48,14 @@ public class ImporterTests {
 
 
         //Adds UserData object to database
-        Importer.addUserData(userCrime);
+        String file = ("src/main/java/seng202/team3/Database/Database.txt");
+        Importer.addUserData(userCrime, file);
 
         //Creates expected String[]
         String[] expected = {"06/15/2021 09:30:00 AM","080XX S DREXEL AVE", "THEFT","41.74848637", "-87.60267506"};
         CrimeData.incrementLatestID();
         //Reads CrimeData objects from database
-        String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
+
         ArrayList<CrimeData> readFromDatabase = ReadCSV.readDataLineByLine(file);
 
         //Loops through crimes read from database
@@ -82,10 +83,11 @@ public class ImporterTests {
     public void importPoliceData() {
         //Create expected String[]'s
         ArrayList<String[]> expectedResult = new ArrayList<>();
-        expectedResult.add(new String[]{"JE266628", "06/15/2021 09:30:00 AM", "080XX S DREXEL AVE",
-                "THEFT", "NO", "NO", "631", "8", "1183633", "1851786", "41.74848637", "-87.60267506"});
         expectedResult.add(new String[]{"JE266536","06/15/2021 07:50:00 AM","042XX W MADISON ST",
                 "ASSAULT","NO","NO","1115","28","1148227","1899678","41.88066079","-87.73118641"});
+        expectedResult.add(new String[]{"JE266628", "06/15/2021 09:30:00 AM", "080XX S DREXEL AVE",
+                "THEFT", "NO", "NO", "631", "8", "1183633", "1851786", "41.74848637", "-87.60267506"});
+
 
         //Call to importer addPoliceData
         String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
