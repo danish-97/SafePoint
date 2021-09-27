@@ -91,10 +91,12 @@ public class ReadCSV extends Importer {
             FileReader filereader = new FileReader(file);
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
+            int headerSize = 0;
 
             //Get header length to determine if reading from database.txt
-            int headerSize = csvReader.readNext().length;
-
+            if (csvReader.readNext() != null) {
+                headerSize = csvReader.readNext().length;
+            }
             // Read data line by line
             while ((nextRecord = csvReader.readNext()) != null) {
 
