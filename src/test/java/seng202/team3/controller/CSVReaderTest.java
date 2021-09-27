@@ -16,6 +16,7 @@ public class CSVReaderTest {
     /**
      * Reads ReaderTestFile.txt and compares result to correct output
      */
+    /*
     @Test
     public void checkReadPoliceData() {
         //Create expected String[]'s
@@ -46,4 +47,6 @@ public class CSVReaderTest {
             index++;
         }
     }
+
+     */
 }

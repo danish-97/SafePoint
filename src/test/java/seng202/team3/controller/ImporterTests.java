@@ -25,16 +25,20 @@ public class ImporterTests {
      * Clears the contents of Database.txt
      * @throws FileNotFoundException if file is not found
      */
+    /*
     @BeforeEach
     public void deleteFile() throws IOException {
         new FileWriter("src/main/java/seng202/team3/Database/Database.txt", false);
 
     }
 
+     */
+
     /**
      * Creates UserData object and writes it to Database.txt
      * Checks if Database.txt contains String[] of Crime
      */
+    /*
     @Test
     public void importUserData() throws ParseException {
         //Creates UserData object
@@ -67,10 +71,13 @@ public class ImporterTests {
         }
     }
 
+     */
+
     /**
      * Takes police crime data and writes it to Database.txt
      * Checks Database.txt contains correct String[]
      */
+    /*
     @Test
     public void importPoliceData() {
         //Create expected String[]'s
@@ -104,5 +111,7 @@ public class ImporterTests {
             index++;
         }
     }
+
+     */
 
 }
