@@ -36,6 +36,17 @@ public class Importer {
                 stringCrimes.add(userToString(data));
                 WriteCSV.writeDataLineByLine("data.csv", stringCrimes);
         }
+        /**
+         * Takes in a UserData object and writes it to the database file
+         * (takes in an outputPath for test file
+         * @param data userData object
+         * @param outputPath outputs to a test file
+         */
+        public static void addUserData(UserData data, String outputPath) {
+                ArrayList<String[]> stringCrimes = new ArrayList<>();
+                stringCrimes.add(userToString(data));
+                WriteCSV.writeDataLineByLine(outputPath, stringCrimes);
+        }
 
         /**
          * Converts PoliceData object into a string array
