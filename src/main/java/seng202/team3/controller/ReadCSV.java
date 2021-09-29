@@ -75,6 +75,7 @@ public class ReadCSV extends Importer {
 
             return policeDataObject;
         }
+
     }
 
     /**
@@ -100,8 +101,10 @@ public class ReadCSV extends Importer {
             while ((nextRecord = csvReader.readNext()) != null) {
 
                 //Create CrimeData object and add it to return list
-                CrimeData crimeDataObject = readerHelper(nextRecord, headerSize); //Calls reader helper, sends in line of CSV file
-                listOfCrimes.add(crimeDataObject); //Adds Crime to final list
+                if (nextRecord.length > 1) {
+                    CrimeData crimeDataObject = readerHelper(nextRecord, headerSize); //Calls reader helper, sends in line of CSV file
+                    listOfCrimes.add(crimeDataObject); //Adds Crime to final list
+                }
             }
             //Returns crime
             return listOfCrimes;
