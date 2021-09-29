@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.google.gson.Gson;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -82,18 +84,22 @@ public class MainViewController implements Initializable {
         UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UIDataInterface.initCrimeData();
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
+
+        //https://stackoverflow.com/questions/31069300/how-to-fire-event-when-scrolling-up-javafx
+        crimeDataPanel.vvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    //culls data pane to only show visible ones when the scroll bar is moved.
+                    crimeDataPanel.setContent(DataPaneConstructor.cullPanes (crimeDataPanel.getVvalue()));
+                });
     }
 
-    @FXML
-    public void doScroll (ScrollEvent e) {
-        System.out.println(e.toString());
-    }
 
     /**
      * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData

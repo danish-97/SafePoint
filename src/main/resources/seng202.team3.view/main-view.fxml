@@ -110,7 +110,7 @@
                         <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#compareCrimeToggle" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
                      </children>
                   </Pane>
-                  <ScrollPane fx:id="crimeDataPanel" onScrollFinished="#doScroll" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+                  <ScrollPane fx:id="crimeDataPanel" hbarPolicy="NEVER" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />
                   <Pane prefHeight="33.0" prefWidth="195.0" style="-fx-background-color: #c9c9c9; -fx-border-width: 2; -fx-border-color: black;">
                      <children>
                         <Button layoutX="57.0" layoutY="8.0" mnemonicParsing="false" onAction="#updateCrimeData" prefHeight="17.0" prefWidth="81.0" style="-fx-padding: 0; -fx-border-color: black; -fx-background-color: white;" text="Reload Data" />
