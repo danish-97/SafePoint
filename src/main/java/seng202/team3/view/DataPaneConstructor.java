@@ -42,6 +42,9 @@ public class DataPaneConstructor {
         VBox root;
         activeData = UIDataInterface.getActiveData();
         int numData = activeData.size();
+        if (numData == 0) {
+            return new VBox();
+        }
         int middle = (int) Math.round(height * (numData - 1));
         ArrayList<CrimeData> topData = DataPaneConstructor.getTopData(middle);
         ArrayList<CrimeData> bottomData = DataPaneConstructor.getBottomData(middle);
@@ -65,19 +68,19 @@ public class DataPaneConstructor {
     public static ArrayList<CrimeData> getBottomData (int middle) {
         ArrayList<CrimeData> visibleData = new ArrayList<>();
         int i = middle + 1;
-        while (i < Math.min(activeData.size(), middle + 5)) {
+        while (i < Math.min(activeData.size(), middle + 6)) {
             visibleData.add(activeData.get(i));
             i++;
         }
         return visibleData;
     }
-
+    //bottomHeight = activeCrime.size() - topPaneHeight - (topData.size() + bottomData.size() + 1)
     public static VBox constructPanes (ArrayList<CrimeData> topData, ArrayList<CrimeData> bottomData, int middle, int topPaneHeight, int bottomPaneHeight) {
         VBox root = new VBox();
         ArrayList<Pane> panes = new ArrayList<>();
         Pane topPane = new Pane ();
         topPane.setPrefWidth(175);
-        topPane.setPrefHeight(topPaneHeight);
+        topPane.setPrefHeight(topPaneHeight * 80);
         panes.add(topPane);
         for (CrimeData data : topData) {
             if (data instanceof PoliceData) {
@@ -100,7 +103,7 @@ public class DataPaneConstructor {
         }
         Pane bottomPane = new Pane ();
         bottomPane.setPrefWidth(175);
-        bottomPane.setPrefHeight(bottomPaneHeight);
+        bottomPane.setPrefHeight(bottomPaneHeight * 80);
         panes.add(bottomPane);
 
         root.getChildren().addAll(panes);

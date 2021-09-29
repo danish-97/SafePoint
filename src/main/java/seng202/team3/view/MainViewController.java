@@ -60,7 +60,8 @@ public class MainViewController implements Initializable {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
-        crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
+        crimeDataPanel.setContent(DataPaneConstructor.cullPanes(0.0));
+        crimeDataPanel.setVvalue(0.0);
         webEngine.executeScript("removeMarkers()");
         loadData1();
         //System.out.println(crimeDataPanel.getVvalue());
