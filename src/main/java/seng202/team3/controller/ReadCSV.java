@@ -61,7 +61,6 @@ public class ReadCSV extends Importer {
             }
             columnCount++;
         }
-
         //If CrimeData object is a UserData object
         if (Objects.equals(crimeType, "U")) {
             UserData userDataObject = new UserData(CrimeData.getLatestID(), modifiedCrime); //Creates PoliceData object
