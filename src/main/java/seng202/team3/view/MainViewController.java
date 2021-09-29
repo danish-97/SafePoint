@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.model.CrimeData;
@@ -87,7 +88,11 @@ public class MainViewController implements Initializable {
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
+    }
 
+    @FXML
+    public void doScroll (ScrollEvent e) {
+        System.out.println(e.toString());
     }
 
     /**
