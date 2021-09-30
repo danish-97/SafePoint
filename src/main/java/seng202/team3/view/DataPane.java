@@ -29,6 +29,7 @@ public class DataPane extends Pane{
      * @param data Data to be displayed on the DataPane
      */
     public void constructComponents (CrimeData data) {
+        System.out.println(data.getCrimeType());
         Label crimeLabel = new Label(data.getCrimeType());
         crimeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 15; -fx-translate-x: 5;");
 

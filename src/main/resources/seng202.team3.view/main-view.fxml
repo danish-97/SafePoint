@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
@@ -110,7 +110,7 @@
                         <CheckBox fx:id="compareCrimesToggle" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#compareCrimeToggle" prefHeight="27.0" prefWidth="123.0" text="Compare Crimes" />
                      </children>
                   </Pane>
-                  <ScrollPane fx:id="crimeDataPanel" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />
+                  <ScrollPane fx:id="crimeDataPanel" hbarPolicy="NEVER" prefHeight="428.0" prefWidth="195.0" style="-fx-border-color: black; -fx-border-width: 2;" />
                   <Pane prefHeight="33.0" prefWidth="195.0" style="-fx-background-color: #c9c9c9; -fx-border-width: 2; -fx-border-color: black;">
                      <children>
                         <Button layoutX="57.0" layoutY="8.0" mnemonicParsing="false" onAction="#updateCrimeData" prefHeight="17.0" prefWidth="81.0" style="-fx-padding: 0; -fx-border-color: black; -fx-background-color: white;" text="Reload Data" />

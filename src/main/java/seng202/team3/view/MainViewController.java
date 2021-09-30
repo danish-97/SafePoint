@@ -7,11 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.google.gson.Gson;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.model.CrimeData;
@@ -57,7 +60,9 @@ public class MainViewController implements Initializable {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
-        crimeDataPanel.setContent(DataPaneConstructor.loadActiveCrimes());
+        DataPaneConstructor.reloadData();
+        crimeDataPanel.setContent(DataPaneConstructor.cullPanes(0.0));
+        crimeDataPanel.setVvalue(0.0);
         webEngine.executeScript("removeMarkers()");
         loadData1();
         //System.out.println(crimeDataPanel.getVvalue());
@@ -81,6 +86,7 @@ public class MainViewController implements Initializable {
         UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UIDataInterface.initCrimeData();
@@ -88,7 +94,14 @@ public class MainViewController implements Initializable {
         initCrimeSelector();
         initRegionFilterSelector();
 
+        //https://stackoverflow.com/questions/31069300/how-to-fire-event-when-scrolling-up-javafx
+        crimeDataPanel.vvalueProperty().addListener(
+                (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                    //culls data pane to only show visible ones when the scroll bar is moved.
+                    crimeDataPanel.setContent(DataPaneConstructor.cullPanes (crimeDataPanel.getVvalue()));
+                });
     }
+
 
     /**
      * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
