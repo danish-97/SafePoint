@@ -15,91 +15,104 @@ import java.lang.Math;
 
 /**
  * Constructs CrimeData objects to DataPane objects to be displayed
+ * @author mattgarrett
  */
 public class DataPaneConstructor {
 
-    /**
-     * @return the pane containing all the CrimePanes
-     */
-    public static VBox loadActiveCrimes() {
-        VBox root = new VBox();
-        ArrayList<CrimeData> activeData = UIDataInterface.getActiveData();
-        ArrayList<Pane> panes = new ArrayList<>();
-        for (CrimeData data : activeData) {
-            if (data instanceof PoliceData) {
-                panes.add(new PoliceDataPane(data));
-            } else if  (data instanceof UserData) {
-                panes.add (new UserDataPane(data));
-            }
-        }
-        root.getChildren().addAll(panes);
-        return root;
-    }
-
     private static ArrayList<CrimeData> activeData;
 
+    /**
+     * sets the activeData variable to the activeData in UIDataInterface
+     */
+    public static void reloadData () {
+        activeData = UIDataInterface.getActiveData();
+    }
+
+    /**
+     * Culls the CrimeData being displayed as DataPanes in a ScrollPane.
+     * This will allow better performance as only 8-13 panes will be displayed at once instead of all the
+     * data that is active.
+     *
+     * @param height the height of the scroll bar in the crimeDataPane ScrollPane. between 0-1
+     * @return all the visible CrimeData objects as CrimePanes and filler panes at the top and bottom
+     */
     public static VBox cullPanes (double height) {
         VBox root;
-        activeData = UIDataInterface.getActiveData();
         int numData = activeData.size();
-        if (numData == 0) {
+        if (numData == 0) { // if there is no data to display, we don't want the scroll pane to contain anything
             return new VBox();
         }
-        int middle = (int) Math.round(height * (numData - 1));
-        ArrayList<CrimeData> topData = DataPaneConstructor.getTopData(middle);
-        ArrayList<CrimeData> bottomData = DataPaneConstructor.getBottomData(middle);
-        int topPaneHeight = Math.max (0, middle - topData.size());
-        int bottomPaneHeight = Math.min (activeData.size(), activeData.size() - (middle + bottomData.size() + 1));
-        root = DataPaneConstructor.constructPanes (topData, bottomData, middle, topPaneHeight, bottomPaneHeight);
+        int middle = (int) Math.round(height * (numData - 1)); //the focus point of the scroll pane
+        ArrayList<CrimeData> topData = DataPaneConstructor.getTopData(middle); //gets the crime data above the focus point
+        ArrayList<CrimeData> bottomData = DataPaneConstructor.getBottomData(middle); // gets the crime data below the focus point
+
+        root = DataPaneConstructor.constructPanes (topData, bottomData, middle);
         return root;
     }
 
+
+    /**
+     * Gets the CrimeData that would be visible above the index of activeData at middle
+     *
+     * @param middle The middle index of the focus point for the ScrollPane
+     * @return all the CrimeData (if any) that occurs above the middle index of activeData
+     */
     public static ArrayList<CrimeData> getTopData (int middle) {
         ArrayList<CrimeData> visibleData = new ArrayList<>();
         int i = 0;
-        while (middle - i > Math.max(0, middle - 5)) {
+        while (middle - i > Math.max(0, middle - 5)) { //gets the 5 crime data objects above the middle one with protection for overflow
             i++;
             visibleData.add (activeData.get(middle - i));
         }
-        Collections.reverse(visibleData);
+        Collections.reverse(visibleData); //gets data in correct order
         return visibleData;
     }
 
+    /**
+     * Gets the CrimeData that would be visible below the index of activeData at middle
+     *
+     * @param middle The middle index of the focus point for the ScrollPane
+     * @return all the CrimeData (if any) that occurs below the middle index of activeData
+     */
     public static ArrayList<CrimeData> getBottomData (int middle) {
         ArrayList<CrimeData> visibleData = new ArrayList<>();
         int i = middle + 1;
-        while (i < Math.min(activeData.size(), middle + 6)) {
+        while (i < Math.min(activeData.size(), middle + 6)) { // gets the 6 crime data objects below the middle one with protection for overflow
             visibleData.add(activeData.get(i));
             i++;
         }
         return visibleData;
     }
-    //bottomHeight = activeCrime.size() - topPaneHeight - (topData.size() + bottomData.size() + 1)
-    public static VBox constructPanes (ArrayList<CrimeData> topData, ArrayList<CrimeData> bottomData, int middle, int topPaneHeight, int bottomPaneHeight) {
+
+
+    /**
+     * Constructs the culled data into panes, as well as the filler top and bottom panes to allow a smoother
+     * experience for the user. This will construct all the DataPanes in topData, middle, and bottomData, and fill
+     * the rest of the ScrollPane with 2 empty panes that are not visible to the end user
+     * @param topData the data that occurs above the middle index of activeData
+     * @param bottomData the data that occurs below the middle index of activeData
+     * @param middle the index of activeData that the user is focusing on with the scroll bar
+     * @return a VBox containing all the constructed and culled panes
+     */
+    public static VBox constructPanes (ArrayList<CrimeData> topData, ArrayList<CrimeData> bottomData, int middle) {
         VBox root = new VBox();
         ArrayList<Pane> panes = new ArrayList<>();
+        int topPaneHeight = Math.max (0, middle - topData.size());
+        int bottomPaneHeight = Math.min (activeData.size(), activeData.size() - (middle + bottomData.size() + 1));
+
         Pane topPane = new Pane ();
         topPane.setPrefWidth(175);
         topPane.setPrefHeight(topPaneHeight * 80);
         panes.add(topPane);
+
         for (CrimeData data : topData) {
-            if (data instanceof PoliceData) {
-                panes.add (new PoliceDataPane(data));
-            } else {
-                panes.add (new UserDataPane(data));
-            }
+            panes.add (DataPaneConstructor.constructPane(data));
         }
-        if (activeData.get(middle) instanceof PoliceData) {
-            panes.add (new PoliceDataPane(activeData.get(middle)));
-        } else {
-            panes.add (new UserDataPane(activeData.get(middle)));
-        }
+
+        panes.add (DataPaneConstructor.constructPane(activeData.get(middle)));
+
         for (CrimeData data : bottomData) {
-            if (data instanceof PoliceData) {
-                panes.add (new PoliceDataPane(data));
-            } else {
-                panes.add (new UserDataPane(data));
-            }
+            panes.add (DataPaneConstructor.constructPane(data));
         }
         Pane bottomPane = new Pane ();
         bottomPane.setPrefWidth(175);
@@ -110,5 +123,20 @@ public class DataPaneConstructor {
 
         return root;
     }
+
+    /**
+     * Constructs a DataPane defined by CrimeData data. This could be either PoliceData or UserData
+     * @param data data to be turned into a DataPane
+     * @return the DataPane constructed by data
+     */
+    public static DataPane constructPane (CrimeData data) {
+        if (data instanceof PoliceData) {
+            return new PoliceDataPane(data);
+        }
+        return new UserDataPane(data);
+
+    }
+
+    public static void setActiveData (ArrayList<CrimeData> newData) {activeData = newData;}
 
 }
