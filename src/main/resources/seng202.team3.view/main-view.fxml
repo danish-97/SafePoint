@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
@@ -58,7 +58,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="12.0" layoutY="105.0" prefHeight="110.0" prefWidth="155.0" style="-fx-border-color: black;">
+                  <Pane layoutX="12.0" layoutY="105.0" prefHeight="140.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
                         <CheckBox fx:id="policeDataToggle" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" text="Show Police Data">
                            <font>
@@ -68,11 +68,16 @@
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
-                        <CheckBox fx:id="arrestMadeToggle" layoutX="5.0" layoutY="55.0" mnemonicParsing="false" text="Arrest Made">
+                        <CheckBox fx:id="arrestMadeToggle" layoutX="7.0" layoutY="56.0" mnemonicParsing="false" text="Arrest Made">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
-                        <CheckBox fx:id="graphToggle" layoutX="7.0" layoutY="86.0" mnemonicParsing="false" text="Graph View">
+                        <CheckBox fx:id="heatMapToggle" layoutX="7.0" layoutY="81.0" mnemonicParsing="false" onAction="#updateHeatMap" text="Heatmap View">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </CheckBox>
+                        <CheckBox fx:id="graphToggle" layoutX="7.0" layoutY="106.0" mnemonicParsing="false" text="Graph View">
                            <font>
                               <Font size="14.0" />
                            </font></CheckBox>
@@ -87,13 +92,13 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="12.0" layoutY="167.0" prefHeight="208.0" prefWidth="155.0" style="-fx-border-color: black;">
+                  <Pane layoutX="12.0" layoutY="167.0" prefHeight="176.0" prefWidth="154.0" style="-fx-border-color: black;">
                      <children>
-                        <CheckBox fx:id="regionFilteringToggle" layoutX="4.0" layoutY="6.0" mnemonicParsing="false" text="Show Region Data" />
-                        <ChoiceBox fx:id="regionFilteringKey" layoutX="4.0" layoutY="26.0" prefHeight="25.0" prefWidth="118.0" />
-                        <CheckBox fx:id="dateSortToggle" layoutX="4.0" layoutY="59.0" mnemonicParsing="false" text="Sort by Date" />
-                        <DatePicker fx:id="startDate" layoutX="7.0" layoutY="82.0" prefHeight="25.0" prefWidth="142.0" promptText="Start Date" />
-                        <DatePicker fx:id="endDate" layoutX="7.0" layoutY="115.0" prefHeight="25.0" prefWidth="142.0" promptText="End Date" />
+                        <CheckBox fx:id="regionFilteringToggle" layoutX="4.0" layoutY="14.0" mnemonicParsing="false" text="Show Region Data" />
+                        <ChoiceBox fx:id="regionFilteringKey" layoutX="5.0" layoutY="39.0" prefHeight="25.0" prefWidth="118.0" />
+                        <CheckBox fx:id="dateSortToggle" layoutX="6.0" layoutY="73.0" mnemonicParsing="false" text="Sort by Date" />
+                        <DatePicker fx:id="startDate" layoutX="6.0" layoutY="103.0" prefHeight="25.0" prefWidth="142.0" promptText="Start Date" />
+                        <DatePicker fx:id="endDate" layoutX="6.0" layoutY="137.0" prefHeight="25.0" prefWidth="142.0" promptText="End Date" />
                      </children>
                   </Pane>
                </children>
@@ -118,7 +123,7 @@
                   </Pane>
                </children>
             </FlowPane>
-            <Pane layoutX="140.0" layoutY="74.0" prefHeight="517.0" prefWidth="645.0" style="-fx-border-color: black; -fx-border-width: 2;">
+            <Pane layoutX="140.0" layoutY="74.0" prefHeight="503.0" prefWidth="645.0" style="-fx-border-color: black; -fx-border-width: 2;">
                <children>
                   <WebView fx:id="mapView" layoutX="4.0" layoutY="4.0" prefHeight="517.0" prefWidth="645.0" />
                </children>
