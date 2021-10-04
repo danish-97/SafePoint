@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 public class ReportCrimeWindow {
 
+    //TODO create parent class for all windows
+
     private static Stage stage = new Stage();
 
     /**

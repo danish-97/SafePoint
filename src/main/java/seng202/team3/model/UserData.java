@@ -20,6 +20,7 @@ public class UserData extends CrimeData {
     public UserData(String id, ArrayList<String> data) throws ParseException {
         super(id);
         formatUserData(data);
+        System.out.println(data);
     }
 
     public void formatUserData (ArrayList<String> data) {

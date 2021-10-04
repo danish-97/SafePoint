@@ -1,15 +1,23 @@
 package seng202.team3.view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import seng202.team3.controller.UIDataInterface;
 
 import javafx.event.ActionEvent;
+import seng202.team3.model.CrimeData;
+
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -38,6 +46,7 @@ public class ReportCrimeController implements Initializable {
     public void reportCrime (ActionEvent e) throws ParseException {
         if (validateInputs ()) {
             UIDataInterface.addUserData(formatInputs());
+            openConfirmationWindow (Integer.parseInt(CrimeData.getLatestID()));
             ReportCrimeWindow.closeStage();
         }
     }
@@ -74,7 +83,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Adds all crime types to a ChoiceBox for selectioncC
+     * Adds all crime types to a ChoiceBox for selectionc
      * @param crimeTypeSelector The ChoiceBox that the fields should be added into
      */
     public static void constructCrimeChoiceBox(ChoiceBox crimeTypeSelector) {
@@ -86,5 +95,9 @@ public class ReportCrimeController implements Initializable {
         for (String crimeType : crimeTypes) {
             crimeTypeSelector.getItems().add(crimeType);
         }
+    }
+
+    public void openConfirmationWindow (int confirmationID) {
+        new ConfirmationWindow (confirmationID);
     }
 }
