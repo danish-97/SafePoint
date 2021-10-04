@@ -17,6 +17,5 @@ public class GeocoderApi {
                 .header("accept", "application/json").build();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         return response.body();
-
     }
 }

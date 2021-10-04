@@ -41,7 +41,7 @@ public class ReportCrimeController implements Initializable {
      * @throws ParseException when input is unexpected
      */
     @FXML
-    public void reportCrime (ActionEvent e) throws ParseException {
+    public void reportCrime (ActionEvent e) throws ParseException, IOException, InterruptedException {
         if (validateInputs ()) {
             UIDataInterface.addUserData(formatInputs());
             ReportCrimeWindow.closeStage();
@@ -61,11 +61,12 @@ public class ReportCrimeController implements Initializable {
      * created into a UserData object
      * @return Formatted string to be turned into a UserData object
      */
-    public String formatInputs () {
+    public String formatInputs () throws IOException, InterruptedException {
         String formattedString;
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
+        getLatLong();
         if (latitude.getText().equals("")) {
             formattedString = formattedString + ",";
         } else {
@@ -84,12 +85,11 @@ public class ReportCrimeController implements Initializable {
      * @throws IOException if the input data is invalid.
      * @throws InterruptedException if the thread is interrupted.
      */
-
     public void getLatLong() throws IOException, InterruptedException {
         Double lat = null;
         Double lon = null;
         GeocoderApi geocoderApi = new GeocoderApi();
-        String res = geocoderApi.doRequest(addressField.getText());
+        String res = geocoderApi.doRequest(addressField.getText().replaceAll(" ", "-"));
         JSONObject obj = new JSONObject(res);
         JSONArray data = obj.getJSONArray("results");
         for (int i = 0; i < data.length(); i++) {
@@ -98,7 +98,8 @@ public class ReportCrimeController implements Initializable {
             lon = result.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 
         }
-
+        latitude.setText(Double.toString(lat));
+        longitude.setText(Double.toString(lon));
     }
 
     /**
