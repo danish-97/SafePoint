@@ -19,12 +19,14 @@
 <div id="map"></div>
 <script>
     var map;
-    var marker1;
-    var marker2;
-    var path;
     var crimeData;
     var markerArray = [];
+    var isHeatMapEnabled = false;
+    var heatmap;
 
+    /**
+     * Initialises default map.
+     */
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 41.881832, lng: -87.623177},
@@ -32,6 +34,9 @@
         });
     }
 
+    /**
+     * Loads default markers on the map, customised depending on whether they are police or user crime data.
+     */
     function loadMarkers() {
         for (let i = 0; i < crimeData.length; i++) {
             var data = crimeData[i];
@@ -49,9 +54,59 @@
             });
             markerArray.push(marker);
         }
+    }
+
+    /**
+     * Loads heat map markers, returning them as an array. Helper function for setupHeatMap()
+     * @returns heatArray array of heat map markers
+     */
+    function loadHeatMarkers() {
+        var heatArray = [];
+        for (let i = 0; i < crimeData.length; i++) {
+            var data = crimeData[i];
+            var heatMarker = new google.maps.LatLng(data.latitude, data.longitude)
+            heatArray.push(heatMarker)
+        }
+        return heatArray;
+    }
+
+    /**
+     * Toggles heat map check box.
+     */
+    function toggleHeatMap() {
+        if (isHeatMapEnabled) {
+            heatmap.setMap(null);
+            loadMarkers();
+            isHeatMapEnabled = false;
+        } else {
+            setupHeatMap();
+        }
 
     }
 
+    /**
+     * Sets up heat map and removes default map markers.
+     */
+   function setupHeatMap(){
+       if (heatmap !== undefined) {
+           heatmap.setMap(null)
+       }
+        removeMarkers();
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: loadHeatMarkers(),
+            radius: 20,
+            opacity: 0.7,
+            maxIntensity:  50
+        });
+
+        heatmap.setMap(map);
+        isHeatMapEnabled = true;
+
+    }
+
+    /**
+     * Removes default map markers.
+     */
     function removeMarkers() {
         for (let i = 0; i < markerArray.length; i++) {
             markerArray[i].setMap(null);
@@ -61,13 +116,20 @@
         markerArray = [];
     }
 
-
+    /**
+     * Passes in the active crime data required for loading on the map.
+     * @param inputJson active crime data in Json format
+     */
     function getAllActiveCrimeData(inputJson){
         crimeData = inputJson
-        loadMarkers();
+        if (isHeatMapEnabled) {
+            setupHeatMap();
+        } else {
+            loadMarkers();
+        }
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArZlTsI6ekABAXnxX2XKFSGNxvG6evMxA&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArZlTsI6ekABAXnxX2XKFSGNxvG6evMxA&libraries=visualization&callback=initMap"
         async defer></script>
 </body>
 </html>

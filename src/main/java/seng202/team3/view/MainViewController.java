@@ -34,6 +34,7 @@ public class MainViewController implements Initializable {
     @FXML private CheckBox userDataToggle;
     @FXML private CheckBox arrestMadeToggle;
     @FXML private CheckBox graphToggle;
+    @FXML private CheckBox heatMapToggle;
     @FXML private CheckBox regionFilteringToggle;
     @FXML private ChoiceBox regionFilteringKey;
     @FXML private CheckBox dateSortToggle;
@@ -64,8 +65,19 @@ public class MainViewController implements Initializable {
         crimeDataPanel.setContent(DataPaneConstructor.cullPanes(0.0));
         crimeDataPanel.setVvalue(0.0);
         webEngine.executeScript("removeMarkers()");
-        loadData1();
-        //System.out.println(crimeDataPanel.getVvalue());
+        reloadData();
+
+
+    }
+
+    /**
+     * Handles when user selects check box for heat map view on main GUI
+     * @param e input variable
+     */
+    @FXML
+    public void updateHeatMap(ActionEvent e) {
+        webEngine.executeScript("toggleHeatMap()");
+
     }
 
     /**
@@ -93,7 +105,6 @@ public class MainViewController implements Initializable {
         initMap();
         initCrimeSelector();
         initRegionFilterSelector();
-
         //https://stackoverflow.com/questions/31069300/how-to-fire-event-when-scrolling-up-javafx
         crimeDataPanel.vvalueProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -119,7 +130,10 @@ public class MainViewController implements Initializable {
 
     }
 
-    public void loadData1() {
+    /**
+     * Reloads CrimeData to the map when reload crime data button is selected on the main GUI
+     */
+    public void reloadData() {
 
         ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
         tempActiveCrimeData = DataManager.getData();
@@ -127,11 +141,16 @@ public class MainViewController implements Initializable {
         webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
     }
 
+    /**
+     * Initialises default map view.
+     */
     private void initMap() {
         webEngine = mapView.getEngine();
         webEngine.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/googleMap.html")).toExternalForm());
         loadData();
     }
+
+
 
     public void initCrimeSelector () {
         ReportCrimeController.constructCrimeChoiceBox(crimeSelector);
