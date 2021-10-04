@@ -23,7 +23,6 @@ public class PoliceData extends CrimeData {
      * Constructor method for the class PoliceData
      * @param id is the String that identifies a particular Crime
      * @param data is an ArrayList containing strings of all Crimes
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     public PoliceData(String id ,ArrayList<String> data) {
         super(id);
@@ -112,7 +111,6 @@ public class PoliceData extends CrimeData {
     /**
      * Function that splits the given string to get the required fields
      * @param data is the ArrayList of String which is to be formatted
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     private void formatPoliceData(ArrayList<String> data) {
         setCaseNumber(data.get(0));

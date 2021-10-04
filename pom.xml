@@ -60,6 +60,16 @@
       <artifactId>javafx-fxml</artifactId>
       <version>16</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.code.geocoder-java</groupId>
+      <artifactId>geocoder-java</artifactId>
+      <version>0.16</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20210307</version>
+    </dependency>
   </dependencies>
   <properties>
     <maven.compiler.source>14</maven.compiler.source>

@@ -106,6 +106,7 @@ public class MainViewController implements Initializable {
     /**
      * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
      */
+
     public void loadData() {
         ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<>();
         tempActiveCrimeData = DataManager.getData();

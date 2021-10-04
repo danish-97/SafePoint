@@ -1,15 +1,21 @@
 package seng202.team3.view;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import org.json.JSONArray;
 import seng202.team3.controller.UIDataInterface;
 
 import javafx.event.ActionEvent;
+
+import org.json.JSONObject;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -74,7 +80,29 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Adds all crime types to a ChoiceBox for selectioncC
+     * Gets the latitude and longitude from an input address.
+     * @throws IOException if the input data is invalid.
+     * @throws InterruptedException if the thread is interrupted.
+     */
+
+    public void getLatLong() throws IOException, InterruptedException {
+        Double lat = null;
+        Double lon = null;
+        GeocoderApi geocoderApi = new GeocoderApi();
+        String res = geocoderApi.doRequest(addressField.getText());
+        JSONObject obj = new JSONObject(res);
+        JSONArray data = obj.getJSONArray("results");
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject result = data.getJSONObject(i);
+            lat = result.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+            lon = result.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+
+        }
+
+    }
+
+    /**
+     * Adds all crime types to a ChoiceBox for selection
      * @param crimeTypeSelector The ChoiceBox that the fields should be added into
      */
     public static void constructCrimeChoiceBox(ChoiceBox crimeTypeSelector) {

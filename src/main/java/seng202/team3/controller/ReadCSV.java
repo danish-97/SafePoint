@@ -1,11 +1,14 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,9 +112,18 @@ public class ReadCSV extends Importer {
             //Returns crime
             return listOfCrimes;
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
+            throw new RuntimeException("Error: File not found");
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error: IO Exception");
+        } catch (CsvValidationException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error: Invalid CSV");
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error: Parse exception");
         }
 
 

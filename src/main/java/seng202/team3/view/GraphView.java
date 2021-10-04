@@ -1,47 +1,43 @@
 package seng202.team3.view;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Objects;
 
 public class GraphView extends Application {
 
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/main-view.fxml")));
-        stage.setTitle("Crime Data Graph");
-        //defining the axes
-        final NumberAxis xAxis = new NumberAxis();
+    @Override public void start(Stage stage) {
+        stage.setTitle("Line Chart Sample");
+        final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Crimes (Per Day)");
-        //creating the chart
-        final LineChart<Number,Number> lineChart =
-                new LineChart<Number,Number>(xAxis,yAxis);
+        xAxis.setLabel("Month");
 
-        lineChart.setTitle("Crime Data Graph");
-        //defining a series
+        final LineChart<String,Number> lineChart =
+                new LineChart<String,Number>(xAxis,yAxis);
+
+        lineChart.setTitle("Stock Monitoring, 2010");
+
         XYChart.Series series = new XYChart.Series();
-        series.setName("Crimes");
-        //populating the series with data
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
+        series.setName("My portfolio");
+
+        series.getData().add(new XYChart.Data("Jan", 23));
+        series.getData().add(new XYChart.Data("Feb", 14));
+        series.getData().add(new XYChart.Data("Mar", 15));
+        series.getData().add(new XYChart.Data("Apr", 24));
+        series.getData().add(new XYChart.Data("May", 34));
+        series.getData().add(new XYChart.Data("Jun", 36));
+        series.getData().add(new XYChart.Data("Jul", 22));
+        series.getData().add(new XYChart.Data("Aug", 45));
+        series.getData().add(new XYChart.Data("Sep", 43));
+        series.getData().add(new XYChart.Data("Oct", 17));
+        series.getData().add(new XYChart.Data("Nov", 29));
+        series.getData().add(new XYChart.Data("Dec", 25));
+
 
         Scene scene  = new Scene(lineChart,800,600);
         lineChart.getData().add(series);
@@ -53,8 +49,4 @@ public class GraphView extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-
-
-
 }
