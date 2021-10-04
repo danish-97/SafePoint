@@ -17,6 +17,8 @@ import seng202.team3.model.CrimeData;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -32,9 +34,12 @@ public class ReportCrimeController implements Initializable {
     @FXML private TextField longitude;
     @FXML private DatePicker date;
 
+    private Boolean isEditing = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         constructCrimeChoiceBox(crimeTypeSelector);
+        ReportCrimeWindow.setActiveController(this);
     }
 
     /**
@@ -44,10 +49,16 @@ public class ReportCrimeController implements Initializable {
      */
     @FXML
     public void reportCrime (ActionEvent e) throws ParseException {
+        System.out.println(validateInputs());
         if (validateInputs ()) {
-            UIDataInterface.addUserData(formatInputs());
-            openConfirmationWindow (Integer.parseInt(CrimeData.getLatestID()));
+            if (!isEditing) {
+                UIDataInterface.addUserData(formatInputs());
+                openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()));
+            }
             ReportCrimeWindow.closeStage();
+        } else if (isEditing) {
+            //delete crime
+            isEditing = false;
         }
     }
 
@@ -56,6 +67,7 @@ public class ReportCrimeController implements Initializable {
      * @return if the user inputs correct data
      */
     public Boolean validateInputs () {
+        //TODO if this is false and isEditing then we want to delete the crime
         return (crimeTypeSelector.getValue() != null && addressField.getText() != null && date.getValue() != null);
     }
 
@@ -99,5 +111,36 @@ public class ReportCrimeController implements Initializable {
 
     public void openConfirmationWindow (int confirmationID) {
         new ConfirmationWindow (confirmationID);
+    }
+
+    public Boolean setAttributes (CrimeData data) {
+        isEditing = true;
+        setCrimeTypeSelector(data.getCrimeType());
+        setAddressField(data.getAddress());
+        setLongitude(data.getLongitude());
+        setLatitude(data.getLatitude());
+        setDate(data.getDate());
+        return false; //returns if the data should be deleted.
+    }
+
+    public void setCrimeTypeSelector (String curr) {
+        crimeTypeSelector.setValue(curr);
+    }
+
+    public void setAddressField (String address) {
+        addressField.setText(address);
+    }
+
+    public void setLatitude (String lat) {
+        latitude.setText(lat);
+    }
+
+    public void setLongitude (String lon) {
+        longitude.setText(lon);
+    }
+
+    public void setDate (String currDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        date.setValue(LocalDate.parse(currDate, formatter));
     }
 }

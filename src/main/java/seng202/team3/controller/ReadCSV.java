@@ -42,8 +42,7 @@ public class ReadCSV extends Importer {
 
             //If Crime is going to be a UserData object
             if (Objects.equals(crimeType, "U")) {
-                columnNotWanted = Arrays.asList(0, 4, 5, 6, 7, 8, 9, 12);
-
+                columnNotWanted = Arrays.asList(5, 6, 7, 8, 9, 12);
             } else {
                 columnNotWanted = List.of(12); // Removes Crime Type
             }
@@ -54,7 +53,6 @@ public class ReadCSV extends Importer {
 
             //Checks if column is wanted for CrimeData object
             boolean inList = (columnNotWanted).contains(columnCount);
-
             //Adds columns wanted to modifiedCrime
             if (!inList) {
                 modifiedCrime.add(column);
@@ -94,8 +92,9 @@ public class ReadCSV extends Importer {
             int headerSize = 0;
 
             //Get header length to determine if reading from database.txt
-            if (csvReader.readNext() != null) {
-                headerSize = csvReader.readNext().length;
+            String[] header = csvReader.readNext();
+            if (header != null) {
+                headerSize = header.length;
             }
             // Read data line by line
             while ((nextRecord = csvReader.readNext()) != null) {

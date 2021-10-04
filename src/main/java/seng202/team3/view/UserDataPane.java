@@ -1,5 +1,6 @@
 package seng202.team3.view;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -20,13 +21,13 @@ public class UserDataPane extends DataPane {
      */
     public UserDataPane(CrimeData data) {
         super(data);
-        constructUserComponents();
+        constructUserComponents(data);
     }
 
     /**
      * Constructs UserData unique attributes for DataPane and adds them to the pane.
      */
-    public void constructUserComponents() {
+    public void constructUserComponents(CrimeData data) {
         Label arrestMade = new Label("Arrest Made: NO");
         arrestMade.setStyle("-fx-translate-x: 5; -fx-translate-y: 28;");
 
@@ -36,6 +37,7 @@ public class UserDataPane extends DataPane {
         settingsButton.setStyle("-fx-translate-x: 135; -fx-translate-y: 2; -fx-background-color: transparent; -fx-border-color: transparent;");
         settingsButton.setPrefSize(16, 16);
         settingsButton.setGraphic(settingsImage);
+        settingsButton.setOnAction(action -> {new ReportCrimeWindow(data);});
 
         this.getChildren().addAll(arrestMade, settingsButton);
     }
