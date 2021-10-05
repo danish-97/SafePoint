@@ -1,11 +1,14 @@
 package seng202.team3.controller;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,6 +117,28 @@ public class ReadCSV extends Importer {
         }
 
 
+    }
+
+    public static void removeLineByID (String file, String ID) throws IOException, CsvValidationException {
+        FileReader filereader = new FileReader(file);
+        CSVReader csvReader = new CSVReader(filereader);
+        String [] nextRecord;
+        ArrayList<String[]> allRecords = new ArrayList<>();
+        allRecords.add(csvReader.readNext());
+
+        int i = 1;
+        while ((nextRecord = csvReader.readNext()) != null) {
+            if (!toRemove (nextRecord, ID)) {
+                allRecords.add(nextRecord);
+            }
+            i++;
+        }
+
+        WriteCSV.reconstructFile (allRecords, file);
+    }
+
+    public static Boolean toRemove (String[] currRecord, String ID) {
+        return (Objects.equals(currRecord[0], ID));
     }
 
 }

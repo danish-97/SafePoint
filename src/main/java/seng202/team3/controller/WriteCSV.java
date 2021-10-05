@@ -50,4 +50,10 @@ public class WriteCSV extends Importer {
         }
 
     }
+
+    public static void reconstructFile (ArrayList<String[]> newRecords, String file) throws IOException {
+        CSVWriter csvWriter = new CSVWriter(new FileWriter(file));
+        csvWriter.writeAll(newRecords);
+        csvWriter.close();
+    }
 }
