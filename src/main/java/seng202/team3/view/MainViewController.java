@@ -1,26 +1,26 @@
 package seng202.team3.view;
 
 
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import com.google.gson.Gson;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import seng202.team3.model.CrimeData;
-import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
+
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * Main FXML controller for main-view.fxml

@@ -1,21 +1,19 @@
 package seng202.team3.view;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import seng202.team3.controller.UIDataInterface;
 
-import javafx.event.ActionEvent;
-
-import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -63,10 +61,15 @@ public class ReportCrimeController implements Initializable {
      */
     public String formatInputs () throws IOException, InterruptedException {
         String formattedString;
+        double lat, lon;
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
-        getLatLong();
+
+        Double[] latLong = getLatLong(addressField.getText().replaceAll(" ", "-"));
+        latitude.setText(Double.toString(latLong[0]));
+        longitude.setText(Double.toString(latLong[1]));
+        
         if (latitude.getText().equals("")) {
             formattedString = formattedString + ",";
         } else {
@@ -85,11 +88,11 @@ public class ReportCrimeController implements Initializable {
      * @throws IOException if the input data is invalid.
      * @throws InterruptedException if the thread is interrupted.
      */
-    public void getLatLong() throws IOException, InterruptedException {
+    public static Double[] getLatLong(String address) throws IOException, InterruptedException {
         Double lat = null;
         Double lon = null;
         GeocoderApi geocoderApi = new GeocoderApi();
-        String res = geocoderApi.doRequest(addressField.getText().replaceAll(" ", "-"));
+        String res = geocoderApi.doRequest(address);
         JSONObject obj = new JSONObject(res);
         JSONArray data = obj.getJSONArray("results");
         for (int i = 0; i < data.length(); i++) {
@@ -98,8 +101,9 @@ public class ReportCrimeController implements Initializable {
             lon = result.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 
         }
-        latitude.setText(Double.toString(lat));
-        longitude.setText(Double.toString(lon));
+
+        return new Double[]{lat, lon};
+
     }
 
     /**
