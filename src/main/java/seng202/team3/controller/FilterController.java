@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class FilterController {
 
-    private static String activeLocation;
+    private static Double[] activeLocation;
     private static String activeCrimeType;
     private static Boolean policeDataActive = true;
     private static Boolean userDataActive = true;
@@ -19,7 +19,7 @@ public class FilterController {
     private static Date endDate;
 
 
-    public static void setActiveLocation(String newLocation) {
+    public static void setActiveLocation(Double[] newLocation) {
         activeLocation =  newLocation;
     }
 
@@ -110,7 +110,7 @@ public class FilterController {
         return activeFilters;
     }
 
-    public static String getActiveLocation() {return activeLocation;}
+    public static Double[] getActiveLocation() {return activeLocation;}
 
     public static String getActiveCrimeType() {return activeCrimeType;}
 

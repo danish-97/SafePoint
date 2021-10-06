@@ -2,9 +2,7 @@ package seng202.team3.model;
 
 import org.apache.commons.lang3.ArrayUtils;
 import seng202.team3.controller.FilterController;
-import seng202.team3.view.ReportCrimeController;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -75,8 +73,10 @@ public class DataFilter {
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (!Objects.equals(crime.getLocation(), FilterController.getActiveLocation())) {
-                        singleFilterArray.add(crime);
+                    if (!(Objects.equals(crime.getLocation(), ", "))) {
+                        if (!crimeInRange(crime.getLocation(), FilterController.getActiveLocation())) {
+                            singleFilterArray.add(crime);
+                        }
                     }
                     break;
                 case CRIME_TYPE:
@@ -110,7 +110,6 @@ public class DataFilter {
                         e.printStackTrace();
                     }
                     break;
-
             }
 
         }
@@ -210,22 +209,20 @@ public class DataFilter {
         }
     }
 
-    public boolean crimeInRange(String crimeAddress) throws IOException, InterruptedException {
+    /**
+     * Calculates whether two address' are within 1km radius of each other
+     * @param crimeAddress Address of a CrimeDataObject
+     * @param inputLatLong Address of user input
+     * @return True if address' are within 1km radius, false otherwise
+     */
+    public boolean crimeInRange(String crimeAddress, Double[] inputLatLong){
         //TODO call this method where its supposed to be called
 
         //Initialising variables
-        Double[] crimeLatLong;
-        Double[] inputLatLong;
+        String[] crimeLatLong = crimeAddress.split(",");
 
-        //Getting Lat/Long values from address'
-        crimeLatLong = ReportCrimeController.getLatLong(crimeAddress);
-        //TODO change inputAddress to the input address
-        inputLatLong= ReportCrimeController.getLatLong("inputAddress");
-
-        double[] crimeLatLong2 = ArrayUtils.toPrimitive(crimeLatLong);
-        double[] inputLatLong2 = ArrayUtils.toPrimitive(crimeLatLong);
-
-        return (distance(crimeLatLong2[0], crimeLatLong2[1], inputLatLong2[0], inputLatLong2[1]));
+        double[] inputLatLong2 = ArrayUtils.toPrimitive(inputLatLong);
+        return (distance(Double.parseDouble(crimeLatLong[0]), Double.parseDouble(crimeLatLong[1]), inputLatLong2[0], inputLatLong2[1]));
 
 
     }
@@ -247,7 +244,7 @@ public class DataFilter {
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
         dist = dist * 1.609344;
-        return (dist < 1);
+        return (dist < 1.1);
     }
 
     /**
