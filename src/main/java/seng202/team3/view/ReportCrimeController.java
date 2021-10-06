@@ -53,6 +53,9 @@ public class ReportCrimeController implements Initializable {
             if (!isEditing) {
                 UIDataInterface.addUserData(formatInputs());
                 openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()));
+            } else {
+                ReadCSV.replaceData ("data.csv", currentID, formatInputs());
+                openConfirmationWindow(currentID);
             }
             ReportCrimeWindow.closeStage();
         } else if (isEditing) {

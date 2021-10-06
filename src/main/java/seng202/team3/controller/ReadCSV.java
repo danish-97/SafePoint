@@ -39,7 +39,7 @@ public class ReadCSV extends Importer {
 
         //Checks column count to determine if reading from database.txt
         if (columnAmount == 17) { //If reading from an Excel document
-            columnNotWanted = Arrays.asList(3, 11, 16, 17); //Columns not needed for PoliceData
+            columnNotWanted = Arrays.asList(16); //Columns not needed for PoliceData
 
         } else { //If reading from database.txt
 
@@ -47,7 +47,7 @@ public class ReadCSV extends Importer {
             if (Objects.equals(crimeType, "U")) {
                 columnNotWanted = Arrays.asList(5, 6, 7, 8, 9, 12);
             } else {
-                columnNotWanted = List.of(12); // Removes Crime Type
+                columnNotWanted = List.of(3, 12); // Removes Crime Type
             }
         }
 
@@ -64,8 +64,8 @@ public class ReadCSV extends Importer {
         }
         //If CrimeData object is a UserData object
         if (Objects.equals(crimeType, "U")) {
-            UserData userDataObject = new UserData(CrimeData.getLatestID(), modifiedCrime); //Creates PoliceData object
-            CrimeData.incrementLatestID();
+            UserData userDataObject = new UserData(row[0], modifiedCrime); //Creates PoliceData object
+            CrimeData.setLatestID(Integer.parseInt(row[0]) + 1);
 
             return userDataObject;
 
@@ -126,18 +126,34 @@ public class ReadCSV extends Importer {
         ArrayList<String[]> allRecords = new ArrayList<>();
         allRecords.add(csvReader.readNext());
 
-        int i = 1;
         while ((nextRecord = csvReader.readNext()) != null) {
-            if (!toRemove (nextRecord, ID)) {
+            if (!isRecord (nextRecord, ID)) {
                 allRecords.add(nextRecord);
             }
-            i++;
         }
 
         WriteCSV.reconstructFile (allRecords, file);
     }
 
-    public static Boolean toRemove (String[] currRecord, String ID) {
+    public static void replaceData (String file, String id, String newData) throws CsvValidationException, IOException {
+        FileReader filereader = new FileReader(file);
+        CSVReader csvReader = new CSVReader(filereader);
+        String [] nextRecord;
+        ArrayList<String[]> allRecords = new ArrayList<>();
+        allRecords.add(csvReader.readNext());
+
+        while ((nextRecord = csvReader.readNext()) != null) {
+            if (!isRecord (nextRecord, id)) {
+                allRecords.add(nextRecord);
+            } else {
+                //TODO create new String[] from newData and id
+            }
+        }
+
+        WriteCSV.reconstructFile (allRecords, file);
+    }
+
+    public static Boolean isRecord (String[] currRecord, String ID) {
         return (Objects.equals(currRecord[0], ID));
     }
 

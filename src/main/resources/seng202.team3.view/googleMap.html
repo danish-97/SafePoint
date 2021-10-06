@@ -35,10 +35,10 @@
     function loadMarkers() {
         for (let i = 0; i < crimeData.length; i++) {
             var data = crimeData[i];
-            var icon = "icons8-user-shield-48.png"
+            var icon = "Iconuser24.png"
 
             if (data.caseNumber !== undefined) {
-                icon = "icons8-warning-shield-48.png"
+                icon = "Iconpolice24.png"
             }
             var marker = new google.maps.Marker({
                 position: {lat: parseFloat(data.latitude), lng: parseFloat(data.longitude)  },

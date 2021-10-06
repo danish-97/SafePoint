@@ -21,6 +21,8 @@ public class ReportCrimeWindow {
     //TODO create parent class for all windows
 
     private static Stage stage = new Stage();
+    private static Stage IDStage = new Stage();
+
 
     private static ReportCrimeController activeController;
     private static EnterIDController idController;
@@ -37,7 +39,15 @@ public class ReportCrimeWindow {
     public ReportCrimeWindow(CrimeData data) {
         activeData = data;
         confirmUserID();
-    };
+    }
+
+    public void setInputID (String input) {
+        String formattedID = Integer.toString(Integer.parseInt(activeData.getId()) * 7159);
+        if (Objects.equals(input, formattedID)) {
+            initReportCrimeWindow();
+            setAttributes(activeData);
+        }
+    }
 
     /**
      * Opens up the Report crime window
@@ -62,23 +72,14 @@ public class ReportCrimeWindow {
     public void confirmUserID () {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/enter-id.fxml")));
-            stage.setTitle("Confirm ID");
-            stage.setScene(new Scene(root, 250, 335));
-            stage.setResizable(false);
-            stage.show();
+            IDStage.setTitle("Confirm ID");
+            IDStage.setScene(new Scene(root, 250, 335));
+            IDStage.setResizable(false);
+            IDStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
         idController.setActiveReportSession(this);
-    }
-
-    public void setInputID (String input) {
-        String formattedID = Integer.toString(Integer.parseInt(activeData.getId()) * 7159);
-        System.out.println(formattedID);
-        if (Objects.equals(input, formattedID)) {
-            initReportCrimeWindow();
-            setAttributes(activeData);
-        }
     }
 
     /**
@@ -88,6 +89,8 @@ public class ReportCrimeWindow {
     public static void closeStage() {
         stage.close();
     }
+
+    public static void closeIDStage() {IDStage.close();}
 
     public static void setActiveController (ReportCrimeController controller) {
         activeController = controller;

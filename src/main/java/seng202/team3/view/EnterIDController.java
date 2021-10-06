@@ -23,7 +23,7 @@ public class EnterIDController implements Initializable {
     @FXML
     public void confirmID (ActionEvent e) {
         activeReportSession.setInputID (crimeIDInput.getText());
-        ReportCrimeWindow.closeStage();
+        ReportCrimeWindow.closeIDStage();
     }
 
     public void setActiveReportSession (ReportCrimeWindow session) {
