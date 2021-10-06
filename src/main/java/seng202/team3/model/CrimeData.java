@@ -85,5 +85,9 @@ public class CrimeData {
         this.crimeType = type;
     }
 
+    public static void setLatestID (int latest) {
+        latestID = latest;
+    }
+
 
 }

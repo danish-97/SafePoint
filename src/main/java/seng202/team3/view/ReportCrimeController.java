@@ -1,14 +1,12 @@
 package seng202.team3.view;
 
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import seng202.team3.controller.ReadCSV;
 import seng202.team3.controller.UIDataInterface;
 
 import javafx.event.ActionEvent;
@@ -34,6 +32,8 @@ public class ReportCrimeController implements Initializable {
     @FXML private TextField longitude;
     @FXML private DatePicker date;
 
+    private String currentID;
+
     private Boolean isEditing = false;
 
     @Override
@@ -48,8 +48,7 @@ public class ReportCrimeController implements Initializable {
      * @throws ParseException when input is unexpected
      */
     @FXML
-    public void reportCrime (ActionEvent e) throws ParseException {
-        System.out.println(validateInputs());
+    public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException {
         if (validateInputs ()) {
             if (!isEditing) {
                 UIDataInterface.addUserData(formatInputs());
@@ -57,7 +56,9 @@ public class ReportCrimeController implements Initializable {
             }
             ReportCrimeWindow.closeStage();
         } else if (isEditing) {
-            //delete crime
+            ReadCSV.removeLineByID("data.csv", currentID);
+            openConfirmationWindow(currentID);
+            ReportCrimeWindow.closeStage();
             isEditing = false;
         }
     }
@@ -68,7 +69,10 @@ public class ReportCrimeController implements Initializable {
      */
     public Boolean validateInputs () {
         //TODO if this is false and isEditing then we want to delete the crime
-        return (crimeTypeSelector.getValue() != null && addressField.getText() != null && date.getValue() != null);
+        if (crimeTypeSelector.getValue() == null) return false;
+        if (addressField.getText() == null) return false;
+        if (Objects.equals(addressField.getText(), "")) return false;
+        return date.getValue() != null;
     }
 
     /**
@@ -113,14 +117,16 @@ public class ReportCrimeController implements Initializable {
         new ConfirmationWindow (confirmationID);
     }
 
-    public Boolean setAttributes (CrimeData data) {
+    public void openConfirmationWindow (String ID) {new ConfirmationWindow(ID);}
+
+    public void setAttributes (CrimeData data) {
         isEditing = true;
+        currentID = data.getId();
         setCrimeTypeSelector(data.getCrimeType());
         setAddressField(data.getAddress());
         setLongitude(data.getLongitude());
         setLatitude(data.getLatitude());
         setDate(data.getDate());
-        return false; //returns if the data should be deleted.
     }
 
     public void setCrimeTypeSelector (String curr) {

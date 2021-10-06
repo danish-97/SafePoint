@@ -107,7 +107,7 @@ public class MainViewController implements Initializable {
      * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
      */
     public void loadData() {
-        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<>();
+        ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
@@ -121,7 +121,7 @@ public class MainViewController implements Initializable {
 
     public void loadData1() {
 
-        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.executeScript("getAllActiveCrimeData(" + json + ")");

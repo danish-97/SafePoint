@@ -55,5 +55,6 @@ public class WriteCSV extends Importer {
         CSVWriter csvWriter = new CSVWriter(new FileWriter(file));
         csvWriter.writeAll(newRecords);
         csvWriter.close();
+        UIDataInterface.initCrimeData();
     }
 }

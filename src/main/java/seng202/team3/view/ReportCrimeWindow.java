@@ -23,6 +23,9 @@ public class ReportCrimeWindow {
     private static Stage stage = new Stage();
 
     private static ReportCrimeController activeController;
+    private static EnterIDController idController;
+
+    private CrimeData activeData;
 
     /**
      * Constructs and opens up a new window to report crimes
@@ -32,8 +35,8 @@ public class ReportCrimeWindow {
     }
 
     public ReportCrimeWindow(CrimeData data) {
-        initReportCrimeWindow();
-        setAttributes(data);
+        activeData = data;
+        confirmUserID();
     };
 
     /**
@@ -51,8 +54,31 @@ public class ReportCrimeWindow {
         }
     }
 
+
     public void setAttributes (CrimeData data) {
        activeController.setAttributes(data);
+    }
+
+    public void confirmUserID () {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/enter-id.fxml")));
+            stage.setTitle("Confirm ID");
+            stage.setScene(new Scene(root, 250, 335));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        idController.setActiveReportSession(this);
+    }
+
+    public void setInputID (String input) {
+        String formattedID = Integer.toString(Integer.parseInt(activeData.getId()) * 7159);
+        System.out.println(formattedID);
+        if (Objects.equals(input, formattedID)) {
+            initReportCrimeWindow();
+            setAttributes(activeData);
+        }
     }
 
     /**
@@ -66,5 +92,7 @@ public class ReportCrimeWindow {
     public static void setActiveController (ReportCrimeController controller) {
         activeController = controller;
     }
+
+    public static void setIDController (EnterIDController controller) {idController = controller;}
 
 }

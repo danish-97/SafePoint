@@ -9,10 +9,14 @@ public class ConfirmationWindow {
 
     public ConfirmationWindow (int confirmationID) {
         String formattedConfID = Integer.toString(confirmationID * 7159);
-        openWindow (formattedConfID);
+        openReportedWindow (formattedConfID);
     }
 
-    public void openWindow (String confirmationStr) {
+    public ConfirmationWindow (String ID) {
+        openEditedWindow (ID);
+    }
+
+    public void openReportedWindow (String confirmationStr) {
         Pane mainPane = new Pane();
         mainPane.setStyle("-fx-pref-width: 296; -fx-pref-height: 142");
 
@@ -33,9 +37,32 @@ public class ConfirmationWindow {
 
         mainPane.getChildren().addAll(warningl1, warningl2, infol1, infol2, crimeConfirmation);
 
-        Stage stage = new Stage();
+        showStage(mainPane, 296, 142);
+    }
+
+    public void openEditedWindow (String ID) {
+        Pane pane = new Pane();
+        pane.setStyle("-fx-pref-height: 100; -fx-pref-width: 200");
+
+        Label confirmation = new Label ("Crime Record Updated");
+        confirmation.setStyle("-fx-font-size: 17; -fx-translate-x: 17; -fx-translate-y: 20;");
+
+        Label info1 = new Label("You may need to reload data to");
+        info1.setStyle("-fx-font-size: 12; -fx-translate-x: 22; -fx-translate-y: 45;");
+
+        Label info2 = new Label("see your changes");
+        info2.setStyle("-fx-translate-x: 50; -fx-translate-y: 58;");
+
+        pane.getChildren().addAll(confirmation, info1, info2);
+
+        showStage(pane, 200, 100);
+
+    }
+
+    public void showStage (Pane root, int width, int height) {
+        Stage stage = new Stage ();
         stage.setTitle("Confirmation");
-        stage.setScene(new Scene(mainPane, 296, 142));
+        stage.setScene(new Scene(root, width, height));
         stage.setResizable(false);
         stage.show();
     }
