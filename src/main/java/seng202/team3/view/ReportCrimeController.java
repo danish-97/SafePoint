@@ -91,7 +91,7 @@ public class ReportCrimeController implements Initializable {
         if (latitude.getText().equals("")) {
             formattedString = formattedString + ",";
         } else {
-            formattedString = formattedString + latitude.getText() + "N,";
+            formattedString = formattedString + latitude.getText() + ",";
         }
         if (!longitude.getText().equals("")) {
             formattedString = formattedString + longitude.getText();

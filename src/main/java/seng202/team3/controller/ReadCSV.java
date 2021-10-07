@@ -6,7 +6,6 @@ import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -39,7 +38,7 @@ public class ReadCSV extends Importer {
 
         //Checks column count to determine if reading from database.txt
         if (columnAmount == 17) { //If reading from an Excel document
-            columnNotWanted = Arrays.asList(16); //Columns not needed for PoliceData
+            columnNotWanted = List.of(16); //Columns not needed for PoliceData
 
         } else { //If reading from database.txt
 
@@ -146,7 +145,21 @@ public class ReadCSV extends Importer {
             if (!isRecord (nextRecord, id)) {
                 allRecords.add(nextRecord);
             } else {
-                //TODO create new String[] from newData and id
+                String[] newStringArr = newData.split(",");
+                ArrayList<String> newDataArr = new ArrayList<>(Arrays.asList(newStringArr));
+                newDataArr.add(0, id);
+                for (int i = 0; i < 7; i++) {
+                    newDataArr.add(4, "N");
+                }
+                if (Objects.equals(newDataArr.get(newDataArr.size() - 1), "N")) {
+                    newDataArr.set(newDataArr.size()-1, "");
+                }
+                newDataArr.add("U");
+                String[] stringArr = new String[newDataArr.size()];
+                for (int i = 0; i < newDataArr.size(); i++) {
+                    stringArr[i] = newDataArr.get(i);
+                }
+                allRecords.add(stringArr);
             }
         }
 
