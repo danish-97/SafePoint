@@ -2,48 +2,47 @@ package seng202.team3.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
+import seng202.team3.controller.GraphCreator;
+import seng202.team3.controller.ReadCSV;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 
 
 public class GraphView extends Application {
 
-    @Override public void start(Stage stage) {
-        stage.setTitle("Line Chart Sample");
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Month");
-
-        final LineChart<String,Number> lineChart =
-                new LineChart<String,Number>(xAxis,yAxis);
-
-        lineChart.setTitle("Stock Monitoring, 2010");
-
-        XYChart.Series series = new XYChart.Series();
-        series.setName("My portfolio");
-
-        series.getData().add(new XYChart.Data("Jan", 23));
-        series.getData().add(new XYChart.Data("Feb", 14));
-        series.getData().add(new XYChart.Data("Mar", 15));
-        series.getData().add(new XYChart.Data("Apr", 24));
-        series.getData().add(new XYChart.Data("May", 34));
-        series.getData().add(new XYChart.Data("Jun", 36));
-        series.getData().add(new XYChart.Data("Jul", 22));
-        series.getData().add(new XYChart.Data("Aug", 45));
-        series.getData().add(new XYChart.Data("Sep", 43));
-        series.getData().add(new XYChart.Data("Oct", 17));
-        series.getData().add(new XYChart.Data("Nov", 29));
-        series.getData().add(new XYChart.Data("Dec", 25));
+    GraphCreator graphCreator = new GraphCreator();
+    NumberAxis xAxis = new NumberAxis();
+    NumberAxis yAxis = new NumberAxis();
+    LineChart<Number, Number> lineChart
+            = new LineChart<Number, Number>(xAxis, yAxis);
 
 
+    @Override
+    public void start(Stage stage) throws ParseException {
+        stage.setTitle("Crime Data Graph");
         Scene scene  = new Scene(lineChart,800,600);
-        lineChart.getData().add(series);
-
+        ReadCSV readCSV = new ReadCSV();
+        ArrayList<CrimeData> crimeData = readCSV.readDataLineByLine("data.csv");
+        graphOverTime(crimeData);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void graphOverTime(ArrayList<CrimeData> crimeData) throws ParseException {
+        XYChart.Series series = graphCreator.createGraphOverTime(crimeData);
+        lineChart.setTitle("Crimes Over Time");
+        xAxis.setLabel("Time (Per Week)");
+        yAxis.setLabel("Number of times");
+        lineChart.getData().add(series);
+
+
     }
 
     public static void main(String[] args) {
