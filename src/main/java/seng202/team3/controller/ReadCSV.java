@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * Class to read Crime content of a file and return list of String crimes
- * @author roryh and Danish
+ * @author roryh, Danish and mattgarrett
  */
 
 public class ReadCSV extends Importer {
@@ -118,43 +118,74 @@ public class ReadCSV extends Importer {
 
     }
 
+    /**
+     * Given a UserData ID, removes this line from the database file.
+     * @param file the target file to remove the line from
+     * @param ID ID of the UserData to be removed
+     * @throws IOException if file is invalid
+     * @throws CsvValidationException if CSV format is invalid
+     */
     public static void removeLineByID (String file, String ID) throws IOException, CsvValidationException {
+        //Initialize variables
         FileReader filereader = new FileReader(file);
         CSVReader csvReader = new CSVReader(filereader);
         String [] nextRecord;
         ArrayList<String[]> allRecords = new ArrayList<>();
+
+        //Removes first line from CSV file, which is the header
         allRecords.add(csvReader.readNext());
 
+        /* Loops through all existing lines in the file and adds them to allRecords except the
+        line that has the required ID to remove */
         while ((nextRecord = csvReader.readNext()) != null) {
             if (!isRecord (nextRecord, ID)) {
                 allRecords.add(nextRecord);
             }
         }
 
+        //Reconstructs the CSV file with the new records
         WriteCSV.reconstructFile (allRecords, file);
     }
 
+    /**
+     * Replaces the line of file that has ID id with the new data
+     * @param file target file to replace the data into
+     * @param id ID of the UserData object to be replaced
+     * @param newData formatted String from ReportCrimeController representing the new data
+     * @throws CsvValidationException if CSV format is incorrect
+     * @throws IOException if given invalid path or file
+     */
     public static void replaceData (String file, String id, String newData) throws CsvValidationException, IOException {
+        //Initialize
         FileReader filereader = new FileReader(file);
         CSVReader csvReader = new CSVReader(filereader);
         String [] nextRecord;
         ArrayList<String[]> allRecords = new ArrayList<>();
+
+        //removes header line from CSV
         allRecords.add(csvReader.readNext());
 
+        /* Loops through the CSV until the line that we want is found. For each line it is added
+        either unmodified if it is not the target line, or modified if it is, to allRecords */
         while ((nextRecord = csvReader.readNext()) != null) {
             if (!isRecord (nextRecord, id)) {
                 allRecords.add(nextRecord);
             } else {
+                //formatting of newData into String[], with empty positions accounted for
                 String[] newStringArr = newData.split(",");
                 ArrayList<String> newDataArr = new ArrayList<>(Arrays.asList(newStringArr));
                 newDataArr.add(0, id);
                 for (int i = 0; i < 7; i++) {
+                    //adding null elements unique to PoliceData
                     newDataArr.add(4, "N");
                 }
+                //If there is no Longitude, replace it with ""
                 if (Objects.equals(newDataArr.get(newDataArr.size() - 1), "N")) {
                     newDataArr.set(newDataArr.size()-1, "");
                 }
+                //Specify type of UserData
                 newDataArr.add("U");
+                //Convert to a String[] from ArrayList<String>
                 String[] stringArr = new String[newDataArr.size()];
                 for (int i = 0; i < newDataArr.size(); i++) {
                     stringArr[i] = newDataArr.get(i);
@@ -162,10 +193,16 @@ public class ReadCSV extends Importer {
                 allRecords.add(stringArr);
             }
         }
-
+        //Reconstructs File
         WriteCSV.reconstructFile (allRecords, file);
     }
 
+    /**
+     * Tests if the record is the one we are looking for
+     * @param currRecord record we want to compare
+     * @param ID id that we are looking for
+     * @return true if the currRecord.ID = ID, false otherwise
+     */
     public static Boolean isRecord (String[] currRecord, String ID) {
         return (Objects.equals(currRecord[0], ID));
     }

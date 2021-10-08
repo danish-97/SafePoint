@@ -5,9 +5,6 @@ import javafx.scene.layout.VBox;
 import seng202.team3.controller.UIDataInterface;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
-import seng202.team3.model.UserData;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -97,14 +94,17 @@ public class DataPaneConstructor {
     public static VBox constructPanes (ArrayList<CrimeData> topData, ArrayList<CrimeData> bottomData, int middle) {
         VBox root = new VBox();
         ArrayList<Pane> panes = new ArrayList<>();
-        int topPaneHeight = Math.max (0, middle - topData.size());
+        int topPaneHeight = Math.max (0, middle - topData.size()); //gets how many crime panes should be above this
+        //gets how many crime panes should be below this
         int bottomPaneHeight = Math.min (activeData.size(), activeData.size() - (middle + bottomData.size() + 1));
 
+        //constructing top pane
         Pane topPane = new Pane ();
         topPane.setPrefWidth(175);
         topPane.setPrefHeight(topPaneHeight * 80);
         panes.add(topPane);
 
+        //adding all the culled data to the view
         for (CrimeData data : topData) {
             panes.add (DataPaneConstructor.constructPane(data));
         }
@@ -114,11 +114,13 @@ public class DataPaneConstructor {
         for (CrimeData data : bottomData) {
             panes.add (DataPaneConstructor.constructPane(data));
         }
+        //constructing bottom pane
         Pane bottomPane = new Pane ();
         bottomPane.setPrefWidth(175);
         bottomPane.setPrefHeight(bottomPaneHeight * 80);
         panes.add(bottomPane);
 
+        //adding all constructed pane to the main root object
         root.getChildren().addAll(panes);
 
         return root;
@@ -136,7 +138,4 @@ public class DataPaneConstructor {
         return new UserDataPane(data);
 
     }
-
-    public static void setActiveData (ArrayList<CrimeData> newData) {activeData = newData;}
-
 }

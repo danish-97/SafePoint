@@ -73,7 +73,7 @@ public class ReportCrimeWindow {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/enter-id.fxml")));
             IDStage.setTitle("Confirm ID");
-            IDStage.setScene(new Scene(root, 250, 335));
+            IDStage.setScene(new Scene(root, 269, 119));
             IDStage.setResizable(false);
             IDStage.show();
         } catch (IOException e) {

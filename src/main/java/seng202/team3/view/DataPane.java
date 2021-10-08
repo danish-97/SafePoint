@@ -7,7 +7,7 @@ import seng202.team3.model.CrimeData;
 /**
  * DataPane is a JavaFX pane that displays the data from a CrimeData object in a graphical representation.
  * This is used on the CrimeData scroll pane on the main GUI
- * @author Matthew Garrett
+ * @author mattgarrett
  */
 public class DataPane extends Pane{
 
@@ -18,7 +18,7 @@ public class DataPane extends Pane{
      * @param data CrimeData object to be displayed on the DataPane
      */
     public DataPane(CrimeData data) {
-        super();
+        super(); //initialize base pane
         this.setStyle("-fx-border-color: black; -fx-pref-height: 80; -fx-pref-width: 175; -fx-border-radius: 5");
         constructComponents (data);
     }
@@ -38,6 +38,7 @@ public class DataPane extends Pane{
         Label date = new Label(data.getDate());
         date.setStyle("-fx-translate-x: 5; -fx-translate-y: 41;");
 
+        //button for viewing crime in more detail
         viewButton = new CrimeViewButton(data);
 
         this.getChildren().addAll(crimeLabel, location, date, viewButton);

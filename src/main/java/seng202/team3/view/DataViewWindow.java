@@ -46,6 +46,7 @@ public class DataViewWindow {
 
         Line l4 = new Line(5.0, 178.5, 185.0, 178.5);
 
+        //add all constructed elements to the root
         pane.getChildren().addAll(l1, crimeType, l2, address, date, l3, location, l4);
         return pane;
     }

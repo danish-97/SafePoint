@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Writes data found in an input file ot an output file
- * @author roryh and Danish
+ * @author roryh, Danish, mattgarrett
  */
 public class WriteCSV extends Importer {
 
@@ -51,6 +51,12 @@ public class WriteCSV extends Importer {
 
     }
 
+    /**
+     * Reconstructs the file from newRecords, in the format of one String[] (record) per line
+     * @param newRecords the new records to be inserted into the database file
+     * @param file target file
+     * @throws IOException if file is invalid
+     */
     public static void reconstructFile (ArrayList<String[]> newRecords, String file) throws IOException {
         CSVWriter csvWriter = new CSVWriter(new FileWriter(file));
         csvWriter.writeAll(newRecords);

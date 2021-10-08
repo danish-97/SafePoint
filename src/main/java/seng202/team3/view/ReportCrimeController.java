@@ -55,12 +55,12 @@ public class ReportCrimeController implements Initializable {
                 openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()));
             } else {
                 ReadCSV.replaceData ("data.csv", currentID, formatInputs());
-                openConfirmationWindow(currentID);
+                openConfirmationWindow();
             }
             ReportCrimeWindow.closeStage();
         } else if (isEditing) {
             ReadCSV.removeLineByID("data.csv", currentID);
-            openConfirmationWindow(currentID);
+            openConfirmationWindow();
             ReportCrimeWindow.closeStage();
             isEditing = false;
         }
@@ -120,7 +120,7 @@ public class ReportCrimeController implements Initializable {
         new ConfirmationWindow (confirmationID);
     }
 
-    public void openConfirmationWindow (String ID) {new ConfirmationWindow(ID);}
+    public void openConfirmationWindow () {new ConfirmationWindow();}
 
     public void setAttributes (CrimeData data) {
         isEditing = true;
