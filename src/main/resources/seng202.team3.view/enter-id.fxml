@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="269.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.EnterIDController">
+   <children>
+      <Label layoutX="65.0" layoutY="14.0" text="Enter Crime ID">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="crimeIDInput" layoutX="32.0" layoutY="46.0" prefHeight="26.0" prefWidth="206.0" />
+      <Label layoutX="36.0" layoutY="72.0" text="(The ID given when you reported the crime)">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Button onAction="#confirmID" layoutX="104.0" layoutY="86.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 3;" text="Confirm" />
+   </children>
+</Pane>

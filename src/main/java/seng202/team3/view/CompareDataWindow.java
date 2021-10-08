@@ -9,7 +9,7 @@ import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 
 public class CompareDataWindow {
-
+    //TODO remake this class
     private Pane pane1;
     private Pane pane2;
     private CrimeData data1;

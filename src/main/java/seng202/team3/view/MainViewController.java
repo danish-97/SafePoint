@@ -10,11 +10,9 @@ import com.google.gson.Gson;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.model.CrimeData;
@@ -119,7 +117,7 @@ public class MainViewController implements Initializable {
      */
 
     public void loadData() {
-        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<>();
+        ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
@@ -136,7 +134,7 @@ public class MainViewController implements Initializable {
      */
     public void reloadData() {
 
-        ArrayList<CrimeData> tempActiveCrimeData = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
         webEngine.executeScript("getAllActiveCrimeData(" + json + ")");

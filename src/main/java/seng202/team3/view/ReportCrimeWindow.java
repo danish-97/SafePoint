@@ -1,9 +1,14 @@
 package seng202.team3.view;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import seng202.team3.model.CrimeData;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -13,13 +18,35 @@ import java.util.Objects;
  */
 public class ReportCrimeWindow {
 
+    //TODO create parent class for all windows
+
     private static Stage stage = new Stage();
+    private static Stage IDStage = new Stage();
+
+
+    private static ReportCrimeController activeController;
+    private static EnterIDController idController;
+
+    private CrimeData activeData;
 
     /**
      * Constructs and opens up a new window to report crimes
      */
     public ReportCrimeWindow() {
         initReportCrimeWindow ();
+    }
+
+    public ReportCrimeWindow(CrimeData data) {
+        activeData = data;
+        confirmUserID();
+    }
+
+    public void setInputID (String input) {
+        String formattedID = Integer.toString(Integer.parseInt(activeData.getId()) * 7159);
+        if (Objects.equals(input, formattedID)) {
+            initReportCrimeWindow();
+            setAttributes(activeData);
+        }
     }
 
     /**
@@ -37,6 +64,24 @@ public class ReportCrimeWindow {
         }
     }
 
+
+    public void setAttributes (CrimeData data) {
+       activeController.setAttributes(data);
+    }
+
+    public void confirmUserID () {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("seng202.team3.view/enter-id.fxml")));
+            IDStage.setTitle("Confirm ID");
+            IDStage.setScene(new Scene(root, 269, 119));
+            IDStage.setResizable(false);
+            IDStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        idController.setActiveReportSession(this);
+    }
+
     /**
      * Closes the window when the user inputs correct data and wants to submit the report. This just closes the window
      * but doesn't delete it.
@@ -44,5 +89,13 @@ public class ReportCrimeWindow {
     public static void closeStage() {
         stage.close();
     }
+
+    public static void closeIDStage() {IDStage.close();}
+
+    public static void setActiveController (ReportCrimeController controller) {
+        activeController = controller;
+    }
+
+    public static void setIDController (EnterIDController controller) {idController = controller;}
 
 }
