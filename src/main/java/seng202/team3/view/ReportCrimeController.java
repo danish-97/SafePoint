@@ -81,7 +81,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Gets the latitude and longitude from an input address.
+     * Gets the latitude and longitude from an input address using the class GeocoderApi.
      * @throws IOException if the input data is invalid.
      * @throws InterruptedException if the thread is interrupted.
      */
