@@ -1,6 +1,5 @@
 package seng202.team3.view;
 
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

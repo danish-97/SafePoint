@@ -167,14 +167,15 @@ public class MainViewController implements Initializable {
     public void updateRegionCrimeData () {
         if (!Objects.equals(regionFilter.getText(), "")) {
             Double[] inputLatLong = new Double[2];
-            //Getts Lat/Long values from address'
+            //Gets Lat/Long values from address
             try {
                 inputLatLong = ReportCrimeController.getLatLong(regionFilter.getText().replaceAll(" ", "-"));
+                if (inputLatLong[0] != 0) {
+                    FilterController.setActiveLocation(inputLatLong);
+                }
             } catch (Exception e){
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
-
-            FilterController.setActiveLocation(inputLatLong);
         }
         FilterController.setActiveCrimeType((String) crimeSelector.getValue());
     }

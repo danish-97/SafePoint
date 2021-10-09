@@ -67,17 +67,11 @@ public class ReportCrimeController implements Initializable {
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
 
         Double[] latLong = getLatLong(addressField.getText().replaceAll(" ", "-"));
-        latitude.setText(Double.toString(latLong[0]));
-        longitude.setText(Double.toString(latLong[1]));
-        
-        if (latitude.getText().equals("")) {
+        if (latLong[0] != 0) {
+            formattedString = formattedString + latLong[0] + ",";
+            formattedString = formattedString + latLong[1];
+        } else {
             formattedString = formattedString + ",";
-        } else {
-            formattedString = formattedString + latitude.getText() + "N,";
-        }
-        if (!longitude.getText().equals("")) {
-            formattedString = formattedString + longitude.getText();
-        } else {
             formattedString = formattedString + "N";
         }
         return formattedString;
@@ -102,7 +96,11 @@ public class ReportCrimeController implements Initializable {
 
         }
 
-        return new Double[]{lat, lon};
+        if (lat != null) {
+            return new Double[]{lat, lon};
+        }
+
+        return new Double[]{0.0, 0.0};
 
     }
 
