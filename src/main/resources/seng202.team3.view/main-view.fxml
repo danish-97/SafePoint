@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
@@ -17,7 +17,7 @@
                         <Font name="System Bold" size="53.0" />
                      </font>
                   </Label>
-                  <Button layoutX="844.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="45.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
+                  <Button layoutX="831.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="48.0" prefWidth="155.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
                      <font>
                         <Font size="19.0" />
                      </font></Button>
@@ -26,6 +26,11 @@
                         <Image url="@SafePoint-logo.png" />
                      </image>
                   </ImageView>
+                  <Button layoutX="670.0" layoutY="19.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Graph View">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
             <FlowPane prefHeight="517.0" prefWidth="159.0" style="-fx-border-color: black; -fx-border-width: 2;">
@@ -58,7 +63,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="12.0" layoutY="105.0" prefHeight="140.0" prefWidth="155.0" style="-fx-border-color: black;">
+                  <Pane layoutX="12.0" layoutY="105.0" prefHeight="117.0" prefWidth="155.0" style="-fx-border-color: black;">
                      <children>
                         <CheckBox fx:id="policeDataToggle" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" text="Show Police Data">
                            <font>
@@ -77,10 +82,6 @@
                               <Font size="14.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox fx:id="graphToggle" layoutX="7.0" layoutY="106.0" mnemonicParsing="false" text="Graph View">
-                           <font>
-                              <Font size="14.0" />
-                           </font></CheckBox>
                      </children>
                   </Pane>
                   <Pane layoutX="12.0" layoutY="136.0" prefHeight="38.0" prefWidth="155.0" style="-fx-border-color: black; -fx-background-color: #c9c9c9;">
@@ -92,7 +93,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="12.0" layoutY="167.0" prefHeight="176.0" prefWidth="154.0" style="-fx-border-color: black;">
+                  <Pane layoutX="12.0" layoutY="167.0" prefHeight="200.0" prefWidth="154.0" style="-fx-border-color: black;">
                      <children>
                         <CheckBox fx:id="regionFilteringToggle" layoutX="4.0" layoutY="14.0" mnemonicParsing="false" text="Show Region Data" />
                         <ChoiceBox fx:id="regionFilteringKey" layoutX="5.0" layoutY="39.0" prefHeight="25.0" prefWidth="118.0" />

@@ -2,6 +2,7 @@ package seng202.team3.controller;
 
 import javafx.scene.chart.XYChart;
 import seng202.team3.model.CrimeData;
+import seng202.team3.model.PoliceData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,15 +24,20 @@ public class GraphCreator {
      * @return a Map<Integer, List<CrimeData>> of the dates grouped by weeks.
      * @throws ParseException if the formatting is invalid.
      */
-    public Map<Integer, List<CrimeData>> formattedDatesIntoGroups(ArrayList<CrimeData> crimeData) throws ParseException {
+    public Map<Integer, List<CrimeData>> formattedDatesIntoGroups(ArrayList<CrimeData> crimeData) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 7);
 
         Map<Integer, List<CrimeData>> weeklyCrimes = new HashMap<>();
         for (CrimeData crime: crimeData) {
             ArrayList<CrimeData> crimesTemp;
-            Integer weekOfYear = simpleDateFormat.parse(crime.getDate())
-                    .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
+            Integer weekOfYear = null;
+            try {
+                weekOfYear = simpleDateFormat.parse(crime.getDate())
+                        .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             if (weeklyCrimes.get(weekOfYear) == null) {
                 crimesTemp = new ArrayList<>();
             } else {
@@ -45,13 +51,12 @@ public class GraphCreator {
     }
 
     /**
-     * This method creates the data for the graph over time. It takes the grouped dates and then adds it to the series
+     * This method creates the data for the graphOverTime. It takes the grouped dates and then adds it to the series
      * using entrySet() to get the key and value pairs.
      * @param crimeData is the data which is used to get the dates.
      * @return the data which is used to populate the graph.
-     * @throws ParseException if the formatting is invalid.
      */
-    public XYChart.Series createGraphOverTime(ArrayList<CrimeData> crimeData) throws ParseException {
+    public XYChart.Series createGraphOverTime(ArrayList<CrimeData> crimeData) {
         XYChart.Series series = new XYChart.Series();
         Map<Integer, List<CrimeData>> formattedDates = formattedDatesIntoGroups(crimeData);
 
@@ -62,10 +67,30 @@ public class GraphCreator {
         return series;
     }
 
-    public static void main(String[] args) throws ParseException {
-        GraphCreator creator = new GraphCreator();
-        ReadCSV readCSV = new ReadCSV();
-        ArrayList<CrimeData> crimeData = readCSV.readDataLineByLine("data.csv");
-        creator.formattedDatesIntoGroups(crimeData);
+    /**
+     * This method takes creates the data for the graphOverTimePerType. It first takes the crime types matching the crimeType
+     * String and adds it to an ArrayList and then takes the grouped dates and then adds it to the series using entrySet()
+     * to get the key and value pairs.
+     * @param crimeData is the data which is used to get the dates.
+     * @param crimeType is the String by which the data is filtered.
+     * @return the data used to populate the graph.
+     */
+    public XYChart.Series createGraphOverTimePerType(ArrayList<CrimeData> crimeData, String crimeType) {
+        XYChart.Series series = new XYChart.Series();
+        ArrayList<CrimeData> crimesPerType = new ArrayList<>();
+
+        for (CrimeData crime: crimeData) {
+            if (crime.getCrimeType().equals(crimeType)) {
+                crimesPerType.add(crime);
+            }
+        }
+
+        Map<Integer, List<CrimeData>> formattedDates = formattedDatesIntoGroups(crimesPerType);
+
+        for (Map.Entry<Integer, List<CrimeData>> pair: formattedDates.entrySet()) {
+            series.getData().add(new XYChart.Data(pair.getKey(), pair.getValue().size()));
+        }
+
+        return series;
     }
 }

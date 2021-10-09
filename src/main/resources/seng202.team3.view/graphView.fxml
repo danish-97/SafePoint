@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="seng202.team3.view.GraphView"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.GraphViewController">
+   <children>
+      <Pane layoutX="143.0" prefHeight="400.0" prefWidth="457.0" />
+      <Pane prefHeight="400.0" prefWidth="138.0" style="-fx-border-color: black;">
+         <children>
+            <Pane prefHeight="64.0" prefWidth="138.0" style="-fx-background-color: #c9c9c9; -fx-border-color: black; -fx-border-width: 2;">
+               <children>
+                  <Label layoutX="15.0" layoutY="15.0" prefHeight="34.0" prefWidth="109.0" text="Filters">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <Pane layoutY="64.0" prefHeight="48.0" prefWidth="138.0" style="-fx-background-color: #c9c9c9; -fx-border-color: black;">
+               <children>
+                  <Label layoutX="14.0" layoutY="7.0" prefHeight="35.0" prefWidth="126.0" text="Type of Crime">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+            <Pane layoutY="112.0" prefHeight="48.0" prefWidth="138.0" style="-fx-border-color: black;">
+               <children>
+                  <ChoiceBox layoutX="12.0" layoutY="12.0" prefHeight="25.0" prefWidth="115.0" style="-fx-border-color: black; -fx-background-color: white;" />
+               </children>
+            </Pane>
+            <Pane layoutY="160.0" prefHeight="48.0" prefWidth="138.0" style="-fx-background-color: #c9c9c9; -fx-border-color: black;">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" prefHeight="35.0" prefWidth="109.0" text="Year">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <ChoiceBox layoutX="12.0" layoutY="219.0" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: white; -fx-border-color: black;" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

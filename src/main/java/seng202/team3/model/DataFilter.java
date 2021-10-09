@@ -66,7 +66,7 @@ public class DataFilter {
      * @return an Arraylist<CrimeData> with filtered crimes.
      */
     public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data, ArrayList<CrimeStat> activeFilters) {
-        ArrayList<CrimeData> singleFilterArray = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> singleFilterArray = new ArrayList<>();
 
         for (CrimeData crime : data) {
             switch (filter) {

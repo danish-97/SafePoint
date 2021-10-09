@@ -10,11 +10,9 @@ import com.google.gson.Gson;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import seng202.team3.model.CrimeData;
@@ -33,7 +31,6 @@ public class MainViewController implements Initializable {
     @FXML private CheckBox policeDataToggle;
     @FXML private CheckBox userDataToggle;
     @FXML private CheckBox arrestMadeToggle;
-    @FXML private CheckBox graphToggle;
     @FXML private CheckBox heatMapToggle;
     @FXML private CheckBox regionFilteringToggle;
     @FXML private ChoiceBox regionFilteringKey;
@@ -82,19 +79,25 @@ public class MainViewController implements Initializable {
 
     /**
      * Handles when a user clicks the report crime button on main GUI
-     * @param e input variable
      */
     @FXML
-    public void reportCrime (ActionEvent e) {
+    public void reportCrime() {
         new ReportCrimeWindow();
     }
 
     /**
-     * Handles when the compare crimes option is clicked
-     * @param e input variable
+     * Handles when a user clicks the graph view button on main GUI
      */
     @FXML
-    public void compareCrimeToggle (ActionEvent e) {
+    public void graphView() {
+        new GraphViewWindow();
+    }
+
+    /**
+     * Handles when the compare crimes option is clicked
+     */
+    @FXML
+    public void compareCrimeToggle() {
         UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
     }
 
