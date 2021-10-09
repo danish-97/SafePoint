@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
+<AnchorPane prefHeight="602.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng202.team3.view.MainViewController">
    <children>
       <FlowPane prefHeight="517.0" prefWidth="1000.0">
          <children>
@@ -17,7 +17,7 @@
                         <Font name="System Bold" size="53.0" />
                      </font>
                   </Label>
-                  <Button layoutX="831.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="48.0" prefWidth="155.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
+                  <Button layoutX="827.0" layoutY="19.0" mnemonicParsing="false" onAction="#reportCrime" prefHeight="48.0" prefWidth="159.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Report Crime">
                      <font>
                         <Font size="19.0" />
                      </font></Button>
@@ -26,7 +26,7 @@
                         <Image url="@SafePoint-logo.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="670.0" layoutY="19.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="142.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Graph View">
+                  <Button layoutX="658.0" layoutY="19.0" mnemonicParsing="false" onAction="#graphView" prefHeight="48.0" prefWidth="155.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 3; -fx-border-radius: 5;" text="Graph View">
                      <font>
                         <Font size="19.0" />
                      </font>

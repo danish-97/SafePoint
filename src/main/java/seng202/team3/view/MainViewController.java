@@ -69,10 +69,9 @@ public class MainViewController implements Initializable {
 
     /**
      * Handles when user selects check box for heat map view on main GUI
-     * @param e input variable
      */
     @FXML
-    public void updateHeatMap(ActionEvent e) {
+    public void updateHeatMap() {
         webEngine.executeScript("toggleHeatMap()");
 
     }
