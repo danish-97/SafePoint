@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import seng202.team3.controller.ReadCSV;
 import seng202.team3.controller.UIDataInterface;
 
@@ -48,8 +50,9 @@ public class ReportCrimeController implements Initializable {
      * @throws ParseException when input is unexpected
      */
     @FXML
-    public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException {
+    public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException, InterruptedException {
         if (validateInputs ()) {
+            getLatLong();
             if (!isEditing) {
                 UIDataInterface.addUserData(formatInputs());
                 openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()));
@@ -88,6 +91,7 @@ public class ReportCrimeController implements Initializable {
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
+        //The code below adds the formatting for latitude and longitude, with protection for null values
         if (latitude.getText().equals("")) {
             formattedString = formattedString + ",";
         } else {
@@ -102,7 +106,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Adds all crime types to a ChoiceBox for selectionc
+     * Adds all crime types to a ChoiceBox for selection
      * @param crimeTypeSelector The ChoiceBox that the fields should be added into
      */
     public static void constructCrimeChoiceBox(ChoiceBox crimeTypeSelector) {
@@ -113,6 +117,30 @@ public class ReportCrimeController implements Initializable {
                 "STALKING", "THEFT", "WEAPONS VIOLATION"};
         for (String crimeType : crimeTypes) {
             crimeTypeSelector.getItems().add(crimeType);
+        }
+    }
+
+    /**
+     * Gets the latitude and longitude from an input address.
+     * @throws IOException if the input data is invalid.
+     * @throws InterruptedException if the thread is interrupted.
+     */
+    public void getLatLong() throws IOException, InterruptedException {
+        Double lat = null;
+        Double lon = null;
+        GeocoderApi geocoderApi = new GeocoderApi();
+        String res = geocoderApi.doRequest(addressField.getText().replaceAll(" ", "-"));
+        JSONObject obj = new JSONObject(res);
+        JSONArray data = obj.getJSONArray("results");
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject result = data.getJSONObject(i);
+            lat = result.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+            lon = result.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+
+        }
+        if (lat != null) {
+            latitude.setText(Double.toString(lat));
+            longitude.setText(Double.toString(lon));
         }
     }
 
