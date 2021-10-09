@@ -1,5 +1,7 @@
 package seng202.team3.view;
 
+
+import javafx.event.ActionEvent;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,6 +9,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.json.JSONArray;
+import org.json.JSONObject;
+import seng202.team3.controller.UIDataInterface;
+
 import org.json.JSONObject;
 import seng202.team3.controller.ReadCSV;
 import seng202.team3.controller.UIDataInterface;
@@ -86,20 +91,17 @@ public class ReportCrimeController implements Initializable {
      * created into a UserData object
      * @return Formatted string to be turned into a UserData object
      */
-    public String formatInputs () {
+    public String formatInputs () throws IOException, InterruptedException {
         String formattedString;
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
-        //The code below adds the formatting for latitude and longitude, with protection for null values
-        if (latitude.getText().equals("")) {
+        Double[] latLong = getLatLong();
+        if (latLong[0] != 0.0) {
+            formattedString = formattedString + latLong[0] + ",";
+            formattedString = formattedString + latLong[1];
+        } else {
             formattedString = formattedString + ",";
-        } else {
-            formattedString = formattedString + latitude.getText() + ",";
-        }
-        if (!longitude.getText().equals("")) {
-            formattedString = formattedString + longitude.getText();
-        } else {
             formattedString = formattedString + "N";
         }
         return formattedString;
@@ -125,7 +127,7 @@ public class ReportCrimeController implements Initializable {
      * @throws IOException if the input data is invalid.
      * @throws InterruptedException if the thread is interrupted.
      */
-    public void getLatLong() throws IOException, InterruptedException {
+    public static Double[] getLatLong() throws IOException, InterruptedException {
         Double lat = null;
         Double lon = null;
         GeocoderApi geocoderApi = new GeocoderApi();
@@ -138,10 +140,13 @@ public class ReportCrimeController implements Initializable {
             lon = result.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 
         }
+
         if (lat != null) {
-            latitude.setText(Double.toString(lat));
-            longitude.setText(Double.toString(lon));
+            return new Double[]{lat, lon};
         }
+
+        return new Double[]{0.0, 0.0};
+
     }
 
     public void openConfirmationWindow (int confirmationID) {

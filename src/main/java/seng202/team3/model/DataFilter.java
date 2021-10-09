@@ -1,9 +1,11 @@
 package seng202.team3.model;
 
+import org.apache.commons.lang3.ArrayUtils;
 import seng202.team3.controller.FilterController;
+
 import java.text.ParseException;
-import java.util.*;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -71,8 +73,10 @@ public class DataFilter {
         for (CrimeData crime : data) {
             switch (filter) {
                 case LOCATION:
-                    if (!Objects.equals(crime.getLocation(), FilterController.getActiveLocation())) {
-                        singleFilterArray.add(crime);
+                    if (!(Objects.equals(crime.getLocation(), ", "))) {
+                        if (!crimeInRange(crime.getLocation(), FilterController.getActiveLocation())) {
+                            singleFilterArray.add(crime);
+                        }
                     }
                     break;
                 case CRIME_TYPE:
@@ -106,7 +110,6 @@ public class DataFilter {
                         e.printStackTrace();
                     }
                     break;
-
             }
 
         }
@@ -206,7 +209,62 @@ public class DataFilter {
         }
     }
 
+    /**
+     * Calculates whether two address' are within 1km radius of each other
+     * @param crimeAddress Address of a CrimeDataObject
+     * @param inputLatLong Address of user input
+     * @return True if address' are within 1km radius, false otherwise
+     */
+    public boolean crimeInRange(String crimeAddress, Double[] inputLatLong){
+        //TODO call this method where its supposed to be called
+
+        //Initialising variables
+        String[] crimeLatLong = crimeAddress.split(",");
+
+        double[] inputLatLong2 = ArrayUtils.toPrimitive(inputLatLong);
+        return (distance(Double.parseDouble(crimeLatLong[0]), Double.parseDouble(crimeLatLong[1]), inputLatLong2[0], inputLatLong2[1]));
+
+
     }
 
 
+    /**
+     * Calculates distance between two lat/long points
+     * Adapted from: https://dzone.com/articles/distance-calculation-using-3
+     * @param lat1 latitude of user inputted address
+     * @param lon1 longitude of user inputted address
+     * @param lat2 latitude of crime address
+     * @param lon2 longitude of crime address
+     * @return True if distance between two points is less than 1km
+     */
+    private boolean distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344;
+        return (dist < 1.1);
+    }
 
+    /**
+     * Converts decimal degrees to radians
+     * Adapted from: https://dzone.com/articles/distance-calculation-using-3
+     * @param deg Decimal degree value
+     * @return Radian value
+     */
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    /**
+     * Converts radians to decimal degrees
+     * Adapted from: https://dzone.com/articles/distance-calculation-using-3
+     * @param rad Radian Value
+     * @return Decimal degree value
+     */
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
+}
