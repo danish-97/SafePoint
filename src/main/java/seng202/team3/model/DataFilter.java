@@ -222,9 +222,10 @@ public class DataFilter {
         String[] crimeLatLong = crimeAddress.split(",");
 
         double[] inputLatLong2 = ArrayUtils.toPrimitive(inputLatLong);
+        if (Objects.equals(crimeLatLong[0], "") || Objects.equals(crimeLatLong[1], "")) {
+            return false;
+        }
         return (distance(Double.parseDouble(crimeLatLong[0]), Double.parseDouble(crimeLatLong[1]), inputLatLong2[0], inputLatLong2[1]));
-
-
     }
 
 

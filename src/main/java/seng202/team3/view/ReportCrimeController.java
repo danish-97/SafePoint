@@ -57,10 +57,10 @@ public class ReportCrimeController implements Initializable {
     @FXML
     public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException, InterruptedException {
         if (validateInputs ()) {
-            getLatLong();
+            getLatLong(addressField.getText());
             if (!isEditing) {
                 UIDataInterface.addUserData(formatInputs());
-                openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()));
+                openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()) - 1);
             } else {
                 ReadCSV.replaceData ("data.csv", currentID, formatInputs());
                 openConfirmationWindow();
@@ -96,7 +96,7 @@ public class ReportCrimeController implements Initializable {
         formattedString = date.getValue().toString() + ",";
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
-        Double[] latLong = getLatLong();
+        Double[] latLong = getLatLong(addressField.getText());
         if (latLong[0] != 0.0) {
             formattedString = formattedString + latLong[0] + ",";
             formattedString = formattedString + latLong[1];
@@ -127,11 +127,11 @@ public class ReportCrimeController implements Initializable {
      * @throws IOException if the input data is invalid.
      * @throws InterruptedException if the thread is interrupted.
      */
-    public static Double[] getLatLong() throws IOException, InterruptedException {
+    public static Double[] getLatLong(String address) throws IOException, InterruptedException {
         Double lat = null;
         Double lon = null;
         GeocoderApi geocoderApi = new GeocoderApi();
-        String res = geocoderApi.doRequest(addressField.getText().replaceAll(" ", "-"));
+        String res = geocoderApi.doRequest(address.replaceAll(" ", "-"));
         JSONObject obj = new JSONObject(res);
         JSONArray data = obj.getJSONArray("results");
         for (int i = 0; i < data.length(); i++) {

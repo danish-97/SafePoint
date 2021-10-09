@@ -75,7 +75,7 @@ public class FilterController {
 
     public static ArrayList<CrimeStat> getActiveFilters() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
-        if (activeLocation != null && !activeLocation.equals("")) {
+        if (activeLocation != null) {
             activeFilters.add(CrimeStat.LOCATION);
         }
         if (activeCrimeType != null && !activeCrimeType.equals("ALL")) {
