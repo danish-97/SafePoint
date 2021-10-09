@@ -2,7 +2,6 @@ package seng202.team3.controller;
 
 import javafx.scene.chart.XYChart;
 import seng202.team3.model.CrimeData;
-import seng202.team3.model.PoliceData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +9,8 @@ import java.time.DayOfWeek;
 import java.time.ZoneId;
 import java.time.temporal.WeekFields;
 import java.util.*;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * Class which groups the dates into weeks and creates the data which populates the Graphs.
@@ -27,14 +28,18 @@ public class GraphCreator {
     public Map<Integer, List<CrimeData>> formattedDatesIntoGroups(ArrayList<CrimeData> crimeData) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 7);
-
         Map<Integer, List<CrimeData>> weeklyCrimes = new HashMap<>();
+        Map<Integer, Map<Integer, List<CrimeData>>> groupedByYears = new HashMap<>();
         for (CrimeData crime: crimeData) {
             ArrayList<CrimeData> crimesTemp;
+            Integer year = null;
             Integer weekOfYear = null;
             try {
+                year = simpleDateFormat.parse(crime.getDate())
+                        .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();
                 weekOfYear = simpleDateFormat.parse(crime.getDate())
                         .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -45,7 +50,10 @@ public class GraphCreator {
             }
             crimesTemp.add(crime);
             weeklyCrimes.put(weekOfYear, crimesTemp);
+            groupedByYears.put(year, weeklyCrimes);
         }
+
+
 
         return weeklyCrimes;
     }
@@ -92,5 +100,11 @@ public class GraphCreator {
         }
 
         return series;
+    }
+
+    public static void main(String[] args) {
+        GraphCreator creator = new GraphCreator();
+        ArrayList<CrimeData> crimeData = ReadCSV.readDataLineByLine("data.csv");
+        creator.formattedDatesIntoGroups(crimeData);
     }
 }

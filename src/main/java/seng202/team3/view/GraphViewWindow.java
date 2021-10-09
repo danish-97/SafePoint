@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Class which creates the Window that pops up after clicking the View Graph Button.
+ * @author Danish Jahangir
+ */
 public class GraphViewWindow {
 
     private static Stage stage = new Stage();
