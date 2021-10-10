@@ -7,6 +7,7 @@ import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 import seng202.team3.model.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
@@ -36,6 +37,8 @@ public class StepDefinitions {
         UIDataInterface.initCrimeData();
         activeCrimeData = DataManager.getData();
     }
+
+
 
 
     @When("I choose to display police data")
@@ -80,23 +83,23 @@ public class StepDefinitions {
     public void see_no_crimes() {
         assertEquals(0, filteredCrimes.size());
     }
-    
+
     @Then("I should only see police data")
     public void see_only_police_data() {
         assertEquals(true, filteredCrimes.get(0) instanceof PoliceData);
     }
-    
+
     @Then("I should only see user data")
     public void see_only_user_data() {
         assertEquals(true, filteredCrimes.get(0) instanceof UserData);
-        
+
     }
 
     @Then("I should only see crimes of that type \\(theft) where arrests were made")
     public void iShouldOnlySeeCrimesOfThatTypeWhereArrestsWereMade() {
         assertEquals("THEFT", filteredCrimes.get(0).getCrimeType());
         assertEquals("YES", ((PoliceData)filteredCrimes.get(0)).isArrestMade());
-        
+
     }
 
     @Then("I should only see the chosen type of crime \\(theft)")
@@ -160,6 +163,41 @@ public class StepDefinitions {
     public void theCrimesOnTheSidebarWillBeSortedBasedOnLowRiskAreas() {
         assertEquals("23", ((PoliceData)filteredCrimes.get(0)).getWard());
     }
+
+    @Given("crimes have been loaded to sidebar and no filters have been selected and I have reported a crime")
+    public void crimesHaveBeenLoadedToSidebarAndNoFiltersHaveBeenSelectedAndIHaveReportedACrime() {
+
+    }
+
+    @When("I report a crime")
+    public void iReportACrime() throws ParseException {
+        UIDataInterface.addUserData("2021-10-08,6 N Cucumber Ave,ASSAULT,41.9485252,-87.6895052");
+
+    }
+
+//    @Then("a user reported crime is added to the list of active crimes")
+//    public void aUserReportedCrimeIsAddedToTheListOfActiveCrimes() {
+//        assertEquals(true, activeCrimeData.contains());
+//    }
+//
+//    @When("I edit a crime")
+//    public void iEditACrime() {
+//
+//    }
+//
+//    @Then("the changes will be displayed on the user reported crime")
+//    public void theChangesWillBeDisplayedOnTheUserReportedCrime() {
+//
+//    }
+//
+//    @When("I delete a crime")
+//    public void iDeleteACrime() {
+//
+//    }
+//
+//    @Then("the user reported crime is removed from the list of active crimes")
+//    public void theUserReportedCrimeIsRemovedFromTheListOfActiveCrimes() {
+//    }
 }
 
 
