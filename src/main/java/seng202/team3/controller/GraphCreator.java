@@ -2,6 +2,7 @@ package seng202.team3.controller;
 
 import javafx.scene.chart.XYChart;
 import seng202.team3.model.CrimeData;
+import seng202.team3.model.PoliceData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,28 +33,29 @@ public class GraphCreator {
         Map<Integer, List<CrimeData>> weeklyCrimes = new HashMap<>();
         Map<Integer, Map<Integer, List<CrimeData>>> groupedByYears = new HashMap<>();
         for (CrimeData crime : crimeData) {
-
-            ArrayList<CrimeData> crimesTemp;
-            Integer weekOfYear = null;
-            Integer year = null;
-            try {
-                year = simpleDateFormat.parse(crime.getDate()).getYear() + 1900;
-                weekOfYear = simpleDateFormat.parse(crime.getDate())
-                        .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (crime instanceof PoliceData) {
+                ArrayList<CrimeData> crimesTemp;
+                Integer weekOfYear = null;
+                Integer year = null;
+                try {
+                    year = simpleDateFormat.parse(crime.getDate()).getYear() + 1900;
+                    weekOfYear = simpleDateFormat.parse(crime.getDate())
+                            .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (groupedByYears.get(year) == null) {
+                    groupedByYears.put(year, new HashMap<>());
+                }
+                weeklyCrimes = groupedByYears.get(year);
+                if (weeklyCrimes.get(weekOfYear) == null) {
+                    crimesTemp = new ArrayList<>();
+                } else {
+                    crimesTemp = (ArrayList<CrimeData>) weeklyCrimes.get(weekOfYear);
+                }
+                crimesTemp.add(crime);
+                weeklyCrimes.put(weekOfYear, crimesTemp);
             }
-            if (groupedByYears.get(year) == null) {
-                groupedByYears.put(year, new HashMap<>());
-            }
-            weeklyCrimes = groupedByYears.get(year);
-            if (weeklyCrimes.get(weekOfYear) == null) {
-                crimesTemp = new ArrayList<>();
-            } else {
-                crimesTemp = (ArrayList<CrimeData>) weeklyCrimes.get(weekOfYear);
-            }
-            crimesTemp.add(crime);
-            weeklyCrimes.put(weekOfYear, crimesTemp);
 
         }
         return groupedByYears;
