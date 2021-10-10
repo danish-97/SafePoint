@@ -30,16 +30,13 @@ public class GraphCreator {
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 7);
         Map<Integer, List<CrimeData>> weeklyCrimes = new HashMap<>();
         Map<Integer, Map<Integer, List<CrimeData>>> groupedByYears = new HashMap<>();
-        for (CrimeData crime: crimeData) {
+        for (CrimeData crime : crimeData) {
             ArrayList<CrimeData> crimesTemp;
-            Integer year = null;
             Integer weekOfYear = null;
+
             try {
-                year = simpleDateFormat.parse(crime.getDate())
-                        .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();
                 weekOfYear = simpleDateFormat.parse(crime.getDate())
                         .toInstant().atZone(ZoneId.systemDefault()).toLocalDate().get(weekFields.weekOfWeekBasedYear());
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -50,8 +47,12 @@ public class GraphCreator {
             }
             crimesTemp.add(crime);
             weeklyCrimes.put(weekOfYear, crimesTemp);
-            groupedByYears.put(year, weeklyCrimes);
+
+
+
         }
+
+
 
 
 
