@@ -185,7 +185,7 @@ public class ReadCSV extends Importer {
                 String[] newStringArr = newData.split(",");
                 ArrayList<String> newDataArr = new ArrayList<>(Arrays.asList(newStringArr));
                 newDataArr.add(0, id);
-                for (int i = 0; i < 7; i++) {
+                for (int i = 0; i < 8; i++) {
                     //adding null elements unique to PoliceData
                     newDataArr.add(4, "N");
                 }
