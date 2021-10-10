@@ -2,6 +2,9 @@ package seng202.team3.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The test class for the Class DataManager.
+ */
 public class DataManagerTest {
 
     /**

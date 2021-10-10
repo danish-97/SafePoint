@@ -18,7 +18,7 @@ public class DataFilterTest {
 
     private DataFilter dataFilter = new DataFilter();
     ArrayList<CrimeData> crimeDataArrayList = new ArrayList<>();
-    private FilterController filterController;
+    private FilterController FilterController;
 
     /**
      * Initializes the info for the data filter
@@ -40,7 +40,7 @@ public class DataFilterTest {
         uData.add("ID123");
         uData.add("11/26/2020"); uData.add("49 MAYS ROAD"); uData.add("THEFT"); uData.add("41.812610526"); uData.add("-87.723765071");
         crimeDataArrayList.add(new UserData("4", uData));
-        filterController = new FilterController();
+        FilterController = new FilterController();
 
     }
 
@@ -52,11 +52,11 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.CRIME_TYPE;
         activeFilters.add(typeFilter);
-       filterController.setActiveCrimeType("THEFT");
-       filterController.setArrestMade(false);
-       filterController.setUserDataActive(true);
-       filterController.setPoliceDataActive(true);
-       filterController.setDateFiltering(false);
+       FilterController.setActiveCrimeType("THEFT");
+       FilterController.setArrestMade(false);
+       FilterController.setUserDataActive(true);
+       FilterController.setPoliceDataActive(true);
+       FilterController.setDateFiltering(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
         assertEquals("1", filteredData.get(0).getId());
@@ -70,27 +70,27 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<CrimeStat>();
         CrimeStat typeFilter = CrimeStat.ARREST_MADE;
         activeFilters.add(typeFilter);
-        filterController.setArrestMade(true);
-        filterController.setActiveCrimeType(null);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(false);
+        FilterController.setArrestMade(true);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(1, filteredData.size());
     }
 
     /**
-     * Tests if only PoliceData will be returned in the ArrayList
+     * Tests if only PoliceData will be returned to the ArrayList
      */
     @Test
     public void testPoliceDataFilter() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
         CrimeStat typeFilter = CrimeStat.POLICE_DATA;
         activeFilters.add(typeFilter);
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setUserDataActive(false);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(false);
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setUserDataActive(false);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(false);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(3, filteredData.size());
     }
@@ -103,16 +103,16 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
         CrimeStat typeFilter = CrimeStat.DATE_RANGE;
         activeFilters.add(typeFilter);
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(true);
-        filterController.setDateFiltering(true);
-        filterController.setRegionDataActive(false);
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(true);
+        FilterController.setDateFiltering(true);
+        FilterController.setRegionDataActive(false);
         Date date = new Date(121, 5, 10); // Months are 0-based, therefore June = month 5
-        filterController.setStartDate(date);
+        FilterController.setStartDate(date);
         Date date2 = new Date(121, 5, 30); // Years are calculated based on actualYear - 1900
-        filterController.setEndDate(date2);
+        FilterController.setEndDate(date2);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
     }
@@ -122,13 +122,13 @@ public class DataFilterTest {
      */
     @Test
     public void testLowFrequencyFilter() {
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(true);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(true);
-        filterController.setRegionFilteringKey("LOW FREQUENCY");
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(true);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(true);
+        FilterController.setRegionFilteringKey("LOW FREQUENCY");
 
         System.out.println(crimeDataArrayList);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
@@ -145,13 +145,13 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
         CrimeStat typeFilter = CrimeStat.HIGH_FREQUENCY;
         activeFilters.add(typeFilter);
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(true);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(true);
-        filterController.setRegionFilteringKey("HIGH FREQUENCY");
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(true);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(true);
+        FilterController.setRegionFilteringKey("HIGH FREQUENCY");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         System.out.println(filteredData);
         assertEquals("THEFT", filteredData.get(0).getCrimeType());
@@ -166,17 +166,17 @@ public class DataFilterTest {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();
         CrimeStat typeFilter = CrimeStat.DATE_RANGE;
         activeFilters.add(typeFilter);
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(true);
-        filterController.setDateFiltering(true);
-        filterController.setRegionDataActive(false);
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(true);
+        FilterController.setDateFiltering(true);
+        FilterController.setRegionDataActive(false);
 
         Date date = new Date(121, 5, 15); // Months are 0-based, therefore June = month 5
-        filterController.setStartDate(date);
+        FilterController.setStartDate(date);
         Date date2 = new Date(121, 5, 15); // Years are calculated based on actualYear - 1900
-        filterController.setEndDate(date2);
+        FilterController.setEndDate(date2);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals(2, filteredData.size());
 
@@ -187,30 +187,30 @@ public class DataFilterTest {
      */
     @Test
     public void testHighRiskAreasSorting() {
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(false);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(true);
-        filterController.setRegionFilteringKey("HIGH RISK AREAS");
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(false);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(true);
+        FilterController.setRegionFilteringKey("HIGH RISK AREAS");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         assertEquals("8", ((PoliceData)filteredData.get(0)).getWard());
 
     }
 
     /**
-     * Tests if this retyrns an ArrayList of crimes from low risk areas to high risk areas
+     * Tests if this returns an ArrayList of crimes from low risk areas to high risk areas
      */
     @Test
     public void testLowRiskAreasSorting() {
-        filterController.setArrestMade(false);
-        filterController.setActiveCrimeType(null);
-        filterController.setPoliceDataActive(true);
-        filterController.setUserDataActive(false);
-        filterController.setDateFiltering(false);
-        filterController.setRegionDataActive(true);
-        filterController.setRegionFilteringKey("LOW RISK AREAS");
+        FilterController.setArrestMade(false);
+        FilterController.setActiveCrimeType(null);
+        FilterController.setPoliceDataActive(true);
+        FilterController.setUserDataActive(false);
+        FilterController.setDateFiltering(false);
+        FilterController.setRegionDataActive(true);
+        FilterController.setRegionFilteringKey("LOW RISK AREAS");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
         System.out.println(filteredData.get(2));
         System.out.println(crimeDataArrayList);

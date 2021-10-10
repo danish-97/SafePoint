@@ -6,14 +6,14 @@ package seng202.team3.model;
  */
 public class CrimeData {
 
-    private String id;/**Unique ID for each CrimeData*/
-    private static int latestID; /**Is the latest id for crime Objects**/
-    private String address; /**Address that the crime happened at (or closest to)*/
-    private String date; /**Date that the crime happened on*/
-    private String latitude; /**Latitude representation of the location of the crime*/
-    private String longitude; /**Longitude representation of the location of the crime*/
-    private String location; /**Tuple containing both latitude and longitude*/
-    private String crimeType; /**Type of crime that this object represents*/
+    private String id; /*Unique ID for each CrimeData*/
+    private static int latestID; /*Is the latest id for crime Objects**/
+    private String address; /*Address that the crime happened at (or closest to)*/
+    private String date; /*Date that the crime happened on*/
+    private String latitude; /*Latitude representation of the location of the crime*/
+    private String longitude; /*Longitude representation of the location of the crime*/
+    private String location; /*Tuple containing both latitude and longitude*/
+    private String crimeType; /*Type of crime that this object represents*/
 
     /**
      * Constructor method for the class CrimeData
@@ -145,7 +145,7 @@ public class CrimeData {
     }
 
     /**
-     * Sets the latest Id of the data
+     * Sets the latest ID of the data
      * @param latest is the id we set it to.
      */
     public static void setLatestID (int latest) {

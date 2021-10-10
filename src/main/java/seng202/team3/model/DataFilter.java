@@ -136,7 +136,7 @@ public class DataFilter {
         List<Map.Entry<String, ArrayList<CrimeData>>> list =
                 new ArrayList<>(countList.entrySet());
         Collections.sort(list, new EntryComparator()); // Sort based on our new overridden comparator, checking ArrayList lengths.
-        ArrayList<CrimeData> finalData = new ArrayList<CrimeData>();
+        ArrayList<CrimeData> finalData = new ArrayList<>();
         for (Map.Entry<String, ArrayList<CrimeData>> entry : list) {
             finalData.addAll(entry.getValue());
         }
@@ -152,16 +152,16 @@ public class DataFilter {
      */
     public ArrayList<CrimeData> sortByRisk(ArrayList<CrimeData> filteredData) {
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
-        for (int i = 0; i < filteredData.size(); i++) {
+        for (CrimeData filteredDatum : filteredData) {
 
-            if (countList.containsKey(((PoliceData)filteredData.get(i)).getWard())) {
-                ArrayList<CrimeData> currentArray = countList.get(((PoliceData) filteredData.get(i)).getWard());
-                currentArray.add(filteredData.get(i));
-                countList.put(((PoliceData) filteredData.get(i)).getWard(), currentArray);
+            if (countList.containsKey(((PoliceData) filteredDatum).getWard())) {
+                ArrayList<CrimeData> currentArray = countList.get(((PoliceData) filteredDatum).getWard());
+                currentArray.add(filteredDatum);
+                countList.put(((PoliceData) filteredDatum).getWard(), currentArray);
             } else {
-                ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
-                hashMapArray.add(filteredData.get(i));
-                countList.put(((PoliceData) filteredData.get(i)).getWard(), hashMapArray);
+                ArrayList<CrimeData> hashMapArray = new ArrayList<>();
+                hashMapArray.add(filteredDatum);
+                countList.put(((PoliceData) filteredDatum).getWard(), hashMapArray);
             }
         }
 
@@ -182,16 +182,16 @@ public class DataFilter {
     public ArrayList<CrimeData> sortByFrequency(ArrayList<CrimeData> crimeDataArrayList, boolean isLowFrequency) {
 
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();
-        for (int i = 0; i < crimeDataArrayList.size(); i++) {
+        for (CrimeData crimeData : crimeDataArrayList) {
 
-            if (countList.containsKey(crimeDataArrayList.get(i).getCrimeType())) {
-                ArrayList<CrimeData> currentArray = countList.get(crimeDataArrayList.get(i).getCrimeType());
-                currentArray.add(crimeDataArrayList.get(i));
-                countList.put(crimeDataArrayList.get(i).getCrimeType(), currentArray);
+            if (countList.containsKey(crimeData.getCrimeType())) {
+                ArrayList<CrimeData> currentArray = countList.get(crimeData.getCrimeType());
+                currentArray.add(crimeData);
+                countList.put(crimeData.getCrimeType(), currentArray);
             } else {
-                ArrayList<CrimeData> hashMapArray = new ArrayList<CrimeData>();
-                hashMapArray.add(crimeDataArrayList.get(i));
-                countList.put(crimeDataArrayList.get(i).getCrimeType(), hashMapArray);
+                ArrayList<CrimeData> hashMapArray = new ArrayList<>();
+                hashMapArray.add(crimeData);
+                countList.put(crimeData.getCrimeType(), hashMapArray);
             }
         }
 
@@ -219,10 +219,10 @@ public class DataFilter {
     }
 
     /**
-     * Calculates whether two address' are within 1km radius of each other
+     * Calculates whether two address' are within 1 km radius of each other
      * @param crimeAddress Address of a CrimeDataObject
      * @param inputLatLong Address of user input
-     * @return True if address' are within 1km radius, false otherwise
+     * @return True if address' are within 1 km radius, false otherwise
      */
     public boolean crimeInRange(String crimeAddress, Double[] inputLatLong){
         //TODO call this method where its supposed to be called
@@ -245,7 +245,7 @@ public class DataFilter {
      * @param lon1 longitude of user inputted address
      * @param lat2 latitude of crime address
      * @param lon2 longitude of crime address
-     * @return True if distance between two points is less than 1km
+     * @return True if distance between two points is less than 1 km
      */
     private boolean distance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;

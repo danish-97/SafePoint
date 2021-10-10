@@ -16,10 +16,9 @@ public class CrimeDataTest {
 
     /**
      * Tests if the getAddress method works as intended.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
-    public void checkAddress() throws ParseException {
+    public void checkAddress() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -28,10 +27,9 @@ public class CrimeDataTest {
 
     /**
      * Tests if the getData method works as intended.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
-    public void checkDate() throws ParseException {
+    public void checkDate() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -40,10 +38,9 @@ public class CrimeDataTest {
 
     /**
      * Checks if the getLocation method works as intended.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
-    public void checkLocation() throws ParseException {
+    public void checkLocation() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -52,10 +49,9 @@ public class CrimeDataTest {
 
     /**
      * Checks if the getCrimeType method works as intended.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
-    public void checkCrimeType() throws ParseException {
+    public void checkCrimeType() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);

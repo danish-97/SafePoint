@@ -4,19 +4,15 @@ package seng202.team3.view;
 import com.google.gson.Gson;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import netscape.javascript.JSObject;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
-import seng202.team3.model.CrimeData;
-import seng202.team3.model.DataManager;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -55,12 +51,10 @@ public class MainViewController implements Initializable {
     /**
      * Handles update crime button on main GUI. This calls functions to update filters and get new data for the
      * crime data panel
-     * @param e input variable
      * @throws ParseException if user input is invalid
-     * @throws ClassNotFoundException if CrimeData is invalid
      */
     @FXML
-    public void updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
+    public void updateCrimeData() throws ParseException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();

@@ -28,7 +28,7 @@ public class GraphCreator {
     public Map<Integer, Map<Integer,List<CrimeData>>> formattedDatesIntoGroups(ArrayList<CrimeData> crimeData) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 7);
-        Map<Integer, List<CrimeData>> weeklyCrimes = new HashMap<>();
+        Map<Integer, List<CrimeData>> weeklyCrimes;
         Map<Integer, Map<Integer, List<CrimeData>>> groupedByYears = new HashMap<>();
         for (CrimeData crime : crimeData) {
             if (crime instanceof PoliceData) {

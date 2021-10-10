@@ -8,13 +8,8 @@ import seng202.team3.controller.CompareDataController;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * Window handler for comparing crimes. This will handle the opening of a window for two different crimes,
@@ -42,8 +37,8 @@ public class CompareDataWindow {
     }
 
     /**
-     * Constructs the JavaFX components for the difference in the crimes, e.g the elements in this window
-     * not already constructed by the dataview window classes.
+     * Constructs the JavaFX components for the difference in the crimes, e.g. the elements in this window
+     * not already constructed by the dataView window classes.
      * @param distanceStr string showing distance between crimes
      * @param dateDiffStr string showing time difference between crimes
      */

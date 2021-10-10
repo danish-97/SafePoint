@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Junit Test for the class UserData.
+ */
 public class UserDataTest {
 
     /**

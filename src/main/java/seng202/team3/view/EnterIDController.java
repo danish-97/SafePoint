@@ -1,6 +1,5 @@
 package seng202.team3.view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -25,10 +24,9 @@ public class EnterIDController implements Initializable {
 
     /**
      * Handles the ID being entered by the user and button to confirm clicked.
-     * @param e input parameter
      */
     @FXML
-    public void confirmID (ActionEvent e) {
+    public void confirmID() {
         activeReportSession.setInputID (crimeIDInput.getText());
         ReportCrimeWindow.closeIDStage();
     }

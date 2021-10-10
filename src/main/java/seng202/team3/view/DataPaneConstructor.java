@@ -84,8 +84,8 @@ public class DataPaneConstructor {
 
     /**
      * Constructs the culled data into panes, as well as the filler top and bottom panes to allow a smoother
-     * experience for the user. This will construct all the DataPanes in topData, middle, and bottomData, and fill
-     * the rest of the ScrollPane with 2 empty panes that are not visible to the end user
+     * experience for the user. This will construct all the DataPanes in topData, middle, and bottomData, and fills
+     * the ScrollPane with 2 empty panes that are not visible to the end user
      * @param topData the data that occurs above the middle index of activeData
      * @param bottomData the data that occurs below the middle index of activeData
      * @param middle the index of activeData that the user is focusing on with the scroll bar
