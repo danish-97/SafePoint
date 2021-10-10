@@ -37,7 +37,6 @@ public class MainViewController implements Initializable {
     @FXML private CheckBox policeDataToggle;
     @FXML private CheckBox userDataToggle;
     @FXML private CheckBox arrestMadeToggle;
-    @FXML private CheckBox graphToggle;
     @FXML private CheckBox heatMapToggle;
     @FXML private CheckBox regionFilteringToggle;
     @FXML private ChoiceBox regionFilteringKey;
@@ -76,29 +75,34 @@ public class MainViewController implements Initializable {
 
     /**
      * Handles when user selects check box for heat map view on main GUI
-     * @param e input variable
      */
     @FXML
-    public void updateHeatMap(ActionEvent e) {
+    public void updateHeatMap() {
         webEngine.executeScript("toggleHeatMap()");
 
     }
 
     /**
      * Handles when a user clicks the report crime button on main GUI
-     * @param e input variable
      */
     @FXML
-    public void reportCrime (ActionEvent e) {
+    public void reportCrime() {
         new ReportCrimeWindow();
     }
 
     /**
-     * Handles when the compare crimes option is clicked
-     * @param e input variable
+     * Handles when a user clicks the graph view button on main GUI
      */
     @FXML
-    public void compareCrimeToggle (ActionEvent e) {
+    public void graphView() {
+        new GraphViewWindow();
+    }
+
+    /**
+     * Handles when the compare crimes option is clicked
+     */
+    @FXML
+    public void compareCrimeToggle() {
         UIDataInterface.setCompareCrimes(compareCrimesToggle.isSelected());
     }
 
