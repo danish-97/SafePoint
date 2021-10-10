@@ -6,6 +6,8 @@ import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 import seng202.team3.model.UserData;
 
+import java.text.ParseException;
+
 /**
  * CrimeViewButton is the button on DataPane for viewing a crime in more detail.
  */
@@ -27,8 +29,12 @@ public class CrimeViewButton extends Button {
         this.setOnAction(value -> {
             if (UIDataInterface.isComparingCrimes()) {
                 //if this is the second crime to be selected
-                if (UIDataInterface.getComparator() != null) {
-                    new CompareDataWindow(UIDataInterface.getComparator(), data);
+                if (UIDataInterface.getComparator() != null && UIDataInterface.getComparator() != data) {
+                    try {
+                        new CompareDataWindow(UIDataInterface.getComparator(), data);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     UIDataInterface.setComparator(null); //resets comparing data
                 } else {
                     UIDataInterface.setComparator(data);

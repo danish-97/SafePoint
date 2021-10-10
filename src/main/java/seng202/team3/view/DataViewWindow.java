@@ -18,7 +18,7 @@ public class DataViewWindow {
     /**
      * Creates a JavaFX Pane and adds Labels and formatting to the pane.
      * All CrimeData attributes added to the Pane are found in PoliceData and UserData.
-     * Constructors for PoliceData and UserData windows are found in seperate files.
+     * Constructors for PoliceData and UserData windows are found in separate files.
      * @param data The data to be displayed on the window
      * @return Pane to be displayed on the view data window
      */
@@ -53,7 +53,7 @@ public class DataViewWindow {
 
 
     /**
-     * Opens a seperate window to display the pane created
+     * Opens a separate window to display the pane created
      * @param root the Pane or Parent JavaFX object to be displayed
      */
     public void displayWindow (Parent root) {

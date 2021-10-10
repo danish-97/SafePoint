@@ -45,7 +45,7 @@ public class ReadCSV extends Importer {
 
             //If Crime is going to be a UserData object
             if (Objects.equals(crimeType, "U")) {
-                columnNotWanted = Arrays.asList(4, 5, 6, 7, 8, 9, 10, 13);
+                columnNotWanted = Arrays.asList(4, 5, 6, 7, 8, 9, 10, 11, 14);
             } else {
                 columnNotWanted = List.of(3, 12); // Removes Crime Type
             }

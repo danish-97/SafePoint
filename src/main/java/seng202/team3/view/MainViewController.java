@@ -57,7 +57,7 @@ public class MainViewController implements Initializable {
      * @throws ClassNotFoundException if CrimeData is invalid
      */
     @FXML
-    public void updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
+    public void updateCrimeData(ActionEvent e) throws ParseException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
@@ -66,8 +66,6 @@ public class MainViewController implements Initializable {
         crimeDataPanel.setVvalue(0.0);
         webEngine.executeScript("removeMarkers()");
         reloadData();
-
-
     }
 
     /**
@@ -134,8 +132,7 @@ public class MainViewController implements Initializable {
     /**
      * Reloads CrimeData to the map when reload crime data button is selected on the main GUI
      */
-    public void reloadData() {
-
+    public void reloadData()  {
         ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);
