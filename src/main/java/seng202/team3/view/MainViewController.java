@@ -10,6 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import netscape.javascript.JSObject;
+import seng202.team3.model.CrimeData;
+import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
 import seng202.team3.controller.UIDataInterface;
 import seng202.team3.model.CrimeData;
@@ -57,7 +60,7 @@ public class MainViewController implements Initializable {
      * @throws ClassNotFoundException if CrimeData is invalid
      */
     @FXML
-    public void updateCrimeData(ActionEvent e) throws ParseException {
+    public void updateCrimeData(ActionEvent e) throws ParseException, ClassNotFoundException {
         updateRegionCrimeData();
         updateMapSettingsData();
         updateRegionDateData();
@@ -66,6 +69,8 @@ public class MainViewController implements Initializable {
         crimeDataPanel.setVvalue(0.0);
         webEngine.executeScript("removeMarkers()");
         reloadData();
+
+
     }
 
     /**
@@ -132,7 +137,8 @@ public class MainViewController implements Initializable {
     /**
      * Reloads CrimeData to the map when reload crime data button is selected on the main GUI
      */
-    public void reloadData()  {
+    public void reloadData() {
+
         ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
         String json = new Gson().toJson(tempActiveCrimeData);

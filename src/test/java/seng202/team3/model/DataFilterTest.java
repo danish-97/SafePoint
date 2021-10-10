@@ -150,6 +150,7 @@ public class DataFilterTest {
         filterController.setRegionDataActive(true);
         filterController.setRegionFilteringKey("HIGH FREQUENCY");
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
+        System.out.println(filteredData);
         assertEquals("THEFT", filteredData.get(0).getCrimeType());
 
     }

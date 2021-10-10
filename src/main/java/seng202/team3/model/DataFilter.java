@@ -27,6 +27,14 @@ public class DataFilter {
         if (activeFilters.size() == 0) {
             return data;
         }
+
+        if (FilterController.getRegionDataActive() &&
+                (activeFilters.contains(CrimeStat.HIGH_RISK_AREA)||
+                        activeFilters.contains(CrimeStat.LOW_RISK_AREA))) {
+            activeFilters.remove(CrimeStat.USER_DATA); // Remove user crime data
+            activeFilters.add(CrimeStat.POLICE_DATA); // Add only police data
+        }
+
         ArrayList<CrimeData> filteredData = (ArrayList<CrimeData>) data.clone();
         for (CrimeStat filter : activeFilters) {
             filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
