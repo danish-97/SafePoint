@@ -16,6 +16,9 @@ public class GraphViewWindow {
 
     private static Stage stage = new Stage();
 
+    /**
+     * Constructor method for the class GraphViewWindow
+     */
     public GraphViewWindow() {
         initGraphViewWindow();
     }

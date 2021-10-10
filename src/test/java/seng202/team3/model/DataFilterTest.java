@@ -20,7 +20,10 @@ public class DataFilterTest {
     ArrayList<CrimeData> crimeDataArrayList = new ArrayList<>();
     private FilterController filterController;
 
-
+    /**
+     * Initializes the info for the data filter
+     * @throws ParseException if the input format is invalid.
+     */
     @BeforeEach
     public void initDataFilterTestInfo() throws ParseException {
 

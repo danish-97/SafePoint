@@ -8,8 +8,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class for the class FilterController.
+ */
 public class FilterControllerTest {
 
+    /**
+     * Sets the filters to null for all filters before the test.
+     */
     @BeforeEach
     public void resetFilters () {
         FilterController.setActiveLocation(null);
@@ -24,6 +30,9 @@ public class FilterControllerTest {
         FilterController.setEndDate(null);
     }
 
+    /**
+     * Checks if the activeFilters method works as intended.
+     */
     @Test
     public void testActiveFilters () {
         FilterController.setActiveLocation(new Double[]{43.76854, -87.1353});
@@ -38,6 +47,9 @@ public class FilterControllerTest {
         assertEquals(expected, FilterController.getActiveFilters());
     }
 
+    /**
+     * Checks if the activeFilters have default value as null.
+     */
     @Test
     public void testActiveFiltersNull () {
         ArrayList<CrimeStat> expected = new ArrayList<>();
@@ -46,6 +58,9 @@ public class FilterControllerTest {
         assertEquals(expected, FilterController.getActiveFilters());
     }
 
+    /**
+     * Checks if the regionFiltering method works as intended.
+     */
     @Test
     public void testRegionFiltering () {
         FilterController.setRegionDataActive(true);

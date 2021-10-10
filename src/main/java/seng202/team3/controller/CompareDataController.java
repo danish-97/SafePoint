@@ -19,6 +19,11 @@ public class CompareDataController {
     private CrimeData data1;
     private CrimeData data2;
 
+    /**
+     * The constructor method for the class CompareDataController
+     * @param data1 is the first crime.
+     * @param data2 is the crime we are comparing with.
+     */
     public CompareDataController (CrimeData data1, CrimeData data2) {
         this.data1 = data1;
         this.data2 = data2;
@@ -67,7 +72,7 @@ public class CompareDataController {
     /**
      * Gets the number of days between the two crime data objects
      * @return String representation of the number of days between the crimes
-     * @throws ParseException
+     * @throws ParseException when the input is invalid
      */
     public String getTimeDifference () throws ParseException {
         Date date1;

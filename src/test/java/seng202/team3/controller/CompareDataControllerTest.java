@@ -7,8 +7,15 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The test class for the CompareDataController class.
+ */
 public class CompareDataControllerTest {
 
+    /**
+     * Checks if the getDistanceZero method works as intended.
+     * @throws ParseException if the input is invalid.
+     */
     @Test
     public void checkGetDistanceZero() throws ParseException {
         ArrayList<String> uData = new ArrayList<>();
@@ -24,6 +31,10 @@ public class CompareDataControllerTest {
         assertEquals("0.0 Km Apart", dist);
     }
 
+    /**
+     * Checks if the getDistance method works as intended.
+     * @throws ParseException if the input is invalid.
+     */
     @Test
     public void checkGetDistance() throws ParseException {
         ArrayList<String> uData = new ArrayList<>();
@@ -39,6 +50,10 @@ public class CompareDataControllerTest {
         assertEquals("18.0 Km Apart", dist);
     }
 
+    /**
+     * Checks if the method getDistanceNull works as intended.
+     * @throws ParseException if the input is invalid.
+     */
     @Test
     public void checkGetDistanceNull() throws ParseException {
         ArrayList<String> uData = new ArrayList<>();
@@ -54,6 +69,10 @@ public class CompareDataControllerTest {
         assertEquals("Distance not available", dist);
     }
 
+    /**
+     * Checks if the method TimeDifferenceZero works as intended.
+     * @throws ParseException if the data is invalid.
+     */
     @Test
     public void checkTimeDifferenceZero() throws ParseException {
         ArrayList<String> uData = new ArrayList<>();
@@ -69,6 +88,10 @@ public class CompareDataControllerTest {
         assertEquals("0 Days Apart", time);
     }
 
+    /**
+     * Checks if the method timeDifference works as intended.
+     * @throws ParseException if the data is invalid.
+     */
     @Test
     public void checkTimeDifference() throws ParseException {
         ArrayList<String> uData = new ArrayList<>();

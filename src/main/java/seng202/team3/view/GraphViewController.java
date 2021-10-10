@@ -38,10 +38,10 @@ public class GraphViewController implements Initializable {
         initYearSelector();
     }
 
-    @FXML
     /**
      * Uses the methods to construct the Graphs.
      */
+    @FXML
     public void viewGraph() {
         lineChart.getData().removeAll(lineChart.getData());
         if (selectCrime.getValue().equals("ALL")) {
@@ -99,6 +99,7 @@ public class GraphViewController implements Initializable {
      * This method uses the data provided by the createGraphOverTimePerType method from the GraphCreator class and
      * creates and populates the lineChart.
      * @param crimeData is the ArrayList of crimes used to populate the graph.
+     * @param crimeType is the type of the crime we get the data for.
      */
     public void graphOverTimePerType(ArrayList<CrimeData> crimeData, String crimeType) {
         XYChart.Series series = graphCreator.createGraphOverTimePerType(crimeData, crimeType,

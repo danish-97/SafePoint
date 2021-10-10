@@ -19,7 +19,7 @@ public class DataFilter {
     /**
      * Returns a list of crime data after filtering has been processed with ALL the active filters.
      * @param data List of crime data to be filtered.
-     * @return an ArrayList<CrimeData> containing only filtered data
+     * @return an ArrayList of CrimeData containing only filtered data
      */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
@@ -73,7 +73,8 @@ public class DataFilter {
      * Filters a list of CrimeData according to a single specific given filter.
      * @param filter criteria used to filter data.
      * @param data list of CrimeData objects to be filtered.
-     * @return an Arraylist<CrimeData> with filtered crimes.
+     * @param activeFilters list of the active filters on the data.
+     * @return an Arraylist of CrimeData with filtered crimes.
      */
     public ArrayList<CrimeData> filterCrimeData(CrimeStat filter, ArrayList<CrimeData> data, ArrayList<CrimeStat> activeFilters) {
         ArrayList<CrimeData> singleFilterArray = new ArrayList<>();
@@ -126,8 +127,8 @@ public class DataFilter {
 
     /**
      * Overrides the sorting criteria by comparing the lengths of ArrayLists in the given HashMap.
-     * @param countList a Hashmap<String, ArrayList<CrimeData>> which maps a given attribute (crime_type or ward) to an
-     *                  ArrayList<CrimeData> associated with this.
+     * @param countList a Hashmap which maps a given attribute (crime_type or ward) to an ArrayList of CrimeData
+     *                 associated with this.
      * @return a final sorted ArrayList, in ascending order.
      */
     public ArrayList<CrimeData> sortOverrider(HashMap<String, ArrayList<CrimeData>> countList) {
@@ -146,8 +147,8 @@ public class DataFilter {
 
     /**
      * Sorts the CrimeData objects array according to whether they belong to the ward with the highest number of crimes.
-     * @param filteredData An ArrayList<CrimeData> which has already been filtered/checked against other filters.
-     * @return an ArrayList<CrimeData> in ascending order, according to which ward has the highest number of crimes.
+     * @param filteredData An ArrayList of CrimeData which has already been filtered/checked against other filters.
+     * @return an ArrayList of CrimeData in ascending order, according to which ward has the highest number of crimes.
      */
     public ArrayList<CrimeData> sortByRisk(ArrayList<CrimeData> filteredData) {
         HashMap<String, ArrayList<CrimeData>> countList = new HashMap<>();

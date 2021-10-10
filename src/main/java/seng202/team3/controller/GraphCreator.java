@@ -11,7 +11,6 @@ import java.time.ZoneId;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
 
 /**
  * Class which groups the dates into weeks and creates the data which populates the Graphs.
@@ -24,8 +23,7 @@ public class GraphCreator {
      * It then takes the parsed data and uses the weekFields to group it by weeks of the year.
      * P.S. Morgan helped a lot in this method.
      * @param crimeData is the data which the method takes the dates field from.
-     * @return a Map<Integer, List<CrimeData>> of the dates grouped by weeks.
-     * @throws ParseException if the formatting is invalid.
+     * @return a Map of the dates grouped by weeks with years as the key.
      */
     public Map<Integer, Map<Integer,List<CrimeData>>> formattedDatesIntoGroups(ArrayList<CrimeData> crimeData) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss a");
