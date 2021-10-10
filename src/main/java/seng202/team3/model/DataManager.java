@@ -1,5 +1,6 @@
 package seng202.team3.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,10 @@ public class DataManager {
         DataFilter filter = new DataFilter();
         activeCrimeData = filter.filterData(allCrimeData);
         return activeCrimeData;
+    }
+
+    public static ArrayList<CrimeData> getAllData () {
+        return allCrimeData;
     }
 
 
