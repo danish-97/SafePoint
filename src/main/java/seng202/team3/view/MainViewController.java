@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import netscape.javascript.JSObject;
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
 import seng202.team3.controller.FilterController;
@@ -101,13 +102,14 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         UIDataInterface.initCrimeData();
         initMap();
+
         initCrimeSelector();
         initRegionFilterSelector();
         //https://stackoverflow.com/questions/31069300/how-to-fire-event-when-scrolling-up-javafx
         crimeDataPanel.vvalueProperty().addListener(
                 (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                     //culls data pane to only show visible ones when the scroll bar is moved.
-                    crimeDataPanel.setContent(DataPaneConstructor.cullPanes (crimeDataPanel.getVvalue()));
+                    crimeDataPanel.setContent(DataPaneConstructor.cullPanes(crimeDataPanel.getVvalue()));
                 });
     }
 
@@ -115,7 +117,6 @@ public class MainViewController implements Initializable {
     /**
      * Loads the CrimeData to the map. This uses the DataManager call to get the activeCrimeData
      */
-
     public void loadData() {
         ArrayList<CrimeData> tempActiveCrimeData;
         tempActiveCrimeData = DataManager.getData();
@@ -123,11 +124,11 @@ public class MainViewController implements Initializable {
         webEngine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 webEngine.executeScript("getAllActiveCrimeData(" + json + ")");
-
             }
         });
 
     }
+
 
     /**
      * Reloads CrimeData to the map when reload crime data button is selected on the main GUI
