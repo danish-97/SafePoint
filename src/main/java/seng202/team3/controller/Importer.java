@@ -71,7 +71,6 @@ public class Importer {
 
                 //Converts Crimes into strings in correct format
                 ArrayList<String[]> stringCrimes = new ArrayList<>();
-                assert crimes != null;
                 for (CrimeData crime : crimes) {
                         stringCrimes.add(policeToString(((PoliceData) crime)));
                 }
