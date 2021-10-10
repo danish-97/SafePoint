@@ -78,7 +78,7 @@ public class CompareDataController {
         Date date1;
         Date date2;
         if (data1 instanceof PoliceData) {
-            //formats date for policedata object
+            //formats date for policeData object
             date1 = new SimpleDateFormat("MM/dd/yyyy").parse(data1.getDate().substring(0, 9));
         } else {
             //formats date for userdata object
@@ -86,7 +86,7 @@ public class CompareDataController {
         }
 
         if (data2 instanceof PoliceData) {
-            //format date for policedata object
+            //format date for policeData object
             date2 = new SimpleDateFormat("MM/dd/yyyy").parse(data2.getDate().substring(0, 9));
         } else {
             //format date for userdata object

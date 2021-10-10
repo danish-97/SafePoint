@@ -29,10 +29,10 @@ public class GraphViewController implements Initializable {
 
     @FXML LineChart lineChart;
 
-    @Override
     /**
      * Initializes the comboBoxes
      */
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initSelectCrime();
         initYearSelector();

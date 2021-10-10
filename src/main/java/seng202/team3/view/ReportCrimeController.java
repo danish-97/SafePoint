@@ -1,7 +1,6 @@
 package seng202.team3.view;
 
 
-import javafx.event.ActionEvent;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,14 +10,8 @@ import javafx.scene.control.TextField;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import seng202.team3.controller.UIDataInterface;
-
-import org.json.JSONObject;
 import seng202.team3.controller.ReadCSV;
-import seng202.team3.controller.UIDataInterface;
-
-import javafx.event.ActionEvent;
 import seng202.team3.model.CrimeData;
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -52,11 +45,10 @@ public class ReportCrimeController implements Initializable {
 
     /**
      * Handles the report crime button function
-     * @param e button pressed
      * @throws ParseException when input is unexpected
      */
     @FXML
-    public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException, InterruptedException {
+    public void reportCrime() throws ParseException, CsvValidationException, IOException, InterruptedException {
         if (validateInputs ()) {
             //valid input given
             getLatLong(addressField.getText());
@@ -153,7 +145,7 @@ public class ReportCrimeController implements Initializable {
             return new Double[]{lat, lon};
         }
 
-        //if data is invalid return general lat long coords
+        //if data is invalid return general lat long Co-ords
         return new Double[]{0.0, 0.0};
 
     }

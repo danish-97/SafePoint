@@ -1,8 +1,6 @@
 package seng202.team3.model;
 
 import org.junit.jupiter.api.Test;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,10 +14,9 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getCaseNumber method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
-    public void caseNumberCheck() throws ParseException {
+    public void caseNumberCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -28,11 +25,10 @@ public class PoliceDataTest {
 
     /**
      * Checks if the isArrestMade method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
 
-    public void arrestMadeCheck() throws ParseException {
+    public void arrestMadeCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -41,11 +37,10 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getxCord method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
     @Test
 
-    public void xCordCheck() throws ParseException {
+    public void xCordCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -55,12 +50,11 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getyCord method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
 
     @Test
 
-    public void yCordCheck() throws ParseException {
+    public void yCordCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -70,12 +64,11 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getDomestic method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
 
     @Test
 
-    public void getDomesticCheck() throws ParseException {
+    public void getDomesticCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -84,12 +77,11 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getWard method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
 
     @Test
 
-    public void getWardCheck() throws ParseException {
+    public void getWardCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);
@@ -98,12 +90,11 @@ public class PoliceDataTest {
 
     /**
      * Checks if the getBeat method gets the correct field from the ArrayList.
-     * @throws ParseException checks if the format is correct when string is parsed.
      */
 
     @Test
 
-    public void getBeatCheck() throws ParseException {
+    public void getBeatCheck() {
         String[] strSplit = "JE266628,06/15/2021 09:30:00 AM,080XX S DREXEL AVE,THEFT,$500 AND UNDER,STREET,N,N,631,8,1183633,1851786,41.748486365,-87.602675062,(41.748486365, -87.602675062)".split(",");
         ArrayList<String> data = new ArrayList<>(Arrays.asList(strSplit));
         PoliceData pData = new PoliceData("1", data);

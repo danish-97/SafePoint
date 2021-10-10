@@ -2,14 +2,10 @@ package seng202.team3.controller;
 
 import seng202.team3.model.CrimeData;
 import seng202.team3.model.DataManager;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import seng202.team3.controller.ReadCSV;
 import seng202.team3.model.UserData;
-import seng202.team3.view.DataPaneConstructor;
 
 /**
  * Class which handles the backend of the User Interface.
@@ -46,8 +42,8 @@ public class UIDataInterface {
      */
     public static void addUserData (String userData) throws ParseException {
         userData = CrimeData.getLatestID() + "," + userData;
-        ArrayList<String> spltUserData = new ArrayList<>(Arrays.asList(userData.split(",")));
-        UserData uData = new UserData (CrimeData.getLatestID(), spltUserData);
+        ArrayList<String> splitUserData = new ArrayList<>(Arrays.asList(userData.split(",")));
+        UserData uData = new UserData (CrimeData.getLatestID(), splitUserData);
         CrimeData.incrementLatestID();
         DataManager.addCrimeData(uData);
         Importer.addUserData(uData);

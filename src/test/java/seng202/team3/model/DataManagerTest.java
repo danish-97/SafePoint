@@ -8,6 +8,9 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+/**
+ * The test class for the Class DataManager.
+ */
 public class DataManagerTest {
 
 

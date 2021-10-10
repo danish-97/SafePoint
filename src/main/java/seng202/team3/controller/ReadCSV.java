@@ -158,7 +158,7 @@ public class ReadCSV extends Importer {
     }
 
     /**
-     * Replaces the line of file that has ID id with the new data
+     * Replaces the line of file that has id with the new data
      * @param file target file to replace the data into
      * @param id ID of the UserData object to be replaced
      * @param newData formatted String from ReportCrimeController representing the new data
@@ -211,7 +211,7 @@ public class ReadCSV extends Importer {
      * Tests if the record is the one we are looking for
      * @param currRecord record we want to compare
      * @param ID id that we are looking for
-     * @return true if the currRecord.ID = ID, false otherwise
+     * @return true if the condition is satisfied, false otherwise
      */
     public static Boolean isRecord (String[] currRecord, String ID) {
         return (Objects.equals(currRecord[0], ID));
