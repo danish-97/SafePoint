@@ -15,6 +15,7 @@ import java.util.Objects;
 
 /**
  * Handles the window for when a user wants to report a crime
+ * @author mattgarrett
  */
 public class ReportCrimeWindow {
 

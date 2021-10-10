@@ -7,7 +7,8 @@ import seng202.team3.model.CrimeData;
 import seng202.team3.model.PoliceData;
 
 /**
- * Handles in depth displaying of PoliceData objects as a seperate window.
+ * Handles in depth displaying of PoliceData objects as a separate window.
+ * @author mattgarrett
  */
 public class PoliceDataWindow extends DataViewWindow{
 

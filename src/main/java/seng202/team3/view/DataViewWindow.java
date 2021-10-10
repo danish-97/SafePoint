@@ -11,6 +11,7 @@ import seng202.team3.model.CrimeData;
 /**
  * Base class for viewing data in a larger window.
  * This creates a pane to display all the common attributes found in every CrimeData object
+ * @author mattgarrett
  */
 public class DataViewWindow {
 

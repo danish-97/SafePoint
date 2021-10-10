@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 
 /**
  * Main FXML controller for main-view.fxml
+ * @author Team 3
  */
 public class MainViewController implements Initializable {
 

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controller class for fxml file enter-id.fxml
+ * @author mattgarrett
  */
 public class EnterIDController implements Initializable {
 

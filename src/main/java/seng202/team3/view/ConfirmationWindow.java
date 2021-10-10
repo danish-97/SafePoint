@@ -9,6 +9,7 @@ import javafx.stage.Stage;
  * This class holds the information for windows that open after a certain user action has happened.
  * This confirms information with the user that their input has been properly handled,
  * or gives necessary information to the user about what they have reported.
+ * @author mattgarrett
  */
 public class ConfirmationWindow {
 

@@ -51,27 +51,6 @@ public class FilterController {
         FilterController.dateFilteringActive = dateFilteringActive;
     }
 
-    public static void setAllFilters(String location, String crimeType, Boolean policeActive, Boolean userActive,
-                                     Boolean arrest, Boolean regionData, String regionKey, Boolean dateFiltering,
-                                     Date start, Date end, Boolean highFreq, Boolean lowFreq,
-                                     Boolean highRisk, Boolean lowRisk) {
-
-        String activeLocation = location;
-        String activeCrimeType = crimeType;
-        Boolean policeDataActive = policeActive;
-        Boolean userDataActive = userActive;
-        Boolean arrestMade = arrest;
-        Boolean regionDataActive = regionData;
-        String regionFilteringKey = regionKey;
-        Boolean dateFilteringActive = dateFiltering;
-        Date startDate = start;
-        Date endDate = end;
-        Boolean highFreqActive = highFreq;
-        Boolean lowFreqActive = lowFreq;
-        Boolean highRiskAreas = highRisk;
-        Boolean lowRiskAreas = lowRisk;
-
-    }
 
     public static ArrayList<CrimeStat> getActiveFilters() {
         ArrayList<CrimeStat> activeFilters = new ArrayList<>();

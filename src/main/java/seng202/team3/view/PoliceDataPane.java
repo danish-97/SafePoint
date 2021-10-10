@@ -7,7 +7,7 @@ import seng202.team3.model.PoliceData;
 /**
  * PoliceDataPane extends DataPane that displays the data from a PoliceData object in a graphical representation.
  * This is used on the CrimeData scroll pane on the main GUI
- * @author Matthew Garrett
+ * @author mattgarrett
  */
 public class PoliceDataPane extends DataPane{
 

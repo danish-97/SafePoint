@@ -10,6 +10,7 @@ import java.text.ParseException;
 
 /**
  * CrimeViewButton is the button on DataPane for viewing a crime in more detail.
+ * @author mattgarrett
  */
 public class CrimeViewButton extends Button {
 

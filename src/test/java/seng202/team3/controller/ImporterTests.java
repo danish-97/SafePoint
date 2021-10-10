@@ -85,10 +85,8 @@ public class ImporterTests {
     public void importPoliceData() {
         //Create expected String[]'s
         ArrayList<String[]> expectedResult = new ArrayList<>();
-        expectedResult.add(new String[]{"JE266536","06/15/2021 07:50:00 AM","042XX W MADISON ST",
-                "ASSAULT","NO","NO","1115","28","1148227","1899678","41.88066079","-87.73118641"});
-        expectedResult.add(new String[]{"JE266628", "06/15/2021 09:30:00 AM", "080XX S DREXEL AVE",
-                "THEFT", "NO", "NO", "631", "8", "1183633", "1851786", "41.74848637", "-87.60267506"});
+        expectedResult.add(new String[]{"JE266628", "06/15/2021 09:30:00 AM", "080XX S DREXEL AVE", "820", "NO", "NO", "N", "631", "8", "6", "1183633", "1851786"});
+        expectedResult.add(new String[]{"JE266536", "06/15/2021 07:50:00 AM", "042XX W MADISON ST", "560", "NO", "NO", "N", "1115", "28", "0", "1148227", "1899678"});
 
 
         //Call to importer addPoliceData

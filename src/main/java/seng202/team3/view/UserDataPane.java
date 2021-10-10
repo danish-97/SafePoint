@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * UserDataPane extends DataPane that displays the data from a UserData object in a graphical representation.
  * This is used on the CrimeData scroll pane on the main GUI
- * @author Matthew Garrett
+ * @author mattgarrett
  */
 public class UserDataPane extends DataPane {
 

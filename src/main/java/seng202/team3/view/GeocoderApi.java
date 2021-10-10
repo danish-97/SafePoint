@@ -6,6 +6,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * Geocoder for handling latitude and longitude from a string
+ * @author Danish Jahangir
+ */
 public class GeocoderApi {
 
     public String doRequest(String address) throws IOException, InterruptedException {

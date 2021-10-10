@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 
 /**
  * FXML Control file for FXML attributes in report-crime-view
+ * @author mattgarrett, Danish Jahangir
  */
 public class ReportCrimeController implements Initializable {
 
@@ -57,16 +58,20 @@ public class ReportCrimeController implements Initializable {
     @FXML
     public void reportCrime (ActionEvent e) throws ParseException, CsvValidationException, IOException, InterruptedException {
         if (validateInputs ()) {
+            //valid input given
             getLatLong(addressField.getText());
             if (!isEditing) {
+                //adds userdata and opens confirmation window
                 UIDataInterface.addUserData(formatInputs());
                 openConfirmationWindow(Integer.parseInt(CrimeData.getLatestID()) - 1);
             } else {
+                //edits existing userdata and opens confirmation window
                 ReadCSV.replaceData ("data.csv", currentID, formatInputs());
                 openConfirmationWindow();
             }
             ReportCrimeWindow.closeStage();
         } else if (isEditing) {
+            //remove this data from the database
             ReadCSV.removeLineByID("data.csv", currentID);
             openConfirmationWindow();
             ReportCrimeWindow.closeStage();
@@ -79,7 +84,6 @@ public class ReportCrimeController implements Initializable {
      * @return if the user inputs correct data
      */
     public Boolean validateInputs () {
-        //TODO if this is false and isEditing then we want to delete the crime
         if (crimeTypeSelector.getValue() == null) return false;
         if (addressField.getText() == null) return false;
         if (Objects.equals(addressField.getText(), "")) return false;
@@ -87,7 +91,7 @@ public class ReportCrimeController implements Initializable {
     }
 
     /**
-     * Formats the inputs from the window into one comma seperated string to be input into the database and
+     * Formats the inputs from the window into one comma separated string to be input into the database and
      * created into a UserData object
      * @return Formatted string to be turned into a UserData object
      */
@@ -97,10 +101,12 @@ public class ReportCrimeController implements Initializable {
         formattedString = formattedString + addressField.getText() + ",";
         formattedString = formattedString + crimeTypeSelector.getValue() + ",";
         Double[] latLong = getLatLong(addressField.getText());
+        //if the lat long exists, that is the input for address is valid
         if (latLong[0] != 0.0) {
             formattedString = formattedString + latLong[0] + ",";
             formattedString = formattedString + latLong[1];
         } else {
+            //null data given, fill string with nothing so that map doesn't get messed up
             formattedString = formattedString + ",";
             formattedString = formattedString + "N";
         }
@@ -131,9 +137,11 @@ public class ReportCrimeController implements Initializable {
         Double lat = null;
         Double lon = null;
         GeocoderApi geocoderApi = new GeocoderApi();
+        //format input string into string API can use
         String res = geocoderApi.doRequest(address.replaceAll(" ", "-"));
         JSONObject obj = new JSONObject(res);
         JSONArray data = obj.getJSONArray("results");
+        //loops through to get the latest lat long value for redundancies' sake
         for (int i = 0; i < data.length(); i++) {
             JSONObject result = data.getJSONObject(i);
             lat = result.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
@@ -145,6 +153,7 @@ public class ReportCrimeController implements Initializable {
             return new Double[]{lat, lon};
         }
 
+        //if data is invalid return general lat long coords
         return new Double[]{0.0, 0.0};
 
     }
