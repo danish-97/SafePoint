@@ -132,7 +132,6 @@ public class DataFilterTest {
 
         System.out.println(crimeDataArrayList);
         ArrayList<CrimeData> filteredData = dataFilter.filterData(crimeDataArrayList);
-        System.out.println(filteredData);
         assertEquals("THEFT", filteredData.get(2).getCrimeType());
 
     }

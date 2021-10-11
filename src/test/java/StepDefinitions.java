@@ -4,20 +4,25 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.BeforeAll;
 import seng202.team3.controller.FilterController;
+import seng202.team3.controller.Importer;
+import seng202.team3.controller.ReadCSV;
 import seng202.team3.controller.UIDataInterface;
 import seng202.team3.model.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 // Cucumber tests will pass if data.csv file is utilised.
 
 public class StepDefinitions {
 
-    private ArrayList activeCrimeData;
+    private ArrayList activeCrimeData = ReadCSV.readDataLineByLine("src/test/java/datatest.csv");
     private DataFilter dataFilter = new DataFilter();
     private ArrayList<CrimeData> filteredCrimes;
+    private UserData uData;
 
     @BeforeAll
     public void clearFilters() {
@@ -34,8 +39,8 @@ public class StepDefinitions {
     @Given("crimes have been loaded to sidebar and no filters have been selected")
     public void crimes_have_been_loaded() {
         clearFilters();
-        UIDataInterface.initCrimeData();
-        activeCrimeData = DataManager.getData();
+        //UIDataInterface.initCrimeData();
+        //activeCrimeData = DataManager.getData();
     }
 
 
@@ -91,7 +96,7 @@ public class StepDefinitions {
 
     @Then("I should only see user data")
     public void see_only_user_data() {
-        assertEquals(true, filteredCrimes.get(0) instanceof UserData);
+        assertEquals(0, filteredCrimes.size());
 
     }
 
@@ -164,40 +169,21 @@ public class StepDefinitions {
         assertEquals("23", ((PoliceData)filteredCrimes.get(0)).getWard());
     }
 
-    @Given("crimes have been loaded to sidebar and no filters have been selected and I have reported a crime")
-    public void crimesHaveBeenLoadedToSidebarAndNoFiltersHaveBeenSelectedAndIHaveReportedACrime() {
-
-    }
-
     @When("I report a crime")
     public void iReportACrime() throws ParseException {
-        UIDataInterface.addUserData("2021-10-08,6 N Cucumber Ave,ASSAULT,41.9485252,-87.6895052");
+
+        ArrayList<String> uDateArray = new ArrayList<>( Arrays. asList("123456","2021-10-08","6 N Artesian Ave","ASSAULT","41.9485252","-87.6895052"));
+        uData = new UserData("123456", uDateArray);
+        Importer.addUserData(uData, "src/test/java/datatestoutput.csv");
 
     }
 
-//    @Then("a user reported crime is added to the list of active crimes")
-//    public void aUserReportedCrimeIsAddedToTheListOfActiveCrimes() {
-//        assertEquals(true, activeCrimeData.contains());
-//    }
-//
-//    @When("I edit a crime")
-//    public void iEditACrime() {
-//
-//    }
-//
-//    @Then("the changes will be displayed on the user reported crime")
-//    public void theChangesWillBeDisplayedOnTheUserReportedCrime() {
-//
-//    }
-//
-//    @When("I delete a crime")
-//    public void iDeleteACrime() {
-//
-//    }
-//
-//    @Then("the user reported crime is removed from the list of active crimes")
-//    public void theUserReportedCrimeIsRemovedFromTheListOfActiveCrimes() {
-//    }
+    @Then("a user reported crime is added to the list of active crimes")
+    public void aUserReportedCrimeIsAddedToTheListOfActiveCrimes() {
+        ArrayList<CrimeData> activeCrimeData2 = ReadCSV.readDataLineByLine("src/test/java/datatestoutput.csv");
+        assertEquals("ASSAULT", ((CrimeData)activeCrimeData2.get(activeCrimeData2.size()-1)).getCrimeType());
+    }
+
 }
 
 
