@@ -77,4 +77,23 @@ public class Importer {
                 //Calls WriteCSV with input crimes
                 WriteCSV.writeDataLineByLine("data.csv", stringCrimes);
         }
+
+        /**
+         * Takes in an input path and output path, writes Crimes into the database file
+         * For tests
+         * @param inputPath Input path of police crimes
+         * @param outputPath Output path of police Crimes
+         */
+        public static void addPoliceData(String inputPath, String outputPath) {
+                //Reads Crimes from input Path
+                ArrayList<CrimeData> crimes = ReadCSV.readDataLineByLine(inputPath);
+
+                //Converts Crimes into strings in correct format
+                ArrayList<String[]> stringCrimes = new ArrayList<>();
+                for (CrimeData crime : crimes) {
+                        stringCrimes.add(policeToString(((PoliceData) crime)));
+                }
+                //Calls WriteCSV with input crimes
+                WriteCSV.writeDataLineByLine(outputPath, stringCrimes);
+        }
 }

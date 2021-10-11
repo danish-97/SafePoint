@@ -84,7 +84,7 @@ public class ImporterTests {
 
         //Call to importer addPoliceData
         String file = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
-        Importer.addPoliceData(file);
+        Importer.addPoliceData(file, "src/main/java/seng202/team3/Database/Database.txt");
 
         //Reads CrimeData objects from Database
         String databaseFile = ("src/main/java/seng202/team3/Database/ReaderTestFile.txt");
