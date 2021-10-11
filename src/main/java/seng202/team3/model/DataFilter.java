@@ -23,7 +23,6 @@ public class DataFilter {
      */
     public ArrayList<CrimeData> filterData(ArrayList<CrimeData> data) {
         ArrayList<CrimeStat> activeFilters = FilterController.getActiveFilters();
-
         if (activeFilters.size() == 0) {
             return data;
         }
@@ -39,7 +38,6 @@ public class DataFilter {
         for (CrimeStat filter : activeFilters) {
             filteredData.removeAll(filterCrimeData(filter, filteredData, activeFilters));
         }
-
         if (FilterController.getRegionDataActive()) {
             if (activeFilters.contains(CrimeStat.LOW_FREQUENCY) || activeFilters.contains(CrimeStat.HIGH_FREQUENCY)) {
             filteredData = sortByFrequency(filteredData, true);
