@@ -24,7 +24,7 @@ public class GeocoderApi {
     public String doRequest(String address) throws IOException, InterruptedException {
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(
-                URI.create("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=AIzaSyArZlTsI6ekABAXnxX2XKFSGNxvG6evMxA"))
+                URI.create("https://maps.googleapis.com/maps/api/geocode/json?address="+ address +"&key=your-api-key"))
                 .header("accept", "application/json").build();
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         return response.body();
